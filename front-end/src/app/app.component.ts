@@ -9,7 +9,6 @@ import { DataService } from './data.service';
 export class AppComponent {
   title = 'app';
   constructor(private _data: DataService) {}
-
   get() {
     console.log(123);
     this._data.get().subscribe((res) => {
