@@ -27,36 +27,36 @@ mongoClient.connect(MONGO_URL)
 ////////////////////////////////////////////// test case ////////////////////////////////////////////////////////////
 
 // to store user photo
-// const storage = multer.diskStorage({
-//   destination: './public/usersPhotos/',
-//     filename: function (req, file, cb) {
-//       cb(null, file.originalname)
-//       }
-//       });
-// // to upload user photo
-// const upload = multer({ storage: storage }).single("testImage");
-// // upload photo
-// app.post('/userPhoto', (req, res, err)=>{
-//   upload(req, res, (err)=>{
-//     if(err) {
-//       console.log(err);
-//       res.status(500).send(err);
-//     }
-//     else {
-//       const user = new User({
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         password: req.body.password,
-//         photo: { 
-//           data: req.file.filename, 
-//           contentType: 'image/jpg'
-//         }
-//       });
-//       user.save().then(()=>res.send("upload done"))
-//     }
-//   });
-// });
+const storage = multer.diskStorage({
+  destination: './public/usersPhotos/',
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+      }
+      });
+// to upload user photo
+const upload = multer({ storage: storage }).single("testImage");
+// upload photo
+app.post('/userPhoto', (req, res, err)=>{
+  upload(req, res, (err)=>{
+    if(err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    else {
+      const user = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        photo: { 
+          data: req.file.filename, 
+          contentType: 'image/jpg'
+        }
+      });
+      user.save().then(()=>res.send("upload done"))
+    }
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
