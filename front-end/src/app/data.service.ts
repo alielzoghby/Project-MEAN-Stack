@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DataService {
-  readonly ROOT_URL;
+readonly ROOT_URL;
   constructor(private _http: HttpClient) {
     this.ROOT_URL = 'http://localhost:3000';
   }
