@@ -28,8 +28,9 @@ const userSchema = new Schema(
             default: false
         },
         photo: {
-            data: Buffer,
-            contentType:String,
+            type: String, 
+            required: false,
+            default: ""
         }
     },
     {

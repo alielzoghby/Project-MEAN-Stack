@@ -1,8 +1,7 @@
 const express = require('express');
 const mongoClient = require('mongoose');
 const cors = require('cors');
-const multer = require('multer');
-const { User } = require('./models/users');
+const { userController } = require('./controllers/index');
 require('dotenv').config(); // to use file .env
 
 
@@ -24,43 +23,7 @@ mongoClient.connect(MONGO_URL)
             });;
 
 
-////////////////////////////////////////////// test case ////////////////////////////////////////////////////////////
-
-// to store user photo
-const storage = multer.diskStorage({
-  destination: './public/usersPhotos/',
-    filename: function (req, file, cb) {
-      cb(null, file.originalname)
-      }
-      });
-// to upload user photo
-const upload = multer({ storage: storage }).single("testImage");
-// upload photo
-app.post('/userPhoto', (req, res, err)=>{
-  upload(req, res, (err)=>{
-    if(err) {
-      console.log(err);
-      res.status(500).send(err);
-    }
-    else {
-      const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        photo: { 
-          data: req.file.filename, 
-          contentType: 'image/jpg'
-        }
-      });
-      user.save().then(()=>res.send("upload done"))
-    }
-  });
-});
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+app.post('/createUser', userController.createUser)
 app.get('/', (req, res) => {
   console.log('connected');
   res.json({ hello: 'world' });
