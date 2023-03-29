@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
-const{ Schema } = mongoose;
+const { Schema } = mongoose;
 
 const userSchema = new Schema(
     {
@@ -33,28 +32,28 @@ const userSchema = new Schema(
             default: ""
         }
     },
-    {
-        timestamps: true,
-        toJSON: {
-            // to hide password from body 
-            transform(doc, ret){
-                delete ret.password;
-            }
-        }
+  {
+    timestamps: true,
+    toJSON: {
+      // to hide password from body
+      transform(doc, ret) {
+        delete ret.password;
+      },
     },
+  },
 );
 
-userSchema.pre("save", function preSave(next){
-    this.password = bcrypt.hashSync(this.password, 10)
-    next();
+userSchema.pre('save', function preSave(next) {
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
 });
 
-userSchema.methods.verifyPassword = function verifyPassword(password){
+userSchema.methods.verifyPassword = function verifyPassword(password) {
   return bcrypt.compareSync(password, this.password);
-}
+};
 
 const User = mongoose.model('User', userSchema);
 
 module.exports = {
-    User
+  User,
 };
