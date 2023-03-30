@@ -4,34 +4,34 @@ const bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
 const userSchema = new Schema(
-    {
-        firstName: {
-            type: String,
-            required: true
-        },
-        lastName: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        password: {
-            type: String,
-            required: true
-        },
-        isAdmin: {
-            type: Boolean,
-            default: false
-        },
-        photo: {
-            type: String, 
-            required: false,
-            default: "../public/defaultPhoto/defaultImage.jpeg"
-        }
+  {
+    firstName: {
+        type: String,
+        required: true
     },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    photo: {
+        type: String, 
+        required: false,
+        default: "../public/defaultPhoto/defaultImage.jpeg"
+    }
+  },
   {
     timestamps: true,
     toJSON: {

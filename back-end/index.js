@@ -2,6 +2,8 @@ const express = require('express');
 const mongoClient = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
+const routes = require('./routes');
+const { usersController } = require('./controllers/index');
 require('dotenv').config(); // to use file .env
 
 const app = express();

@@ -28,8 +28,12 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/semantic-ui-css/semantic.min.js",
-              "node_modules/aos/dist/aos.js"
+              "/node_modules/semantic-ui-css/semantic.min.js",
+              "/node_modules/aos/dist/aos.js",
+              "/src/assets/js/jquery-1.11.0.min.js",
+              "/src/assets/js/plugins.js",
+              "/src/assets/js/script.js"
+    
             ]
           },
           "configurations": {
@@ -92,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f1e384b4-eae7-42aa-ac03-75ec60ad7e3a"
   }
 }
