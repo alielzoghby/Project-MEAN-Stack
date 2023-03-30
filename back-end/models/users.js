@@ -6,36 +6,35 @@ const { Schema } = mongoose;
 const userSchema = new Schema(
   {
     firstName: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     lastName: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     email: {
-      type: String,
-      required: true,
-      unique: true,
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     isAdmin: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false
     },
     photo: {
-      type: String,
-      required: false,
-      default: '',
-    },
+        type: String, 
+        required: false,
+        default: "../public/defaultPhoto/defaultImage.jpeg"
+    }
   },
   {
     timestamps: true,
     toJSON: {
-      // to hide password from body
       transform(doc, ret) {
         delete ret.password;
       },
