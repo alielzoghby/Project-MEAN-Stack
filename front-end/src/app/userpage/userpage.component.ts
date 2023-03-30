@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class UserpageComponent {
   shelve:string="ALL"
   rate:string ="&#xf005;"
-  shelves:string[] = ["ALL","Reading","Want to Read","Currently Read"]
+  shelves:string[] = ["ALL","Read","Want to Read","Currently Read"]
   pos:number = 0 ;
 
   
