@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="category-name">Category Name</div>
+
+  <div class="row" *ngFor="let number of [0,1]" >
+
+    <div class="col-md-4 col-sm-6 book"  >
+      <div class="img"><img src="../../assets/images/product-item1.jpg" /></div>
+      <div class="bookname"><a href="">bookname</a></div>
+      <div class="authorname"><a href="">AuthorName</a></div>
+    </div>
+    <div class="col-md-4 col-sm-6 book"  >
+        <div class="img"><img src="../../assets/images/product-item1.jpg" /></div>
+        <div class="bookname"><a href="">bookname</a></div>
+        <div class="authorname"><a href="">AuthorName</a></div>
+
+      </div>
+
+        <div class="col-md-4 col-sm-6 book"  >
+        <div class="img"><img src="../../assets/images/product-item1.jpg" /></div>
+        <div class="bookname"><a href="">bookname</a></div>
+        <div class="authorname"><a href="">AuthorName</a></div>
+       </div>
+</div>
+  <div class="skip">
+
+    <i class="fa" (click)="prev()">&#xf137;</i>
+    <i class="fa" (click)="next()">&#xf138;</i>
+   
+  </div>
+
+</div>
