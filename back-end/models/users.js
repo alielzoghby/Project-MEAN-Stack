@@ -29,13 +29,12 @@ const userSchema = new Schema(
         photo: {
             type: String, 
             required: false,
-            default: ""
+            default: "../public/defaultPhoto/defaultImage.jpeg"
         }
     },
   {
     timestamps: true,
     toJSON: {
-      // to hide password from body
       transform(doc, ret) {
         delete ret.password;
       },

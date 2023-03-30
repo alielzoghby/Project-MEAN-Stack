@@ -1,8 +1,7 @@
 const express = require('express');
 const mongoClient = require('mongoose');
 const cors = require('cors');
-const routes = require('routes');
-const { usersController } = require('./controllers/index');
+const routes = require('./routes');
 require('dotenv').config(); // to use file .env
 
 const app = express();
@@ -23,7 +22,6 @@ mongoClient.connect(MONGO_URL)
     console.log('Error connecting to database', error);
   });
 
-app.post('/createUser', usersController.createUser)
 app.get('/', (req, res) => {
   console.log('connected');
   res.json({ hello: 'world' });
