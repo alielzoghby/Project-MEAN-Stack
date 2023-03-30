@@ -1,0 +1,99 @@
+<div class="container">
+
+<div class="row">
+     
+<div class="col-2">
+   
+    <ul>
+        <li (click)="changeShelve('All')">All</li>
+        <li (click)="changeShelve('Read')">read</li>
+        <li (click)="changeShelve('want to read')">want to read</li>
+        <li>currently read</li>
+    </ul>
+   </div>
+
+<div class="col-8 slider" >
+     <div class="shelve">{{shelve}}</div>        
+  <table class="table caption-top">
+ 
+  <thead>
+    <tr >
+      <th scope="col">img</th>
+      <th scope="col">name</th>
+      <th scope="col">Author</th>
+      <th scope="col">AVG Rate</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Shelve</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="tablerow">
+      <td scope="row"><img src="../../assets/images/product-item2.jpg"></td>
+      <td>book1</td>
+      <td>Otto</td>
+      <td class="rate"><i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+    </td>
+      <td class="rate">
+        <i class="fa">&#xf005;</i>
+        <i class="fa">&#xf005;</i>
+        <i class="fa">&#xf005;</i>
+        <i class="fa">&#xf005;</i>
+        <i class="fa">&#xf005;</i>
+
+      </td>
+      <td>
+        <select class="form-select" >
+            <option selected>Want to Read</option>
+            <option value="1">Currently Read</option>
+            <option value="2">Read</option>
+          </select>
+
+      </td>
+    </tr>
+
+
+    <tr class="tablerow">
+        <td scope="row"><img src="../../assets/images/product-item2.jpg"></td>
+        <td>book1</td>
+        <td>Otto</td>
+        <td class="rate">
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>   
+      </td>
+        <td class="rate">
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+          <i class="fa">&#xf005;</i>
+  
+        </td>
+        <td><select class="form-select" >
+            <option selected>Want to Read</option>
+            <option value="1">Currently Read</option>
+            <option value="2">Read</option>
+          </select></td>
+      </tr>
+
+  </tbody>
+  </table>
+
+  <div class="skip">
+
+    <i class="fa" (click)="next()">&#xf137;</i>
+    <i class="fa" (click)="prev()">&#xf138;</i>
+   
+  </div>
+      </div>
+
+</div>
+</div>
+
+

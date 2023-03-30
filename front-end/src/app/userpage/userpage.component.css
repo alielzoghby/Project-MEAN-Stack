@@ -1,0 +1,70 @@
+ul{
+    list-style: none;
+    margin-top: 60px;
+    
+}
+
+.slider {
+    margin-top: 60px;
+    padding-left: 50px;
+    border-left:1px solid
+}
+
+
+ul li {
+    padding-bottom:50px;
+    text-transform: uppercase;
+    transition: font-size 0.5s ease-in-out
+}
+
+ul li:hover{
+  color:#74642f;
+  font-weight: 600;  
+  font-size:15px ;
+    
+}
+
+th{
+    padding-bottom: 20px;
+}
+
+th,td{
+    border:0px;
+    padding-right: 30px;
+}
+
+
+
+.tablerow td img{
+    max-height: 100px;
+}
+
+
+
+.shelve{
+    font-size: 25px;
+    color: #74642f;
+    padding-bottom:40px;
+    transition: all 0.5s ease-in-out
+}
+
+.skip{
+    padding-left:45%;
+    padding-top:40px;
+}
+
+.skip i {
+    font-size: 30px;
+    color:lightgray;
+    padding-left:20px;
+}
+
+
+.skip i:active{
+    color: gray;
+}
+
+
+
+
+

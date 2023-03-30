@@ -1,0 +1,41 @@
+.nav-link{
+   
+    padding:10px 10px;
+    text-transform: uppercase;
+    transition: color 0.15s ease-in-out, color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+    font-weight:200;
+}
+
+.nav-link:hover{
+    font-weight:400;
+    color: #74642f;
+}
+
+
+header{
+    padding:50px
+}
+
+
+.search{
+    margin-left: 2.5rem;
+   
+}
+
+.search input{
+    border-width: 0px 0px 1px 0px; 
+    border-radius: 0;
+    outline: none;
+}
+
+.search input:active{
+  border-width: 0px 0px 1px 0px; 
+    border-radius: 0;  
+}
+
+:root {
+    --body-font: "Raleway", sans-serif;
+    --heading-font: "Prata", Georgia, serif;
+    --secondary-font: "Playfair Display", Georgia, serif;
+  }
