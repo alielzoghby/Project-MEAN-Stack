@@ -7,7 +7,7 @@ const addNewBook = asyncFunction(async (req, res) => {
     name: req.body.name,
     categoryId: req.body.categoryId,
     authorId: req.body.authorId,
-    cover: req.file && req.filename,
+    cover: req.file && req.file.filename,
   });
   book.save().then(() => {
     res.status(200).send(book);
