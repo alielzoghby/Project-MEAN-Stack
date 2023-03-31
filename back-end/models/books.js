@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
@@ -34,6 +38,15 @@ const bookSchema = new mongoose.Schema({
   },
 
 });
+
+bookSchema.pre('save', async function () {
+  const book = this;
+  if (!book.id) {
+    const count = await Book.countDocuments();
+    book.id = count + 1;
+  }
+});
+
 
 const Book = mongoose.model('Book', bookSchema);
 
