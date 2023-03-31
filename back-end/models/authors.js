@@ -8,14 +8,15 @@ const authorSchema = new Schema(
         firstName: {
             type: String,
             required: true
-        },lastName: {
+        },
+        lastName: {
             type: String,
             required: true
         },
         photo: {
             type: String, 
             required: false,
-            default: "../public/defaultImage/defaultImage.jpeg"
+            default: "../public/defaultPhoto/defaultImage2.jpeg"
         },
         dob:{
             type: Date,

@@ -3,12 +3,18 @@ const asyncFunction = require('../middlewares/async');
 
 ///////////////////////////////// get authors //////////////////////////////////////////
 
-const getAuthors = () => Author.find();
-
+const getAuthors = asyncFunction(async (req, res) => {
+const authors = await Author.find();
+    res.status(200).send(authors);
+});
 
 ///////////////////////////////// get author //////////////////////////////////////////
 
-const getAuthorById = (_id) => Author.find({ _id });
+const getAuthorById = asyncFunction(async (req, res) => {
+    const { authorId } = req.body
+    const oneAuthor = await Author.findById({ _id: authorId });
+    res.status(200).send(oneAuthor);
+});
 
 ///////////////////////////////// create author ///////////////////////////////////////
 
@@ -33,20 +39,18 @@ const deleteAuthorById = asyncFunction(async (req, res) => {
 
 const updateAuthorById = asyncFunction(async (req, res) => {
     const { authorId, firstName, lastName, dateOfBirth, } = req.body;
-    // const { ProfileImage } = req.file;
-    const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { firstName: firstName, lastName: lastName, dob: dateOfBirth, photo:ProfileImage } }, { new: true });
+    const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { firstName: firstName, lastName: lastName, dob: dateOfBirth } }, { new: true });
     res.status(200).send(author);
 })
 
 ///////////////////////////////// update photo ////////////////////////////////////////
 
-// const updatePhotoOfAuthorById = asyncFunction(async (req, res) => {
-//     const { authorId } = req.body;
-//     const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { photo: req.file   } }, { new: true });
-//     res.status(200).send(author);
-//     });
-
-
+const updateAuthorPhotoById = asyncFunction(async (req, res) => {
+    const { authorId } = req.body;
+    const { filename } = req.file;
+    const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { photo: filename  } }, { new: true });
+    res.status(200).send(author);
+});
 
 module.exports = {
     createNewAuthor,
@@ -54,4 +58,5 @@ module.exports = {
     getAuthorById,
     deleteAuthorById,
     updateAuthorById,
+    updateAuthorPhotoById
 }

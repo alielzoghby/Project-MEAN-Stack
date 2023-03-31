@@ -29,7 +29,7 @@ const userSchema = new Schema(
     photo: {
         type: String, 
         required: false,
-        default: "../public/defaultPhoto/defaultImage.jpeg"
+        default: "../public/defaultPhoto/defaultImage2.jpeg"
     }
   },
   {
