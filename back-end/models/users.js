@@ -5,6 +5,10 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
+    id: {
+      type: Number,
+      unique: true,
+    },
     firstName: {
         type: String,
         required: true
@@ -42,6 +46,7 @@ const userSchema = new Schema(
   },
 );
 
+
 userSchema.pre('save', function preSave(next) {
   this.password = bcrypt.hashSync(this.password, 10);
   next();
@@ -50,6 +55,14 @@ userSchema.pre('save', function preSave(next) {
 userSchema.methods.verifyPassword = function verifyPassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.pre('save', async function () {
+  const user = this;
+  if (!user.id) {
+    const count = await User.countDocuments();
+    user.id = count + 1;
+  }
+});
 
 const User = mongoose.model('User', userSchema);
 

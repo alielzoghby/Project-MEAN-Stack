@@ -12,7 +12,7 @@ const authors = await Author.find();
 
 const getAuthorById = asyncFunction(async (req, res) => {
     const { authorId } = req.body
-    const oneAuthor = await Author.findById({ _id: authorId });
+    const oneAuthor = await Author.findById({ id: authorId });
     res.status(200).send(oneAuthor);
 });
 
@@ -31,7 +31,7 @@ const createNewAuthor = asyncFunction(async (req, res) => {
 ///////////////////////////////// delete author ///////////////////////////////////////
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
-    const author =  await Author.findOneAndDelete({ _id: req.body.authorId});
+    const author =  await Author.findOneAndDelete({ id: req.body.authorId});
     res.status(200).send(`Deleted author: ${author.firstName}`);
 })
 
@@ -39,7 +39,7 @@ const deleteAuthorById = asyncFunction(async (req, res) => {
 
 const updateAuthorById = asyncFunction(async (req, res) => {
     const { authorId, firstName, lastName, dateOfBirth, } = req.body;
-    const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { firstName: firstName, lastName: lastName, dob: dateOfBirth } }, { new: true });
+    const author= await Author.findOneAndUpdate({ id : authorId }, { $set: { firstName: firstName, lastName: lastName, dob: dateOfBirth } }, { new: true });
     res.status(200).send(author);
 })
 
@@ -48,7 +48,7 @@ const updateAuthorById = asyncFunction(async (req, res) => {
 const updateAuthorPhotoById = asyncFunction(async (req, res) => {
     const { authorId } = req.body;
     const { filename } = req.file;
-    const author= await Author.findOneAndUpdate({ _id : authorId }, { $set: { photo: filename  } }, { new: true });
+    const author= await Author.findOneAndUpdate({ id : authorId }, { $set: { photo: filename  } }, { new: true });
     res.status(200).send(author);
 });
 

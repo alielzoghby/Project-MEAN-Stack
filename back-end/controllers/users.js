@@ -26,7 +26,7 @@ function loginUser(){
 
 const getUserById = asyncFunction(async (req, res) => {
   const { userId } = req.body
-  const oneUser = await User.findById({ _id: userId });
+  const oneUser = await User.findById({ id: userId });
   res.status(200).send(oneUser);
 });
 
@@ -41,7 +41,7 @@ const getUsers = asyncFunction(async (req, res) => {
 
 const deleteUserById = asyncFunction(async (req, res) => {
   const { userId } = req.body;
-  const deleteUser =  await User.findOneAndDelete({ _id: userId});
+  const deleteUser =  await User.findOneAndDelete({ id: userId});
   res.status(200).send( `Deleted User: ${deleteUser}` );
 })
 
@@ -49,7 +49,7 @@ const deleteUserById = asyncFunction(async (req, res) => {
 
 const updateUserById = asyncFunction(async (req, res) => {
 const { userId, firstName, lastName, password, email } = req.body;
-  const updateUser = await User.findOneAndUpdate({ _id : userId }, { $set: { firstName: firstName, lastName: lastName, password: password, email: email } }, { new: true });
+  const updateUser = await User.findOneAndUpdate({ id : userId }, { $set: { firstName: firstName, lastName: lastName, password: password, email: email } }, { new: true });
   res.status(200).send( `Update User: ${updateUser}` );
 })
 
@@ -58,7 +58,7 @@ const { userId, firstName, lastName, password, email } = req.body;
 const updateUserPhotoById = asyncFunction(async (req, res) => {
   const { userId } = req.body;
   const { filename } = req.file;
-  const userPhoto = await User.findOneAndUpdate({ _id : userId }, { $set: { photo: filename } }, { new: true });
+  const userPhoto = await User.findOneAndUpdate({ id : userId }, { $set: { photo: filename } }, { new: true });
   res.status(200).send(userPhoto);
 })
 
