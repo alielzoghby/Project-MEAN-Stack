@@ -9,9 +9,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserpageComponent } from './userpage/userpage.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, NavbarComponent, UserpageComponent],
+  declarations: [AppComponent, HomePageComponent, NavbarComponent, UserpageComponent, CategoriesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
