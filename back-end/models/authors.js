@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const authorSchema = new Schema(
   {
+    id: {
+      type: Number,
+      unique: true,
+    },
     firstName: {
       type: String,
       required: true,
@@ -15,7 +19,7 @@ const authorSchema = new Schema(
     photo: {
       type: String,
       required: false,
-      default: '../public/defaultImage/defaultImage.jpeg',
+      default: '../public/defaultPhoto/defaultImage2.jpeg',
     },
     dob: {
       type: Date,
@@ -23,6 +27,22 @@ const authorSchema = new Schema(
     },
   },
 );
+
+authorSchema.pre('save', async function () {
+  const author = this;
+  if (!author.id) {
+    const count = await Author.countDocuments();
+    author.id = count + 1;
+  }
+});
+
+authorSchema.pre('save', async function () {
+  const author = this;
+  if (!author.id) {
+    const count = await Author.countDocuments();
+    author.id = count + 1;
+  }
+});
 
 const Author = mongoose.model('author', authorSchema);
 

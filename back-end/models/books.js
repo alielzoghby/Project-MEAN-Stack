@@ -20,6 +20,8 @@ const bookSchema = new mongoose.Schema({
   },
   cover: {
     type: String,
+    required: false,
+    // default: '../public/defaultPhoto/defaultImage2.jpeg',
   },
   numberOfRatings: {
     type: Number,
@@ -30,7 +32,6 @@ const bookSchema = new mongoose.Schema({
   reviews: {
     type: [String],
   },
-  // per user we will put array of books
 
 });
 

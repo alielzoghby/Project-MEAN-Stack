@@ -6,6 +6,7 @@ const storage = multer.diskStorage({
   destination: './public/usersPhotos/',
   filename(req, file, cb) {
     // if(req.file && req.file.filename){
+    console.log(req.file);
     fileUUID = uuidv4();
     cb(null, `${file.originalname}-${fileUUID}`);
     // }
@@ -17,6 +18,7 @@ const upload = multer({ storage }).single('ProfileImage');
 const fileParser = (req, res, next) => {
   upload(req, res, (err) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({ message: 'Error uploading file' });
     }
     next();

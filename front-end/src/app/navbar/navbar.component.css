@@ -2,8 +2,7 @@
    
     padding:10px 10px;
     text-transform: uppercase;
-    transition: color 0.15s ease-in-out, color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, color 0.15s ease-in-out;
     font-weight:200;
 }
 

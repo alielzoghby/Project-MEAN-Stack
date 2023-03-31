@@ -22,11 +22,59 @@ function loginUser() {
   console.log('login');
 }
 
+/// ////////////////////////////// login user /////////////////////////////////////////
+
+const getUserById = asyncFunction(async (req, res) => {
+  const { userId } = req.body;
+  const oneUser = await User.findById({ id: userId });
+  res.status(200).send(oneUser);
+});
+
+/// ////////////////////////////// login user /////////////////////////////////////////
+
+const getUsers = asyncFunction(async (req, res) => {
+  const users = await User.find();
+  res.status(200).send(users);
+});
+
 /// ////////////////////////////// delete user ///////////////////////////////////////
 
+const deleteUserById = asyncFunction(async (req, res) => {
+  const { userId } = req.body;
+  const deleteUser = await User.findOneAndDelete({ id: userId });
+  res.status(200).send(`Deleted User: ${deleteUser}`);
+});
+
 /// ////////////////////////////// update user ///////////////////////////////////////
+
+const updateUserById = asyncFunction(async (req, res) => {
+  const {
+    userId, firstName, lastName, password, email,
+  } = req.body;
+  const updateUser = await User.findOneAndUpdate({ id: userId }, {
+    $set: {
+      firstName, lastName, password, email,
+    },
+  }, { new: true });
+  res.status(200).send(`Update User: ${updateUser}`);
+});
+
+/// ////////////////////////////// update user Photo ///////////////////////////////////////
+
+const updateUserPhotoById = asyncFunction(async (req, res) => {
+  const { userId } = req.body;
+  const { filename } = req.file;
+  // eslint-disable-next-line max-len
+  const userPhoto = await User.findOneAndUpdate({ id: userId }, { $set: { photo: filename } }, { new: true });
+  res.status(200).send(userPhoto);
+});
 
 module.exports = {
   createUser,
   loginUser,
+  getUserById,
+  getUsers,
+  deleteUserById,
+  updateUserById,
+  updateUserPhotoById,
 };
