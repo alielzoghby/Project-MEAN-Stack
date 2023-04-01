@@ -7,8 +7,8 @@ header{
 }
 
 .img{
-    width: 290px;
-    height: 325px;
+    max-width: 22%;
+    height: 24rem;
     background-color: rgb(253, 248, 239);
     margin-left: 15%;
     box-shadow:  10px 10px 8px 0  rgba(0, 0, 0, 0.19);
@@ -19,8 +19,8 @@ header{
 }
 
 .img img{
-    width: 260px;
-    height: 300px;
+    max-width: 95%;
+    height: 22rem;
 
     
 }
