@@ -10,9 +10,10 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { AuthorPageComponent } from './author-page/author-page.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, NavbarComponent, UserpageComponent, CategoriesComponent],
+  declarations: [AppComponent, HomePageComponent, NavbarComponent, UserpageComponent, CategoriesComponent, AuthorPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

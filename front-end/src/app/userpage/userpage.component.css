@@ -14,7 +14,9 @@ ul{
 ul li {
     padding-bottom:50px;
     text-transform: uppercase;
-    transition: font-size 0.5s ease-in-out
+    transition: font-size 0.3s ease-in-out;
+    transition: font-size 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 ul li:hover{
@@ -45,7 +47,9 @@ th,td{
     font-size: 25px;
     color: #74642f;
     padding-bottom:40px;
-    transition: all 0.5s ease-in-out
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
 }
 
 .skip{
