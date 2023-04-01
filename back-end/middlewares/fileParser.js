@@ -3,20 +3,22 @@ const { v4: uuidv4 } = require('uuid');
 
 // to store user photo
 const storage = multer.diskStorage({
-    destination: './public/usersPhotos/',
-    filename: function (req, file, cb){
-        // if(req.file && req.file.filename){
-          fileUUID = uuidv4();
-          cb(null, file.originalname + '-' + fileUUID);
-        // }
-    }
+  destination: './public/usersPhotos/',
+  filename(req, file, cb) {
+    // if(req.file && req.file.filename){
+    console.log(req.file);
+    fileUUID = uuidv4();
+    cb(null, `${file.originalname}-${fileUUID}`);
+    // }
+  },
 });
   // upload photo
-const upload = multer({ storage: storage }).single("ProfileImage");
+const upload = multer({ storage }).single('ProfileImage');
 
 const fileParser = (req, res, next) => {
   upload(req, res, (err) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({ message: 'Error uploading file' });
     }
     next();
@@ -24,5 +26,5 @@ const fileParser = (req, res, next) => {
 };
 
 module.exports = {
-  fileParser
-}
+  fileParser,
+};

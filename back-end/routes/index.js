@@ -9,7 +9,7 @@ const { fileParser } = require('../middlewares/fileParser');
 const router = express.Router();
 
 router.use(fileParser);
-router.use("/users", usersRoutes);
+router.use('/users', usersRoutes);
 router.use('/authors', authorsRoutes);
 router.use('/categories', categoriesRoutes);
 router.use('/books', booksRoutes);
