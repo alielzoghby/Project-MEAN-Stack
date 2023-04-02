@@ -1,5 +1,9 @@
 const { User } = require('../models/users');
 const asyncFunction = require('../middlewares/async');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET = 'test' } = process.env;
+
+
 
 /// /////////////////////////// create user (register) /////////////////////////////////
 
@@ -18,9 +22,22 @@ const createUser = asyncFunction(async (req, res) => {
 
 /// ////////////////////////////// login user /////////////////////////////////////////
 
-function loginUser() {
-  console.log('login');
-}
+const loginUser = asyncFunction(async (req, res) => {
+  // check is user login with email already exist or not
+  const { email, password } = req.body;
+  const userAuthentication = await User.findOne({ email }).exec();
+  if (!userAuthentication) {
+    res.status(401).send({ error: 'User not found' });
+  }
+  // check password
+  const isPasswordValid = userAuthentication.verifyPassword(req.body.password);
+  if (!isPasswordValid) {
+    return res.status(401).send({ error: 'Incorrect username or password' });
+  }
+  const token = jwt.sign({ id: userAuthentication._id }, JWT_SECRET, { expiresIn: '1d'});
+  res.status(200).send({ "Token": token });
+  return token;
+});
 
 /// ////////////////////////////// login user /////////////////////////////////////////
 
