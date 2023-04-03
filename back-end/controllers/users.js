@@ -20,7 +20,7 @@ const createUser = asyncFunction(async (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     isAdmin: req.body.admin,
-    password: req.bosy.password,
+    password: req.body.password,
     photo: req.file && req.file.filename,
   });
   user.save().then(() => { res.status(200).send(user); });
@@ -33,10 +33,10 @@ const loginUser = asyncFunction(async (req, res) => {
   const { email, password } = req.body;
   const userAuthentication = await User.findOne({ email }).exec();
   if (!userAuthentication) {
-    res.status(401).send({ error: 'Incorrect Email or Password' });
+    return res.status(401).send({ error: 'Incorrect Email or Password' });
   }
   // check password
-  const isPasswordValid = userAuthentication.verifyPassword(req.body.password);
+  const isPasswordValid = userAuthentication.verifyPassword(password);
   if (!isPasswordValid) {
     return res.status(401).send({ error: 'Incorrect Email or password' });
   }
