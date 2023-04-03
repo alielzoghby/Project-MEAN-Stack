@@ -23,6 +23,7 @@
               "@angular/material/prebuilt-themes/purple-green.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
+              "src/style.scss",
               "node_modules/semantic-ui-css/semantic.min.css",
               "node_modules/aos/dist/aos.css"
             ],
@@ -30,10 +31,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "/node_modules/semantic-ui-css/semantic.min.js",
               "/node_modules/aos/dist/aos.js",
-              "/src/assets/js/jquery-1.11.0.min.js",
-              "/src/assets/js/plugins.js",
-              "/src/assets/js/script.js"
-    
+              "node_modules/chart.js/dist/chart.js"
             ]
           },
           "configurations": {

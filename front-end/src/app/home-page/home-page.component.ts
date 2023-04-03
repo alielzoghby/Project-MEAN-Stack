@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 
 declare let AOS: any;
 
@@ -8,6 +8,8 @@ declare let AOS: any;
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
+  constructor(private elementRef: ElementRef) {}
+
   ngOnInit(): void {
     AOS.init();
   }
