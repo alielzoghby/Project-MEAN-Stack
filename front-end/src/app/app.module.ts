@@ -28,6 +28,8 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { FotterComponent } from './fotter/fotter.component';
     AuthorPageComponent,
     CarouselComponent,
     FotterComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

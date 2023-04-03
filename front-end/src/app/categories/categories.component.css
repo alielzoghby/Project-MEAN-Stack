@@ -1,68 +1,129 @@
-.container .category-name{
-    padding-top:30px;
-    padding-bottom: 50px;
-    font-size: 30px;
-    font-family:  Georgia, serif ;
-    color:#74642f
-
+@import "../../root.css";
+/*----- Categories Books Section
+--------------------------------------------------------------*/
+.tab-content {
+  position: relative;
+}
+[data-tab-content] {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+.active[data-tab-content] {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 55px 0;
+  justify-content: center;
+  list-style: none;
+}
+.tabs .tab {
+  font-weight: 600;
+  color: #999;
+  margin-right: 50px;
+  cursor: pointer;
+}
+.tabs .tab.active,
+.tabs .tab:hover {
+  color: #111;
+  border-bottom: 2px solid #9a884c;
+}
+img.books-image {
+  /*height: 290px;*/
+  margin-right: 10px;
+  margin-bottom: 20px;
+  object-fit: cover;
 }
 
-.book{
-    padding-bottom: 50px;
-    justify-content: center;
-   
+/* Shop page */
+.products-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.product-style {
+  position: relative;
+  margin: 0 15px 25px;
+}
+.product-style figcaption p {
+  margin-bottom: 20px;
+}
+.products-grid .product-style {
+  width: 25%;
+}
+.products-grid.col-5 .product-style {
+  width: 20%;
+}
+.products-grid.col-4 .product-style {
+  width: 25%;
+}
+.products-grid.col-3 .product-style {
+  width: 33.33%;
+}
+.product-style img.product-item {
+  background: #efeee8;
+  border: 1px solid #eae8df;
+  padding: 15%;
+  cursor: pointer;
+  width: 100%;
+}
+.product-style button.add-to-cart {
+  background: #000;
+  color: #fff;
+  width: 70%;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 3;
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.5s ease-out;
+}
+.product-style:hover button.add-to-cart {
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+.product-style figcaption {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.product-style figcaption > h3 {
+  font-size: 1.4em;
+  font-weight: 500;
+  color: #74642f;
+  margin: 0;
+}
+.product-style .item-price {
+  color: #74642f;
+  font-size: 1.3em;
 }
 
-
-.book img {
-max-width: 200px;
-display: block;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 25px;
-transition :all 0.3s ease-in-out, all 0.3s ease-in-out
-
+@media screen and (max-width: 768px) {
+  .products-grid .product-style {
+    width: 45%;
+  }
+  .product-style img.product-item {
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  .products-grid.col-3 .product-style,
+  .products-grid.col-4 .product-style,
+  .products-grid.col-5 .product-style {
+    width: 100%;
+  }
 }
-
-img:hover{
-    opacity: .8;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    cursor: pointer;
-}
-
-
-
-.skip i {
-font-size: 30px;
-color:lightgray;
-padding-left:32%;
-padding-bottom: 50px;
-
-}
-
-.skip i:hover {
-
-    color:gray;
-    cursor: pointer;
-
-}
-
-
-
-.bookname,.authorname{
-text-align: center;
-}
-
-.book a {
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color:black;
-    transition :font-size 0.3s ease-in-out, font-size 0.3s ease-in-out
-}
-
-.book a:hover{
-    font-size: 20px;
-    color:#74642f;
-    cursor: pointer;
+@media screen and (max-width: 575px) {
+  .products-grid .product-style {
+    width: 100%;
+  }
 }

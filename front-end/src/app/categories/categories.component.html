@@ -1,32 +1,59 @@
-<div class="container">
-  <div class="category-name">Category Name</div>
+<app-navbar></app-navbar>
+<section id="popular-books" class="bookshelf">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-header align-center">
+          <h2 class="section-title">Categories</h2>
+        </div>
 
-  <div class="row" *ngFor="let number of [0,1]" >
+        <ul class="tabs">
+          <li class="active tab" data-aos="fade-down">All Genre</li>
+          <li class="tab" data-aos="fade-down" data-aos-duration="2000">
+            Business
+          </li>
+          <li class="tab" data-aos="fade-down" data-aos-duration="2200">
+            Technology
+          </li>
+          <li class="tab" data-aos="fade-down" data-aos-duration="2400">
+            Romantic
+          </li>
+          <li class="tab" data-aos="fade-down" data-aos-duration="2600">
+            Adventure
+          </li>
+          <li class="tab" data-aos="fade-down" data-aos-duration="2800">
+            Fictional
+          </li>
+        </ul>
 
-    <div class="col-md-4 col-sm-12 book"  >
-      <div class="img"><a><img src="../../assets/images/product-item1.jpg" /></a></div>
-      <div class="bookname"><a href="">bookname</a></div>
-      <div class="authorname"><a href="">AuthorName</a></div>
-    </div>
-    <div class="col-md-4 col-sm-12 book"  >
-        <div class="img"><a><img src="../../assets/images/product-item1.jpg" /></a></div>
-        <div class="bookname"><a href="">bookname</a></div>
-        <div class="authorname"><a href="">AuthorName</a></div>
-
+        <div class="tab-content" data-aos="fade-right" data-aos-duration="2200">
+          <div id="all-genre">
+            <div class="row">
+              <div class="col-md-3">
+                <figure class="product-style">
+                  <img
+                    src="../../assets/images/tab-item1.jpg"
+                    alt="Books"
+                    class="product-item"
+                  />
+                  <button
+                    type="button"
+                    class="add-to-cart"
+                    data-product-tile="add-to-cart"
+                  >
+                    Read it now
+                  </button>
+                  <figcaption>
+                    <h3>Portrait photography</h3>
+                    <p>Adam Silber</p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-        <div class="col-md-4 col-sm-12 book"  >
-        <div class="img"><a><img src="../../assets/images/product-item1.jpg" /></a></div>
-        <div class="bookname"><a href="">bookname</a></div>
-        <div class="authorname"><a href="">AuthorName</a></div>
-       </div>
-     
-</div>
-  <div class="skip">
-
-    <i class="fa" (click)="prev()">&#xf137;</i>
-    <i class="fa" (click)="next()">&#xf138;</i>
-   
+    </div>
   </div>
-
-</div>
+</section>
+<app-fotter></app-fotter>

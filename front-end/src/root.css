@@ -1,0 +1,359 @@
+:root {
+  --accent-color: #c5a992;
+  --secondary-color: #c5a992;
+  --dark-color: #2f2f2f;
+  --light-color: #f3f2ec;
+  --body-text-color: #757575;
+  --light-text-color: #afafaf;
+  --dark-text-color: #2f2f2f;
+}
+/* Fonts */
+:root {
+  --body-font: "Raleway", sans-serif;
+  --heading-font: "Prata", Georgia, serif;
+  --secondary-font: "Playfair Display", Georgia, serif;
+}
+
+/* General Styles
+/*----------------------------------------------*/
+
+a {
+  color: var(--accent-color);
+  transition: 0.3s color ease-out;
+}
+
+a:hover {
+  color: #111;
+}
+
+figure {
+  margin: 0;
+}
+img {
+  display: inline-block;
+  border: 0;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+::selection {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-shadow: none;
+}
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-shadow: none;
+}
+
+/* image align */
+figure.align-right {
+  margin: 30px 0 30px 30px;
+}
+
+/* Typography */
+/*----------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  line-height: 1.2;
+  color: var(--dark-color);
+}
+
+h1,
+h2,
+h3 {
+  margin: 25px 0;
+  text-transform: capitalize;
+}
+h5,
+h6 {
+  letter-spacing: 1px;
+}
+h1 {
+  font-size: 2.5em;
+  line-height: 1.4;
+}
+h2 {
+  font-size: 1.5em;
+  line-height: 1.4;
+}
+h3 {
+  font-size: 1.4em;
+  line-height: 1.4;
+}
+h4 {
+  font-size: 1.1em;
+  line-height: 1.4;
+}
+h5 {
+  font-size: 0.83em;
+  line-height: 1.25;
+}
+h6 {
+  font-size: 0.67em;
+  line-height: 1.1;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  font-weight: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+p {
+  margin: 0 0 20px 0;
+}
+i {
+  padding: 4px;
+}
+
+/*----------------------------------------------*/
+/* Floating & Alignment */
+/*----------------------------------------------*/
+
+.align-left {
+  float: left;
+  text-align: left;
+}
+.align-right {
+  float: right;
+  text-align: right;
+}
+.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/**::after,*/
+.container::after,
+.row::after,
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+/*------------------------------------------------
+/* Lists
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+ul li,
+ol li {
+  margin-bottom: 5px;
+  outline: 0;
+}
+ul li.active a {
+  color: #daa556;
+}
+
+ul {
+  list-style: circle inside;
+}
+ol {
+  list-style: decimal inside;
+}
+ol,
+ul {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+/*--- Section Title
+-----------------------------------------------*/
+.section-header {
+  position: relative;
+}
+.section-title {
+  font-size: 3em;
+  font-weight: 500;
+  line-height: 1;
+  position: relative;
+  margin-bottom: 75px;
+}
+.section-title.divider {
+  width: 100%;
+}
+.section-title.divider:after {
+  content: "";
+  border-bottom: 3px solid #74642f;
+  position: absolute;
+  right: 0;
+  bottom: -16px;
+  left: 0;
+  width: 50px;
+}
+.section-header .section-title:before,
+.section-header .section-title:after {
+  content: "";
+  border-bottom: 1px solid #e0e0e0;
+  position: absolute;
+  top: 30px;
+  width: 25%;
+  align-items: center;
+}
+.section-header .section-title:before {
+  left: 3px;
+}
+.section-header .section-title:after {
+  right: 3px;
+}
+.section-header .title span {
+  font-size: 14px;
+  color: #afafaf;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 1366px) {
+  .section-header .section-title:before,
+  .section-header .section-title:after {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .section-header .section-title:before,
+  .section-header .section-title:after {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 2em;
+  }
+  .section-header .section-title:before,
+  .section-header .section-title:after {
+    top: 60px;
+    width: 100%;
+  }
+}
+
+/* book page */
+.products-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.product-style {
+  position: relative;
+  margin: 0 15px 25px;
+}
+.product-style figcaption p {
+  margin-bottom: 20px;
+}
+.products-grid .product-style {
+  width: 25%;
+}
+.products-grid.col-5 .product-style {
+  width: 20%;
+}
+.products-grid.col-4 .product-style {
+  width: 25%;
+}
+.products-grid.col-3 .product-style {
+  width: 33.33%;
+}
+.product-style img.product-item {
+  background: #efeee8;
+  border: 1px solid #eae8df;
+  padding: 15%;
+  cursor: pointer;
+  width: 100%;
+}
+
+.product-style button.add-to-cart {
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  height: 65px;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  width: 70%;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 3;
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  opacity: 0;
+  transition: 0.5s ease-out;
+}
+
+.product-style:hover button.add-to-cart {
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+.product-style figcaption {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.product-style figcaption > h3 {
+  font-size: 1.4em;
+  font-weight: 500;
+  color: #74642f;
+  margin: 0;
+}
+.product-style .item-price {
+  color: #74642f;
+  font-size: 1.3em;
+}
+
+@media screen and (max-width: 768px) {
+  .products-grid .product-style {
+    width: 45%;
+  }
+  .product-style img.product-item {
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  .products-grid.col-3 .product-style,
+  .products-grid.col-4 .product-style,
+  .products-grid.col-5 .product-style {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 575px) {
+  .products-grid .product-style {
+    width: 100%;
+  }
+}
+
+/* .parent-image {
+  overflow: hidden;
+}
+.post-image:hover {
+  transform: scale(1.2);
+} */

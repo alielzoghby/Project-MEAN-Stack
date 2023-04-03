@@ -1,19 +1,4 @@
-:root {
-  --accent-color: #c5a992;
-  --secondary-color: #c5a992;
-  --dark-color: #2f2f2f;
-  --light-color: #f3f2ec;
-  --body-text-color: #757575;
-  --light-text-color: #afafaf;
-  --dark-text-color: #2f2f2f;
-}
-/* Fonts */
-:root {
-  --body-font: "Raleway", sans-serif;
-  --heading-font: "Prata", Georgia, serif;
-  --secondary-font: "Playfair Display", Georgia, serif;
-}
-
+@import "../../root.css";
 /*----- Footer Section
 --------------------------------------------------------------*/
 footer#footer {
@@ -59,15 +44,13 @@ footer#footer {
   }
 }
 
-ul {
-  padding-left: 0;
-}
-ul li {
-  padding-bottom: 10px;
-}
-
 #footer-bottom {
+  display: flex;
+  align-items: center;
   padding: 20px;
   color: #c5a992;
   background: #2f2f2f;
+}
+#footer-bottom p {
+  margin: 0;
 }

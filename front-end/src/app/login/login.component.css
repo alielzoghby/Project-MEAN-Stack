@@ -1,0 +1,20 @@
+.image {
+  background-image: url("https://mdbootstrap.com/img/new/textures/full/171.jpg");
+  height: 300px;
+}
+.bg {
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(30px);
+  width: 40%;
+  position: relative;
+  left: 50%;
+  top: -140px;
+  transform: translateX(-50%);
+}
+
+@media screen and (max-width: 900px) {
+  .bg {
+    top: -140px;
+    width: 80%;
+  }
+}

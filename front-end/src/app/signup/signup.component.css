@@ -1,0 +1,29 @@
+.content {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cascading-right {
+  margin-right: -50px;
+}
+
+@media (max-width: 991.98px) {
+  .cascading-right {
+    margin-right: 0;
+  }
+  .image {
+    display: none;
+  }
+  .bg {
+    margin-top: 40px;
+  }
+}
+.bg {
+  background: hsla(0, 0%, 100%, 0.55);
+  backdrop-filter: blur(30px);
+}
+.image {
+  width: 400px;
+  height: 400px;
+}

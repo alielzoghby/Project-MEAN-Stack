@@ -1,19 +1,4 @@
-/* Theme Colors */
-:root {
-  --accent-color: #c5a992;
-  --secondary-color: #c5a992;
-  --dark-color: #2f2f2f;
-  --light-color: #f3f2ec;
-  --body-text-color: #757575;
-  --light-text-color: #afafaf;
-  --dark-text-color: #2f2f2f;
-}
-/* Fonts */
-:root {
-  --body-font: "Raleway", sans-serif;
-  --heading-font: "Prata", Georgia, serif;
-  --secondary-font: "Playfair Display", Georgia, serif;
-}
+@import "./root.css";
 
 *,
 *::before,
@@ -28,13 +13,14 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: var(--body-font);
+  font-family: var(--body-font) !important;
   font-size: 16px;
   line-height: 2;
   color: var(--body-text-color);
   background-color: var(--light-color);
   color: #000 !important;
 }
+
 /*
 - Jarallax
 - Slick Slider

@@ -1,5 +1,40 @@
+@import "../../root.css";
+
+/* -- Top Menu Part
+--------------------------------------------------------------*/
+.header-wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+.top-content {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.social-links a :hover {
+  color: var(--dark-text-color);
+}
+
+.top-content a {
+  color: #555;
+  text-decoration: none;
+}
+.top-content .right-element {
+  text-align: right;
+  font-weight: 500;
+}
+.top-content .right-element .for-buy {
+  margin-right: 40px;
+}
+
 #header {
   padding: 20px 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0; /* required */
 }
 #header .menu-list a {
   text-transform: uppercase;

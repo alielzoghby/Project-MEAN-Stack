@@ -1,26 +1,4 @@
-<div id="header-wrap">
-  <div class="top-content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 social-links gap-2">
-          <!--social-links-->
-          <a href="#"> <i class="fa-brands fa-facebook"></i></a>
-          <a href="#"> <i class="fa-brands fa-twitter"></i></a>
-          <a href="#"> <i class="fa-brands fa-github"></i> </a>
-          <a href="#"> <i class="fa-brands fa-linkedin"></i> </a>
-        </div>
-        <div class="col-md-6 right-element">
-          <a href="#" class="user-account"
-            ><i class="icon icon-user"></i><span>Account</span></a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <app-navbar></app-navbar>
-</div>
-
+<app-navbar></app-navbar>
 <app-carousel></app-carousel>
 
 <section id="client-holder" data-aos="fade-up" data-aos-duration="2000">
@@ -117,8 +95,11 @@
   <div class="container line">
     <div class="col-md-12">
       <div class="btn-wrap align-right">
-        <a href="#" class="btn-accent-arrow"
-          >View all products <i class="icon icon-ns-arrow-right"></i
+        <a
+          [routerLink]="['/categories']"
+          routerLinkActive="active"
+          class="btn-accent-arrow"
+          >View all books <i class="icon icon-ns-arrow-right"></i
         ></a>
       </div>
     </div>
@@ -278,6 +259,18 @@
       </div>
     </div>
   </div>
+  <div class="container line">
+    <div class="col-md-12">
+      <div class="btn-wrap align-right">
+        <a
+          [routerLink]="['/categories']"
+          routerLinkActive="active"
+          class="btn-accent-arrow"
+          >View all books <i class="icon icon-ns-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="quotation" class="align-center">
@@ -309,7 +302,7 @@
         <div class="row">
           <div class="col-md-4">
             <article class="column" data-aos="fade-up" data-aos-duration="3000">
-              <figure>
+              <figure class="parent-image">
                 <a href="#" class="image-hvr-effect">
                   <img
                     src="../../assets/images/post-img1.jpg"
@@ -384,6 +377,18 @@
             </article>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container line">
+    <div class="col-md-12">
+      <div class="btn-wrap align-right">
+        <a
+          [routerLink]="['/']"
+          routerLinkActive="active"
+          class="btn-accent-arrow"
+          >View all Authors <i class="icon icon-ns-arrow-right"></i
+        ></a>
       </div>
     </div>
   </div>
