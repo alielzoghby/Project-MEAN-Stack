@@ -1,6 +1,7 @@
 const { User } = require('../models/users');
 const asyncFunction = require('../middlewares/async');
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 const { JWT_SECRET = 'test' } = process.env;
 
 
@@ -9,12 +10,17 @@ const { JWT_SECRET = 'test' } = process.env;
 
 const createUser = asyncFunction(async (req, res) => {
   //  debugger;
-  const user = new User({
+  let user = await User.findOne({email:req.body.email}).exec();
+  if(user)
+  {
+    return res.status(400).send("User already registered");
+  }
+  user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     isAdmin: req.body.admin,
-    password: req.body.password,
+    password: req.bosy.password,
     photo: req.file && req.file.filename,
   });
   user.save().then(() => { res.status(200).send(user); });
@@ -27,16 +33,17 @@ const loginUser = asyncFunction(async (req, res) => {
   const { email, password } = req.body;
   const userAuthentication = await User.findOne({ email }).exec();
   if (!userAuthentication) {
-    res.status(401).send({ error: 'User not found' });
+    res.status(401).send({ error: 'Incorrect Email or Password' });
   }
   // check password
   const isPasswordValid = userAuthentication.verifyPassword(req.body.password);
   if (!isPasswordValid) {
-    return res.status(401).send({ error: 'Incorrect username or password' });
+    return res.status(401).send({ error: 'Incorrect Email or password' });
   }
-  const token = jwt.sign({ id: userAuthentication._id }, JWT_SECRET, { expiresIn: '1d'});
+  const token = jwt.sign({ id: userAuthentication._id , adminRole:userAuthentication.isAdmin}, JWT_SECRET, { expiresIn: '1d'});
+  res.header("x-auth-token",token);
   res.status(200).send({ "Token": token });
-  return token;
+  // return token;
 });
 
 /// ////////////////////////////// login user /////////////////////////////////////////
