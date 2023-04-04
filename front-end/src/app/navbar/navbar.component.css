@@ -1,40 +1,56 @@
-.nav-link{
-   
-    padding:10px 10px;
-    text-transform: uppercase;
-    transition: color 0.15s ease-in-out, color 0.15s ease-in-out;
-    font-weight:200;
+@import "../../root.css";
+
+/* -- Top Menu Part
+--------------------------------------------------------------*/
+#header-wrap {
+  position: relative;
 }
 
-.nav-link:hover{
-    font-weight:400;
-    color: #74642f;
+.top-content {
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-
-header{
-    padding:50px
+.social-links a :hover {
+  color: var(--dark-text-color);
 }
 
-
-.search{
-    margin-left: 2.5rem;
-   
+.top-content a {
+  color: #555;
+  text-decoration: none;
+}
+.top-content .right-element {
+  text-align: right;
+  font-weight: 500;
+}
+.top-content .right-element .for-buy {
+  margin-right: 40px;
 }
 
-.search input{
-    border-width: 0px 0px 1px 0px; 
-    border-radius: 0;
-    outline: none;
+#header {
+  padding: 10px 0;
 }
-
-.search input:active{
-  border-width: 0px 0px 1px 0px; 
-    border-radius: 0;  
+.fixed {
+  position: fixed;
+  width: 100%;
+  transition: 0.2s linear;
+  top: 5px;
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(60px);
+  z-index: 5555;
 }
-
-:root {
-    --body-font: "Raleway", sans-serif;
-    --heading-font: "Prata", Georgia, serif;
-    --secondary-font: "Playfair Display", Georgia, serif;
-  }
+.nofixed {
+  position: static;
+  transition: 0.2s linear;
+}
+#header .menu-list a {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+ul li.active a {
+  color: #daa556;
+}
+ul li a {
+  padding: 10px 20px;
+}

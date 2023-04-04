@@ -1,57 +1,70 @@
-<header id="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="main-logo">
-          <a href="index.html"
-            ><img src="../../assets/images/main-logo.png" alt="logo"
-          /></a>
+<div id="header-wrap">
+  <div class="top-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 social-links gap-2">
+          <!--social-links-->
+          <a href="#"> <i class="fa-brands fa-facebook"></i></a>
+          <a href="#"> <i class="fa-brands fa-twitter"></i></a>
+          <a href="#"> <i class="fa-brands fa-github"></i> </a>
+          <a href="#"> <i class="fa-brands fa-linkedin"></i> </a>
+          <a href="#"> <i class="fab fa-google"></i> </a>
         </div>
-      </div>
-<div class = "col-3 search">
-  <!-- Search form -->
-<div class="md-form mt-0" >
-  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-</div>
-</div>
-      <div class="col-md-6">
-        <nav id="navbar">
-          <div class="main-menu stellarnav">
-            <ul class="menu-list">
-              <li class="menu-item active">
-                <a href="#home" class="nav-link" data-effect="Home">Home</a>
-              </li>
-              <li class="menu-item">
-                <a href="#about" class="nav-link" data-effect="About"
-                  >About us</a
-                >
-
-                <li class="menu-item">
-                  <a href="#about" class="nav-link" data-effect="About"
-                    >About us</a
-                  >
-
-              </li>
-              <li class="menu-item has-sub">
-                <a href="#pages" class="nav-link" data-effect="Pages"
-                  >Caterories</a
-                >
-              </li>
-              <li class="menu-item">
-                <a href="#popular-books" class="nav-link" data-effect="Shop"
-                  >Authors</a
-                >
-              </li>
-              <li class="menu-item">
-                <a href="#contact" class="nav-link" data-effect="Contact"
-                  >Contact</a
-                >
-              </li>
-            </ul>
-
-          </div>
-        </nav>
+        <div class="col-6 right-element">
+          <a
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            class="user-account"
+            ><i class="fa-solid fa-user"></i><span>Account</span></a
+          >
+        </div>
       </div>
     </div>
   </div>
-</header>
+  <header
+    id="header"
+    class="fixed"
+    (scroll)="onscroll()"
+    [ngClass]="navbarfixed ? 'fixed' : 'nofixed'"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="main-logo col-md-2 d-flex align-items-center">
+          <a [routerLink]="['']" routerLinkActive="active"
+            ><img src="../../assets/images/main-logo.png" alt="logo"
+          /></a>
+        </div>
+
+        <div class="col-md-10">
+          <nav id="navbar  d-flex align-items-center">
+            <div class="main-menu stellarnav">
+              <ul class="menu-list">
+                <li class="menu-item active">
+                  <a href="#header-wrap">Home</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#featured-books" class="nav-link">Popular Books</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#popular-books" class="nav-link">Categories</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#latest-blog" class="nav-link">Authors</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">About Us</a>
+                </li>
+              </ul>
+
+              <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
