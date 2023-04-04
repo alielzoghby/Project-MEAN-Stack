@@ -6,7 +6,9 @@ const asyncFunction = require('../middlewares/async');
 
 const { JWT_SECRET = 'test' } = process.env;
 
-/// /////////////////////////// create user (register) /////////////////////////////////
+
+
+/////////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   //  debugger;
@@ -26,7 +28,9 @@ const createUser = asyncFunction(async (req, res) => {
   user.save().then(() => { res.status(200).send(user); });
 });
 
-/// ////////////////////////////// login user /////////////////////////////////////////
+
+//////////////////////////////// login user ///////////////////////////////////////////
+
 
 const loginUser = asyncFunction(async (req, res) => {
   // check is user login with email already exist or not
@@ -46,38 +50,47 @@ const loginUser = asyncFunction(async (req, res) => {
   // return token;
 });
 
-/// ////////////////////////////// login user /////////////////////////////////////////
 
-const getUserById = asyncFunction(async (req, res) => {
-  const { userId } = req.body;
-  const oneUser = await User.findById({ id: userId });
-  res.status(200).send(oneUser);
-});
+//////////////////////////////// get user by id ///////////////////////////////////////////
 
-/// ////////////////////////////// login user /////////////////////////////////////////
 
-const getUsers = asyncFunction(async (req, res) => {
-  const users = await User.find();
-  res.status(200).send(users);
-});
+// const getUserById = asyncFunction(async (req, res) => {
+//   const { userId } = req.body;
+//   const oneUser = await User.findById({ id: userId });
+//   res.status(200).send(oneUser);
+// });
 
-/// ////////////////////////////// delete user ///////////////////////////////////////
 
-const deleteUserById = asyncFunction(async (req, res) => {
-  const { userId } = req.body;
-  const deleteUser = await User.findOneAndDelete({ id: userId });
-  res.status(200).send(`Deleted User: ${deleteUser}`);
-});
+////////////////////////////////// get all user ///////////////////////////////////////////
 
-/// ////////////////////////////// update user ///////////////////////////////////////
+
+// const getUsers = asyncFunction(async (req, res) => {
+//   const users = await User.find();
+//   res.status(200).send(users);
+// });
+
+
+///////////////////////////////////// delete user /////////////////////////////////////////
+
+
+// const deleteUserById = asyncFunction(async (req, res) => {
+//   const { userId } = req.body;
+//   const deleteUser = await User.findOneAndDelete({ id: userId });
+//   res.status(200).send(`Deleted User: ${deleteUser}`);
+// });
+
+
+////////////////////////////////// update user ///////////////////////////////////////
 
 const updateUserById = asyncFunction(async (req, res) => {
+  const { id } = req.params;
+  const { filename } = req.file;
   const {
-    userId, firstName, lastName, password, email,
+    firstName, lastName, password, email
   } = req.body;
-  const updateUser = await User.findOneAndUpdate({ id: userId }, {
+  const updateUser = await User.findByIdAndUpdate({ _id: id }, {
     $set: {
-      firstName, lastName, password, email,
+      firstName: firstName, lastName: lastName, password: password, email: email, photo: filename
     },
   }, { new: true });
   res.status(200).send(`Update User: ${updateUser}`);
@@ -85,20 +98,17 @@ const updateUserById = asyncFunction(async (req, res) => {
 
 /// ////////////////////////////// update user Photo ///////////////////////////////////////
 
-const updateUserPhotoById = asyncFunction(async (req, res) => {
-  const { userId } = req.body;
-  const { filename } = req.file;
-  // eslint-disable-next-line max-len
-  const userPhoto = await User.findOneAndUpdate({ id: userId }, { $set: { photo: filename } }, { new: true });
-  res.status(200).send(userPhoto);
-});
+// const updateUserPhotoById = asyncFunction(async (req, res) => {
+//   const { userId } = req.body;
+//   const { filename } = req.file;
+//   // eslint-disable-next-line max-len
+//   const userPhoto = await User.findOneAndUpdate({ id: userId }, { $set: { photo:  } }, { new: true });
+//   res.status(200).send(userPhoto);
+// });
 
 module.exports = {
   createUser,
   loginUser,
-  getUserById,
-  getUsers,
-  deleteUserById,
   updateUserById,
-  updateUserPhotoById,
+  // updateUserPhotoById,
 };
