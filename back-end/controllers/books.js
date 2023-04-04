@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 const asyncFunction = require('../middlewares/async');
 
 const { Book } = require('../models/books');
@@ -22,18 +23,26 @@ const getAllBooks = asyncFunction(async (req, res) => {
 
 const getBookById = asyncFunction(async (req, res) => {
   const book = await Book.findById(req.params.id);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
   res.status(200).send(book);
 });
 
 const deleteBook = asyncFunction(async (req, res) => {
   const book = await Book.findByIdAndRemove(req.params.id);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
   res.status(200).send(book);
 });
 
 const updateBook = asyncFunction(async (req, res) => {
   // eslint-disable-next-line max-len
-  const book = await Book.findOneAndUpdate(req.params.id, req.body, { returnOriginal: false });
-  res.status(200).send(book);
+  const book = await Book.findByIdAndUpdate(req.params.id, req.body, { returnOriginal: false });
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }res.status(200).send(book);
 });
 
 module.exports = {
