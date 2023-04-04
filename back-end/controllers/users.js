@@ -1,19 +1,19 @@
+/* eslint-disable no-throw-literal */
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { User } = require('../models/users');
 const asyncFunction = require('../middlewares/async');
-const jwt = require('jsonwebtoken');
-const bcrypt = require("bcrypt");
+
 const { JWT_SECRET = 'test' } = process.env;
-
-
 
 /// /////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   //  debugger;
-  let user = await User.findOne({email:req.body.email}).exec();
-  if(user)
-  {
-    return res.status(400).send("User already registered");
+  let user = await User.findOne({ email: req.body.email }).exec();
+  if (user) {
+    // res.statusCode = 400;
+    throw { status: 400, message: 'User already registered' };
   }
   user = new User({
     firstName: req.body.firstName,
@@ -40,9 +40,9 @@ const loginUser = asyncFunction(async (req, res) => {
   if (!isPasswordValid) {
     return res.status(401).send({ error: 'Incorrect Email or password' });
   }
-  const token = jwt.sign({ id: userAuthentication._id , adminRole:userAuthentication.isAdmin}, JWT_SECRET, { expiresIn: '1d'});
-  res.header("x-auth-token",token);
-  res.status(200).send({ "Token": token });
+  const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
+  res.header('x-auth-token', token);
+  res.status(200).send({ Token: token });
   // return token;
 });
 
