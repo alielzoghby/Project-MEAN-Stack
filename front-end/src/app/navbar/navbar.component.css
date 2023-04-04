@@ -2,11 +2,8 @@
 
 /* -- Top Menu Part
 --------------------------------------------------------------*/
-.header-wrap {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  overflow: visible;
+#header-wrap {
+  position: relative;
 }
 
 .top-content {
@@ -31,10 +28,20 @@
 }
 
 #header {
-  padding: 20px 0;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0; /* required */
+  padding: 10px 0;
+}
+.fixed {
+  position: fixed;
+  width: 100%;
+  transition: 0.2s linear;
+  top: 5px;
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(60px);
+  z-index: 5555;
+}
+.nofixed {
+  position: static;
+  transition: 0.2s linear;
 }
 #header .menu-list a {
   text-transform: uppercase;
