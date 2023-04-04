@@ -6,6 +6,5 @@ const router = express.Router();
 router.post('/sing-up', usersController.createUser);
 router.post('/login', usersController.loginUser);
 router.patch('/:id', usersController.updateUserById);
-// router.patch('/updateUser', usersController.updateUserById);
 
 module.exports = router;

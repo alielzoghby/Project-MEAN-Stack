@@ -11,7 +11,6 @@ const { JWT_SECRET = 'test' } = process.env;
 /////////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
-  //  debugger;
   let user = await User.findOne({ email: req.body.email }).exec();
   if (user) {
     // res.statusCode = 400;
@@ -82,6 +81,7 @@ const loginUser = asyncFunction(async (req, res) => {
 
 ////////////////////////////////// update user ///////////////////////////////////////
 
+
 const updateUserById = asyncFunction(async (req, res) => {
   const { id } = req.params;
   const { filename } = req.file;
@@ -96,19 +96,10 @@ const updateUserById = asyncFunction(async (req, res) => {
   res.status(200).send(`Update User: ${updateUser}`);
 });
 
-/// ////////////////////////////// update user Photo ///////////////////////////////////////
 
-// const updateUserPhotoById = asyncFunction(async (req, res) => {
-//   const { userId } = req.body;
-//   const { filename } = req.file;
-//   // eslint-disable-next-line max-len
-//   const userPhoto = await User.findOneAndUpdate({ id: userId }, { $set: { photo:  } }, { new: true });
-//   res.status(200).send(userPhoto);
-// });
 
 module.exports = {
   createUser,
   loginUser,
   updateUserById,
-  // updateUserPhotoById,
 };
