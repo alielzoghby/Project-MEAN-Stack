@@ -3,12 +3,18 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { User } = require('../models/users');
 const asyncFunction = require('../middlewares/async');
+const { UserBook } = require('../models/usersBooks');
 
 const { JWT_SECRET = 'test' } = process.env;
 
+const addUserToUserBooks = function addUserToUserBooks(userId) {
+  const userbook = new UserBook({
+    userId,
+  });
+  userbook.save();
+};
 
-
-/////////////////////////////// create user (register) /////////////////////////////////
+/// //////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   let user = await User.findOne({ email: req.body.email }).exec();
@@ -24,12 +30,11 @@ const createUser = asyncFunction(async (req, res) => {
     password: req.body.password,
     photo: req.file && req.file.filename,
   });
+  addUserToUserBooks(user._id);
   user.save().then(() => { res.status(200).send(user); });
 });
 
-
-//////////////////////////////// login user ///////////////////////////////////////////
-
+/// ///////////////////////////// login user ///////////////////////////////////////////
 
 const loginUser = asyncFunction(async (req, res) => {
   // check is user login with email already exist or not
@@ -49,9 +54,7 @@ const loginUser = asyncFunction(async (req, res) => {
   // return token;
 });
 
-
-//////////////////////////////// get user by id ///////////////////////////////////////////
-
+/// ///////////////////////////// get user by id ///////////////////////////////////////////
 
 // const getUserById = asyncFunction(async (req, res) => {
 //   const { userId } = req.body;
@@ -59,18 +62,14 @@ const loginUser = asyncFunction(async (req, res) => {
 //   res.status(200).send(oneUser);
 // });
 
-
-////////////////////////////////// get all user ///////////////////////////////////////////
-
+/// /////////////////////////////// get all user ///////////////////////////////////////////
 
 // const getUsers = asyncFunction(async (req, res) => {
 //   const users = await User.find();
 //   res.status(200).send(users);
 // });
 
-
-///////////////////////////////////// delete user /////////////////////////////////////////
-
+/// ////////////////////////////////// delete user /////////////////////////////////////////
 
 // const deleteUserById = asyncFunction(async (req, res) => {
 //   const { userId } = req.body;
@@ -78,25 +77,21 @@ const loginUser = asyncFunction(async (req, res) => {
 //   res.status(200).send(`Deleted User: ${deleteUser}`);
 // });
 
-
-////////////////////////////////// update user ///////////////////////////////////////
-
+/// /////////////////////////////// update user ///////////////////////////////////////
 
 const updateUserById = asyncFunction(async (req, res) => {
   const { id } = req.params;
   const { filename } = req.file;
   const {
-    firstName, lastName, password, email
+    firstName, lastName, password, email,
   } = req.body;
   const updateUser = await User.findByIdAndUpdate({ _id: id }, {
     $set: {
-      firstName: firstName, lastName: lastName, password: password, email: email, photo: filename
+      firstName, lastName, password, email, photo: filename,
     },
   }, { new: true });
   res.status(200).send(`Update User: ${updateUser}`);
 });
-
-
 
 module.exports = {
   createUser,
