@@ -33,10 +33,17 @@ const bookSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  reviews: {
-    type: [String],
-  },
-
+  reviews: [
+    {
+      userId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'users',
+      },
+      review: {
+        type: String,
+      },
+    },
+  ],
 });
 
 bookSchema.pre('save', async function () {
@@ -46,7 +53,6 @@ bookSchema.pre('save', async function () {
     book.id = count + 1;
   }
 });
-
 
 const Book = mongoose.model('Book', bookSchema);
 
