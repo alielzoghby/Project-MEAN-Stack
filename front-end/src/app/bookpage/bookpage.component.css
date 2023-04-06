@@ -25,6 +25,21 @@ p {
   line-height: 25px;
 }
 
+form{
+  display: flex;
+}
+
+form i {
+  font-size: 25px;
+  color:gray;
+  cursor:pointer
+}
+
+form button {
+  background-color: transparent;
+  border: 0px;
+}
+
 .userrate {
   font-weight: 600;
 }
