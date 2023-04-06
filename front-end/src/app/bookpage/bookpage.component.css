@@ -1,0 +1,104 @@
+@import "../../root.css";
+
+header {
+  padding: 50px;
+  background-color: var(--light-color);
+}
+
+img {
+  /* max-width: 200px; */
+  max-height: 250px;
+}
+
+
+
+.shelve {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 200px;
+}
+
+.bookname h1 {
+  margin: 0;
+  padding-top: 25px;
+}
+
+.bookname h4 {
+ margin:5px 0px;
+ color:var(  --light-text-color);
+}
+
+.bookname a:hover{
+  color:var( --dark-text-color)
+}
+
+p {
+  height: 35%;
+  line-height: 25px;
+  color:var(--body-text-color);
+  padding-top:10px;
+}
+
+
+form{
+  display: flex;
+}
+
+form i {
+  font-size: 25px;
+  color:gray;
+  cursor:pointer
+}
+
+form button {
+  background-color: transparent;
+  border: 0px;
+}
+
+.userrate {
+  font-weight: 600;
+}
+.userrate h3 {
+  margin-bottom: 15px;
+}
+
+.comments {
+  padding: 50px 0;
+}
+.reviews {
+  padding: 50px;
+  padding-bottom: 0px;
+  display: flex;
+}
+
+.userimg {
+  vertical-align: middle;
+}
+
+.userimg img {
+  width: 80px;
+  min-width: 20px;
+  height: 80px;
+  border-style: solid;
+  border-radius: 50%;
+}
+
+.usercomment {
+  padding: 10px;
+}
+
+.usercomment input {
+  border-width: 0px 0px 1px 0px;
+  border-radius: 0;
+  padding-bottom: 20px;
+}
+
+.comments h4 {
+  text-transform: capitalize;
+  font-family: inherit;
+}
+
+.comments h3 {
+  margin: 0px;
+  font-weight: 600;
+}

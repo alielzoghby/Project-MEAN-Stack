@@ -19,6 +19,7 @@
 
 a {
   color: var(--accent-color);
+  padding: var(--);
   transition: 0.3s color ease-out;
 }
 
