@@ -14,16 +14,35 @@ img {
   max-height: 250px;
 }
 
+
+
 .shelve {
   margin-top: 20px;
   margin-bottom: 20px;
   max-width: 200px;
 }
 
-p {
-  max-height: 30%;
-  line-height: 25px;
+.bookname h1 {
+  margin: 0;
+  padding-top: 25px;
 }
+
+.bookname h4 {
+ margin:5px 0px;
+ color:var(  --light-text-color);
+}
+
+.bookname a:hover{
+  color:var( --dark-text-color)
+}
+
+p {
+  height: 35%;
+  line-height: 25px;
+  color:var(--body-text-color);
+  padding-top:10px;
+}
+
 
 form{
   display: flex;
