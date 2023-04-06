@@ -5,10 +5,6 @@ header {
   background-color: var(--light-color);
 }
 
-.img {
-  padding: 2%;
-}
-
 img {
   /* max-width: 200px; */
   max-height: 250px;
@@ -62,6 +58,10 @@ form button {
 .userrate {
   font-weight: 600;
 }
+.userrate h3 {
+  margin-bottom: 15px;
+}
+
 .comments {
   padding: 50px 0;
 }

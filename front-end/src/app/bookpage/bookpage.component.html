@@ -4,14 +4,32 @@
     <div class="row">
       <div class="col-md-3 col-sm-6 img">
         <div><img src="../../assets/images/product-item1.jpg" /></div>
+      </div>
+      <div class="col-md-6 ps-md-5">
+        <div class="bookname">
+          <h1>bookname</h1>
+          <h4><a [routerLink]="['/author']">Author name</a></h4>
+          <h4><a [routerLink]="['/categories']">category name</a></h4>
+        </div>
+        <p class="brife">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius,
+          ratione non. Laborum quas voluptates voluptas earum dolorem voluptate.
+          Quidem ex odio sint! Quaerat natus atque saepe doloribus expedita,
+          quos error ducimus non odit, numquam sequi magni ex incidunt
+          praesentium suscipit, impedit perferendis eos dignissimos excepturi
+          officiis doloremque voluptas? Laboriosam, ipsum.
+        </p>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-3 col-sm-6 ">
         <select class="shelve form-select">
           <option selected>Want to Read</option>
           <option value="1">Currently Read</option>
           <option value="2">Read</option>
         </select>
-
-        <div class="AVGrate">
+       <div class="AVGrate">
           <div class="rate">
             <i class="fa">&#xf005;</i>
             <i class="fa">&#xf005;</i>
@@ -22,16 +40,8 @@
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-6 ps-3">
-        <div class="bookname">
-          <h1>bookname</h1>
-          <h4><a [routerLink]="['/author']" >Author name</a></h4>
-          <h4><a [routerLink]="['/categories']" >category name</a></h4>
-        </div>
-        <p class="brife">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi,
-          nemo ea? Consequatur rem alias unde corporis commodi, pariatur,
-        </p>
+
+      <div class="col-md-3 col-sm-6 ps-md-5">
         <div class="rating">
           <h3 class="userrate">your rate</h3>
           <i class="fa-regular fa-star"></i>
@@ -61,7 +71,9 @@
             id=""
             placeholder="enter your review"
           />
-          <button class="submit" title="send your comment"><i class="fa-regular fa-paper-plane"></i></button>
+          <button class="submit" title="send your comment">
+            <i class="fa-regular fa-paper-plane"></i>
+          </button>
         </form>
       </div>
     </div>
