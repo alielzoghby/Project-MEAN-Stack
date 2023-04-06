@@ -23,6 +23,10 @@ const addBook = asyncFunction(async (req, res) => {
 });
 // add review
 // add rating
+// update rating -> At the end
+// get user books based on shelf
+// get all user books
+// calculate average rating 
 
 module.exports = {
   addBook,

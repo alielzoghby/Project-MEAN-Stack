@@ -11,6 +11,5 @@ module.exports = asyncFunction((req, res, next) => {
   }
   const decodedPayload = jwt.verify(token, JWT_SECRET);
   req.currentUserId = decodedPayload.id;
-  console.log(req.currentUserId);
   next();
 });
