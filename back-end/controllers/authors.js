@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 const { Author } = require('../models/authors');
 const asyncFunction = require('../middlewares/async');
 
@@ -13,6 +14,9 @@ const getAuthors = asyncFunction(async (req, res) => {
 const getAuthorById = asyncFunction(async (req, res) => {
   const { authorId } = req.body;
   const oneAuthor = await Author.findById({ id: authorId });
+  if (!oneAuthor) {
+    throw { status: 404, message: 'Author not found!' };
+  }
   res.status(200).send(oneAuthor);
 });
 
@@ -32,6 +36,9 @@ const createNewAuthor = asyncFunction(async (req, res) => {
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
   const author = await Author.findOneAndDelete({ id: req.body.authorId });
+  if (!author) {
+    throw { status: 404, message: 'Author not found!' };
+  }
   res.status(200).send(`Deleted author: ${author.firstName}`);
 });
 
@@ -42,7 +49,10 @@ const updateAuthorById = asyncFunction(async (req, res) => {
     authorId, firstName, lastName, dateOfBirth,
   } = req.body;
   // eslint-disable-next-line max-len
-  const author = await Author.findOneAndUpdate({ id: authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
+  if (!author) {
+    throw { status: 404, message: 'Author not found!' };
+  }
   res.status(200).send(author);
 });
 
@@ -52,7 +62,10 @@ const updateAuthorPhotoById = asyncFunction(async (req, res) => {
   const { authorId } = req.body;
   const { filename } = req.file;
   // eslint-disable-next-line max-len
-  const author = await Author.findOneAndUpdate({ id: authorId }, { $set: { photo: filename } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { photo: filename } }, { new: true });
+  if (!author) {
+    throw { status: 404, message: 'Author not found!' };
+  }
   res.status(200).send(author);
 });
 

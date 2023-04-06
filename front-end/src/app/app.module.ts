@@ -30,6 +30,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { BookpageComponent } from './bookpage/bookpage.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SignupComponent } from './signup/signup.component';
     FotterComponent,
     LoginComponent,
     SignupComponent,
+    BookpageComponent,
   ],
   imports: [
     BrowserModule,

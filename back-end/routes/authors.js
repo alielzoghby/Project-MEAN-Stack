@@ -10,5 +10,4 @@ router.delete('/deleteAuthor', authorsController.deleteAuthorById);
 router.patch('/updateAuthor', authorsController.updateAuthorById);
 router.patch('/updateAuthorPhoto', authorsController.updateAuthorPhotoById);
 
-
 module.exports = router;
