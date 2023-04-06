@@ -1,0 +1,97 @@
+<app-navbar></app-navbar>
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 img">
+        <div><img src="../../assets/images/product-item1.jpg" /></div>
+      </div>
+      <div class="col-md-6 ps-md-5">
+        <div class="bookname">
+          <h1>bookname</h1>
+          <h4><a [routerLink]="['/author']">Author name</a></h4>
+          <h4><a [routerLink]="['/categories']">category name</a></h4>
+        </div>
+        <p class="brife">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius,
+          ratione non. Laborum quas voluptates voluptas earum dolorem voluptate.
+          Quidem ex odio sint! Quaerat natus atque saepe doloribus expedita,
+          quos error ducimus non odit, numquam sequi magni ex incidunt
+          praesentium suscipit, impedit perferendis eos dignissimos excepturi
+          officiis doloremque voluptas? Laboriosam, ipsum.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-6 ">
+        <select class="shelve form-select">
+          <option selected>Want to Read</option>
+          <option value="1">Currently Read</option>
+          <option value="2">Read</option>
+        </select>
+       <div class="AVGrate">
+          <div class="rate">
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+            <i class="fa">&#xf005;</i>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3 col-sm-6 ps-md-5">
+        <div class="rating">
+          <h3 class="userrate">your rate</h3>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="reviews">
+  <div class="container">
+    <h1>reviews</h1>
+    <div class="row">
+      <div class="col-1 userimg">
+        <img src="../../assets/images/banner.jpg" />
+      </div>
+      <div class="col-5 usercomment">
+        <form action="">
+          <input
+            class="form-control"
+            type="text"
+            name=""
+            id=""
+            placeholder="enter your review"
+          />
+          <button class="submit" title="send your comment">
+            <i class="fa-regular fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="comments">
+      <div class="row">
+        <div class="col-1 userimg">
+          <img src="../../assets/images/team-1.jpg" />
+        </div>
+        <div class="col-5 otherReviews">
+          <h3 class="pname">jon haper</h3>
+          <p>
+            Soluta fugit porro alias. Explicabo temporibus ullam velit
+            distinctio architecto!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-fotter></app-fotter>
