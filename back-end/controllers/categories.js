@@ -1,4 +1,4 @@
-// Any function in any controller will have the same structure
+/* eslint-disable no-throw-literal */
 
 const asyncFunction = require('../middlewares/async');
 
@@ -19,17 +19,26 @@ const getAllCategories = asyncFunction(async (req, res) => {
 });
 const getCategoryById = asyncFunction(async (req, res) => {
   const category = await Category.findById(req.params.id);
+  if (!category) {
+    throw { status: 404, message: 'Category not found!' };
+  }
   res.status(200).send(category);
 });
 
 const deleteCategory = asyncFunction(async (req, res) => {
   const category = await Category.findByIdAndRemove(req.params.id);
+  if (!category) {
+    throw { status: 404, message: 'Category not found!' };
+  }
   res.status(200).send(category);
 });
 
 const updateCategory = asyncFunction(async (req, res) => {
   // eslint-disable-next-line max-len
-  const category = await Category.findOneAndUpdate(req.params.id, req.body, { returnOriginal: false });
+  const category = await Category.findByIdAndUpdate(req.params.id, req.body, { returnOriginal: false });
+  if (!category) {
+    throw { status: 404, message: 'Category not found!' };
+  }
   res.status(200).send(category);
 });
 module.exports = {
