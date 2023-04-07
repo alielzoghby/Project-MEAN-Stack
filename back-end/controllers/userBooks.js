@@ -45,6 +45,11 @@ const addRating = asyncFunction(async (req, res) => {
   res.status(200).send(newEntry);
 });
 // update book shelf
+const updateShelf = asyncFunction(async (req, res) => {
+  const userBook = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.params.id }, { $set: { 'books.$.shelf': req.body.shelf } }, { returnOriginal: false });
+  res.status(200).send(userBook);
+});
+
 // add review
 // calculate average rating
 
@@ -52,4 +57,5 @@ module.exports = {
   addBook,
   getUserBooks,
   addRating,
+  updateShelf,
 };

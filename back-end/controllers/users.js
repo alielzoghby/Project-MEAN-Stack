@@ -14,8 +14,7 @@ const addUserToUserBooks = function addUserToUserBooks(userId) {
   userbook.save();
 };
 
-//////////////////////////////// create user (register) /////////////////////////////////
-
+/// ///////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   let user = await User.findOne({ email: req.body.email }).exec();
@@ -35,9 +34,7 @@ const createUser = asyncFunction(async (req, res) => {
   user.save().then(() => { res.status(200).send(user); });
 });
 
-
-///////////////////////////////// login user ///////////////////////////////////////////
-
+/// ////////////////////////////// login user ///////////////////////////////////////////
 
 const loginUser = asyncFunction(async (req, res) => {
   // check is user login with email already exist or not
@@ -53,12 +50,10 @@ const loginUser = asyncFunction(async (req, res) => {
   }
   const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
   // res.cookie('x-auth-token', token);
-  res.status(200).cookie('x-auth-token', token).send({message: "login Successful"});
+  res.status(200).cookie('x-auth-token', token).send({ message: 'login Successful' });
 });
 
-
-/////////////////////////////////// update user ///////////////////////////////////////
-
+/// //////////////////////////////// update user ///////////////////////////////////////
 
 const updateUserById = asyncFunction(async (req, res) => {
   const { id } = req.params;
@@ -73,9 +68,6 @@ const updateUserById = asyncFunction(async (req, res) => {
   }, { new: true });
   res.status(200).send(`Update User: ${updateUser}`);
 });
-
-
-
 
 module.exports = {
   createUser,
