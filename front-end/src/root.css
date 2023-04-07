@@ -18,9 +18,12 @@
 /*----------------------------------------------*/
 
 a {
-  color: var(--accent-color);
-  padding: var(--);
+  color: #dd7621;
+  padding: 5px;
   transition: 0.3s color ease-out;
+  font-weight: 700;
+  position: relative;
+  z-index: 999999;
 }
 
 a:hover {
@@ -161,9 +164,6 @@ ul li,
 ol li {
   margin-bottom: 5px;
   outline: 0;
-}
-ul li.active a {
-  color: #daa556;
 }
 
 ul {

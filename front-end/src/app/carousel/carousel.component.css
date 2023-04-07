@@ -1,5 +1,8 @@
 #billboard .main-slider {
   padding: 80px 0;
+  background-image: url(/assets/bg.avif);
+  background-size: cover;
+  background-attachment: fixed;
 }
 .main-slider .slider-item {
   display: flex;
