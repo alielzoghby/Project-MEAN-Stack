@@ -41,6 +41,7 @@ const addRating = asyncFunction(async (req, res) => {
     throw { status: 404, message: 'Book not found!' };
   }
   const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.rating': req.body.rating } }, { returnOriginal: false });
+  const bookNew = await Book.findOneAndUpdate(req.body.bookId, { $set: { numberOfRatings: book.numberOfRatings + 1 } }, { returnOriginal: false });
   res.status(200).send(newEntry);
 });
 // update book shelf
