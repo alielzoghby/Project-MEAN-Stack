@@ -14,10 +14,32 @@
 
 /*----- Featured Books Section
 --------------------------------------------------------------*/
-#special-offer,
+#latest-blog,
 #popular-books,
 #featured-books {
   margin-bottom: 100px;
+  position: relative;
+}
+#latest-blog::before,
+#popular-books::before,
+#featured-books::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-size: cover;
+  background-attachment: fixed;
+  backdrop-filter: blur(10px);
+}
+#latest-blog::before {
+  background-image: url("/assets/Curve\ Line.svg");
+}
+#popular-books::before {
+  background-image: url("/assets/Curve\ Line\ \(1\).svg");
+}
+#featured-books::before {
+  background-image: url("/assets/Curve\ Line\ \(2\).svg");
 }
 #featured-books .product-list {
   margin-bottom: 30px;

@@ -9,7 +9,9 @@ declare let AOS: any;
 })
 export class NavbarComponent implements OnInit {
   navbarfixed: boolean = false;
+  isLoged: boolean = false;
   constructor(private _router: Router) {}
+
   ngOnInit(): void {
     AOS.init();
   }
