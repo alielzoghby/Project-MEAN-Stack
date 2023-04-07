@@ -21,13 +21,35 @@ const addBook = asyncFunction(async (req, res) => {
   }
   res.status(200).send(newEntry);
 });
-// add review
-// add rating
-// update rating -> At the end
+
 // get user books based on shelf
-// get all user books
-// calculate average rating 
+const getUserBooks = asyncFunction(async (req, res) => {
+  let userBooks;
+  if (req.params.shelf === 'all') {
+    userBooks = await UserBook.find({ userId: req.currentUserId })
+      .populate('books.bookId').select({ books: 1, _id: 0 });
+  } else {
+    userBooks = await UserBook.find({ userId: req.currentUserId, 'books.shelf': req.params.shelf })
+      .populate('books.bookId').select({ books: { $elemMatch: { shelf: req.params.shelf } }, _id: 0 });
+  }
+  res.status(200).send(userBooks);
+});
+// add rating
+const addRating = asyncFunction(async (req, res) => {
+  const book = await Book.findById(req.body.bookId);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
+  const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.rating': req.body.rating } }, { returnOriginal: false });
+  const bookNew = await Book.findOneAndUpdate(req.body.bookId, { $set: { numberOfRatings: book.numberOfRatings + 1 } }, { returnOriginal: false });
+  res.status(200).send(newEntry);
+});
+// update book shelf
+// add review
+// calculate average rating
 
 module.exports = {
   addBook,
+  getUserBooks,
+  addRating,
 };
