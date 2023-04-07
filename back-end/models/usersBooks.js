@@ -9,7 +9,7 @@ const usersBooksSchema = new mongoose.Schema({
   books: [{
     bookId: {
       type: mongoose.Types.ObjectId,
-      ref: 'books',
+      ref: 'Book',
     },
     shelf: {
       type: String,

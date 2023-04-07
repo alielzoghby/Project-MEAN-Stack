@@ -21,13 +21,28 @@ const addBook = asyncFunction(async (req, res) => {
   }
   res.status(200).send(newEntry);
 });
+
+// get user books based on shelf
+const getUserBooks = asyncFunction(async (req, res) => {
+  let userBooks;
+  if (req.params.shelf === 'all') {
+    userBooks = await UserBook.find({ userId: req.currentUserId })
+      .populate('books.bookId').select({ books: 1, _id: 0 });
+  } else {
+    userBooks = await UserBook.find({ userId: req.currentUserId, 'books.shelf': req.params.shelf })
+      .populate('books.bookId').select({ books: { $elemMatch: { shelf: req.params.shelf } }, _id: 0 });
+  }
+  res.status(200).send(userBooks);
+});
+// update book shelf
 // add review
 // add rating
 // update rating -> At the end
-// get user books based on shelf
+
 // get all user books
-// calculate average rating 
+// calculate average rating
 
 module.exports = {
   addBook,
+  getUserBooks,
 };
