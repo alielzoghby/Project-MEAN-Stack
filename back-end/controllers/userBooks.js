@@ -34,15 +34,21 @@ const getUserBooks = asyncFunction(async (req, res) => {
   }
   res.status(200).send(userBooks);
 });
+// add rating
+const addRating = asyncFunction(async (req, res) => {
+  const book = await Book.findById(req.body.bookId);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
+  const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.rating': req.body.rating } }, { returnOriginal: false });
+  res.status(200).send(newEntry);
+});
 // update book shelf
 // add review
-// add rating
-// update rating -> At the end
-
-// get all user books
 // calculate average rating
 
 module.exports = {
   addBook,
   getUserBooks,
+  addRating,
 };

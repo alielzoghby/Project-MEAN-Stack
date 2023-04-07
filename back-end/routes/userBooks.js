@@ -6,6 +6,7 @@ const userBooksController = require('../controllers/userBooks');
 const currentUser = require('../middlewares/getCurrentUser');
 
 router.post('/', currentUser, userBooksController.addBook);
+router.post('/rating', currentUser, userBooksController.addRating);
 router.get('/:shelf', currentUser, userBooksController.getUserBooks);
 // update book shelf
 // add review
