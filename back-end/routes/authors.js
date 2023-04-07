@@ -3,6 +3,7 @@ const { authorsController } = require('../controllers/index');
 
 const router = express.Router();
 
+router.get('/', authorsController.getPopularListOfAuthors)
 router.get('/getAuthors', authorsController.getAuthors);
 router.get('/getAuthor', authorsController.getAuthorById);
 router.post('/newAuthor', authorsController.createNewAuthor);
