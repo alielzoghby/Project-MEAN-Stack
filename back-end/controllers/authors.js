@@ -1,15 +1,21 @@
 /* eslint-disable no-throw-literal */
 const { Author } = require('../models/authors');
+const { Book } = require('../models/books');
 const asyncFunction = require('../middlewares/async');
 
-/// /////////////////////// get authors ///////////////////
+
+
+///////////////////////////////////////// get authors //////////////////////////////////
+
 
 const getAuthors = asyncFunction(async (req, res) => {
   const authors = await Author.find();
   res.status(200).send(authors);
 });
 
-/// ////////////////////////////// get author //////////////////////////////////////////
+
+////////////////////////////////// get author //////////////////////////////////////////
+
 
 const getAuthorById = asyncFunction(async (req, res) => {
   const { authorId } = req.body;
@@ -20,7 +26,9 @@ const getAuthorById = asyncFunction(async (req, res) => {
   res.status(200).send(oneAuthor);
 });
 
-/// ////////////////////////////// create author ///////////////////////////////////////
+
+////////////////////////////////// create author ///////////////////////////////////////
+
 
 const createNewAuthor = asyncFunction(async (req, res) => {
   const author = new Author({
@@ -32,7 +40,9 @@ const createNewAuthor = asyncFunction(async (req, res) => {
   author.save().then(() => { res.status(200).send(author); });
 });
 
-/// ////////////////////////////// delete author ///////////////////////////////////////
+
+////////////////////////////////// delete author ///////////////////////////////////////
+
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
   const author = await Author.findOneAndDelete({ id: req.body.authorId });
@@ -42,7 +52,8 @@ const deleteAuthorById = asyncFunction(async (req, res) => {
   res.status(200).send(`Deleted author: ${author.firstName}`);
 });
 
-/// ////////////////////////////// update author ///////////////////////////////////////
+
+////////////////////////////////// update author ///////////////////////////////////////
 
 const updateAuthorById = asyncFunction(async (req, res) => {
   const {
@@ -56,7 +67,9 @@ const updateAuthorById = asyncFunction(async (req, res) => {
   res.status(200).send(author);
 });
 
-/// ////////////////////////////// update photo ////////////////////////////////////////
+
+////////////////////////////////// update photo ////////////////////////////////////////
+
 
 const updateAuthorPhotoById = asyncFunction(async (req, res) => {
   const { authorId } = req.body;
@@ -69,6 +82,27 @@ const updateAuthorPhotoById = asyncFunction(async (req, res) => {
   res.status(200).send(author);
 });
 
+
+//////////////////////////////// get popular list ///////////////////////////////////////////
+
+
+const getPopularListOfAuthors = asyncFunction(async (req, res) => {
+  const highRatingsOfBooks = await Book.find().sort({ 'averageRating': -1 }).limit(6).populate('authorId');
+  console.log(highRatingsOfBooks)
+  if(!highRatingsOfBooks || highRatingsOfBooks.length === 0) {
+    throw { status: 404, message: 'No books exist' };
+  }
+  const popularAuthor = highRatingsOfBooks.map(book => book.authorId.firstName); // story.author._id;
+  console.log(popularAuthor)
+  if(!popularAuthor || popularAuthor.length === 0) {
+    throw { status: 404, message: 'No authors exist' };
+  }
+  res.status(200).send(popularAuthor);
+});
+
+
+
+
 module.exports = {
   createNewAuthor,
   getAuthors,
@@ -76,4 +110,5 @@ module.exports = {
   deleteAuthorById,
   updateAuthorById,
   updateAuthorPhotoById,
+  getPopularListOfAuthors
 };

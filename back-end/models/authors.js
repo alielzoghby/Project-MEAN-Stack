@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+
+
 const { Schema } = mongoose;
 
 const authorSchema = new Schema(
@@ -36,15 +38,10 @@ authorSchema.pre('save', async function () {
   }
 });
 
-authorSchema.pre('save', async function () {
-  const author = this;
-  if (!author.id) {
-    const count = await Author.countDocuments();
-    author.id = count + 1;
-  }
-});
-
 const Author = mongoose.model('author', authorSchema);
+
+
+
 
 module.exports = {
   Author,

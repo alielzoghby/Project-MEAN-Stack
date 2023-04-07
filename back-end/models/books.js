@@ -45,6 +45,7 @@ const bookSchema = new mongoose.Schema({
     },
   ],
 });
+const Book = mongoose.model('Book', bookSchema);
 
 bookSchema.pre('save', async function () {
   const book = this;
@@ -53,8 +54,6 @@ bookSchema.pre('save', async function () {
     book.id = count + 1;
   }
 });
-
-const Book = mongoose.model('Book', bookSchema);
 
 module.exports = {
   Book,
