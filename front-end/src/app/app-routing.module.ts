@@ -7,6 +7,7 @@ import { AuthorPageComponent } from './author-page/author-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { AuthorsComponent } from './authors/authors.component';
 import { AuthGardGuard } from './auth-gard.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 
@@ -25,6 +26,9 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'bookpage', component: BookpageComponent },
+  { path: 'authors', component: AuthorsComponent },
+
   {
     path: 'bookpage',
     component: BookpageComponent, // canActivate: [AuthGardGuard],

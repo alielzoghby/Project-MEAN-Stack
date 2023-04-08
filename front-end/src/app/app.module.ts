@@ -31,12 +31,16 @@ import { FotterComponent } from './fotter/fotter.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { AuthorsComponent } from './authors/authors.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   NgbPaginationModule,
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { BookComponent } from './book/book.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PopularBookComponent } from './popular-book/popular-book.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
     LoginComponent,
     SignupComponent,
     BookpageComponent,
+    AuthorsComponent,
     NotfoundComponent,
+    BookComponent,
+    PopularBookComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +85,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     NgbPaginationModule,
     NgbAlertModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

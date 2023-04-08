@@ -21,7 +21,9 @@
             ><span>Profile</span></a
           >
 
-          <a class="user-account mx-2" *ngIf="isLoged"><span>Logout</span></a>
+          <a (click)="logout()" class="user-account mx-2" *ngIf="isLoged"
+            ><span>Logout</span></a
+          >
         </div>
       </div>
     </div>

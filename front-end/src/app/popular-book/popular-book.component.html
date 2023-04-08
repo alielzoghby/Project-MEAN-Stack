@@ -1,0 +1,46 @@
+<section id="popular-books">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="section-header align-center container">
+        <div class="title">
+          <span>Read our Books</span>
+        </div>
+        <h2 class="section-title">Popular Books</h2>
+      </div>
+
+      <div class="book-list my-5" data-aos="fade-up" data-aos-duration="1000">
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let book of books">
+            <ng-template carouselSlide>
+              <app-book [data]="book"></app-book>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+
+        <!-- <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+          <ng-template carouselSlide><app-book></app-book></ng-template>
+        </owl-carousel-o> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container line">
+    <div class="col-md-12">
+      <div class="btn-wrap align-right">
+        <a
+          [routerLink]="['/categories']"
+          routerLinkActive="active"
+          class="btn-accent-arrow"
+          >View all books
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
