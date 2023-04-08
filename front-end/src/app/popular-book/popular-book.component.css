@@ -1,0 +1,33 @@
+#popular-books {
+  margin-bottom: 100px;
+  position: relative;
+}
+
+#popular-books::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  background-size: cover;
+  background-attachment: fixed;
+  backdrop-filter: blur(10px);
+}
+
+#author-section::before {
+  background-image: url("/assets/Curve\ Line.svg");
+}
+#categories::before {
+  background-image: url("/assets/Curve\ Line\ \(1\).svg");
+}
+#popular-books::before {
+  background-image: url("/assets/Curve\ Line\ \(2\).svg");
+}
+#popular-books .book-list {
+  margin-bottom: 30px;
+}
+
+.line {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+}

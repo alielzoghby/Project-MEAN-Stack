@@ -15,4 +15,43 @@ export class HomePageComponent implements OnInit {
     AOS.init({ disable: 'mobile' });
     AOS.refresh();
   }
+
+  books = [
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+    {
+      name: 'Portrait photography',
+      author: 'ilber',
+    },
+  ];
 }

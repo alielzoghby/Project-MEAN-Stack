@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <app-carousel></app-carousel>
 
-<section id="client-holder" data-aos="fade-up" data-aos-duration="2000">
+<section id="books-holder" data-aos="fade-up" data-aos-duration="2000">
   <div class="container">
     <div class="row">
       <div class="inner-content">
@@ -27,93 +27,16 @@
   </div>
 </section>
 
-<section id="featured-books">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="section-header align-center container">
-        <div class="title">
-          <span>Read our Books</span>
-        </div>
-        <h2 class="section-title">Popular Books</h2>
-      </div>
+<app-popular-book [books]="books"></app-popular-book>
 
-      <div class="product-list" data-aos="fade-up" data-aos-duration="1000">
-        <mdb-carousel [controls]="true" [dark]="true" [indicators]="true">
-          <mdb-carousel-item>
-            <div class="container">
-              <div class="col-md-3">
-                <figure class="product-style">
-                  <img
-                    src="../../assets/images/product-item1.jpg"
-                    alt="Books"
-                    class="product-item"
-                  />
-                  <button
-                    type="button"
-                    class="add-to-cart"
-                    data-product-tile="add-to-cart"
-                  >
-                    Read it now
-                  </button>
-                  <figcaption>
-                    <h3>Simple way of piece life</h3>
-                    <p>Armor Ramsey</p>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-          </mdb-carousel-item>
-          <mdb-carousel-item>
-            <div class="container">
-              <div class="col-md-3">
-                <figure class="product-style">
-                  <img
-                    src="../../assets/images/product-item1.jpg"
-                    alt="Books"
-                    class="product-item"
-                  />
-                  <button
-                    type="button"
-                    class="add-to-cart"
-                    data-product-tile="add-to-cart"
-                  >
-                    Read it now
-                  </button>
-                  <figcaption>
-                    <h3>Simple way of piece life</h3>
-                    <p>Armor Ramsey</p>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-          </mdb-carousel-item>
-        </mdb-carousel>
-      </div>
-    </div>
-  </div>
-
-  <div class="container line">
-    <div class="col-md-12">
-      <div class="btn-wrap align-right">
-        <a
-          [routerLink]="['/categories']"
-          routerLinkActive="active"
-          class="btn-accent-arrow"
-          >View all books <i class="icon icon-ns-arrow-right"></i
-        ></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="best-selling" class="leaf-pattern-overlay">
+<section id="best-book" class="leaf-pattern-overlay">
   <div class="corner-pattern-overlay"></div>
   <div class="container" data-aos="zoom-out-up" data-aos-duration="1000">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="row">
           <div class="col-md-6">
-            <figure class="products-thumb">
+            <figure class="book-thumb">
               <img
                 src="../../assets/images/single-image.jpg"
                 alt="book"
@@ -147,7 +70,7 @@
   </div>
 </section>
 
-<section id="popular-books" class="bookshelf">
+<section id="categories" class="bookshelf">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -211,48 +134,11 @@
         <div class="tab-content" data-aos="fade-right" data-aos-duration="2200">
           <div id="all-genre">
             <div class="row">
-              <div class="col-md-3">
-                <figure class="product-style">
-                  <img
-                    src="../../assets/images/tab-item1.jpg"
-                    alt="Books"
-                    class="product-item"
-                  />
-                  <button
-                    type="button"
-                    class="add-to-cart"
-                    data-product-tile="add-to-cart"
-                  >
-                    Read it now
-                  </button>
-                  <figcaption>
-                    <h3>Portrait photography</h3>
-                    <p>Adam Silber</p>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <figure class="product-style">
-                  <img
-                    src="../../assets/images/tab-item5.jpg"
-                    alt="Books"
-                    class="product-item"
-                  />
-                  <button
-                    type="button"
-                    class="add-to-cart"
-                    data-product-tile="add-to-cart"
-                  >
-                    Read it now
-                  </button>
-                  <figcaption>
-                    <h3>Peaceful Enlightment</h3>
-                    <p>Marmik Lama</p>
-                  </figcaption>
-                </figure>
-              </div>
+              <app-book
+                class="col-md-3"
+                *ngFor="let book of books"
+                [data]="book"
+              ></app-book>
             </div>
           </div>
         </div>
@@ -291,7 +177,7 @@
   </div>
 </section>
 
-<section id="latest-blog">
+<section id="author-section">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

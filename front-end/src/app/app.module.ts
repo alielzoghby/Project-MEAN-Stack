@@ -37,6 +37,9 @@ import {
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { BookComponent } from './book/book.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { PopularBookComponent } from './popular-book/popular-book.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     SignupComponent,
     BookpageComponent,
     NotfoundComponent,
+    BookComponent,
+    PopularBookComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     NgbPaginationModule,
     NgbAlertModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

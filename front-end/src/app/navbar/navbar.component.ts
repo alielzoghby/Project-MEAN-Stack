@@ -12,9 +12,6 @@ export class NavbarComponent implements OnInit {
   navbarfixed: boolean = false;
   isLoged: boolean = false;
   constructor(private _router: Router, private _auth: AuthService) {
-    // if (_auth.currentUser) this.isLoged = true;
-    // else this.isLoged = false;
-
     _auth.currentUser.subscribe((res) => {
       if (_auth.currentUser.getValue()) this.isLoged = true;
       else this.isLoged = false;
@@ -22,6 +19,10 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit(): void {
     AOS.init();
+  }
+
+  logout() {
+    this._auth.logout();
   }
 
   @HostListener('window:scroll', ['$event']) onscroll() {

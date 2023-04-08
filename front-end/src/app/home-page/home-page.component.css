@@ -2,27 +2,25 @@
 
 /*----- Cient-holder Section
 --------------------------------------------------------------*/
-#client-holder {
+#books-holder {
   background: #edebe4;
   padding: 105px 0;
   margin: 40px 0 100px;
 }
-#client-holder .logo-wrap {
+#books-holder .logo-wrap {
   max-width: 1000px;
   margin: auto;
 }
 
 /*----- Featured Books Section
 --------------------------------------------------------------*/
-#latest-blog,
-#popular-books,
-#featured-books {
+#author-section,
+#categories {
   margin-bottom: 100px;
   position: relative;
 }
-#latest-blog::before,
-#popular-books::before,
-#featured-books::before {
+#author-section::before,
+#categories::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -32,51 +30,34 @@
   background-attachment: fixed;
   backdrop-filter: blur(10px);
 }
-#latest-blog::before {
-  background-image: url("/assets/Curve\ Line.svg");
-}
-#popular-books::before {
-  background-image: url("/assets/Curve\ Line\ \(1\).svg");
-}
-#featured-books::before {
-  background-image: url("/assets/Curve\ Line\ \(2\).svg");
-}
-#featured-books .product-list {
-  margin-bottom: 30px;
-}
 
-.line {
-  border-top: 1px solid #e0e0e0;
-  padding-top: 20px;
-}
-
-/*----- Best Selling Section Section
+/*----- Best book Section Section
 --------------------------------------------------------------*/
-#best-selling {
+#best-book {
   background: #edebe4;
   padding: 140px 0;
   margin-bottom: 180px;
 }
 
-#best-selling .products-thumb {
+#best-book .book-thumb {
   margin-right: 60px;
   box-shadow: 2px 6px 34px 4px rgba(63, 63, 63, 0.08);
 }
-#best-selling .product-entry {
+#best-book .product-entry {
   margin-top: 80px;
 }
-#best-selling .product-entry h3.item-title {
+#best-book .product-entry h3.item-title {
   font-size: 1.8em;
   font-weight: 100;
   margin-top: 15px;
 }
-#best-selling .product-entry .item-price {
+#best-book .product-entry .item-price {
   font-size: 1.5em;
   color: #74642f;
   margin-bottom: 40px;
 }
 @media screen and (max-width: 768px) {
-  #best-selling .products-thumb {
+  #best-book .book-thumb {
     margin: 0;
   }
 }
@@ -154,32 +135,32 @@ img.books-image {
 
 /*----- popuar authors
 --------------------------------------------------------------*/
-#latest-blog {
+#author-section {
   margin-bottom: 60px;
 }
-#latest-blog article.column {
+#author-section article.column {
   margin-bottom: 60px;
 }
-#latest-blog figure {
+#author-section figure {
   margin-bottom: 30px;
 }
-#latest-blog .meta-date {
+#author-section .meta-date {
   font-family: "Prata", Georgia, serif;
   color: #74642f;
   padding-bottom: 20px;
 }
-#latest-blog h3 {
+#author-section h3 {
   font-size: 1.7em;
   font-weight: 500;
   margin-top: 0;
 }
-#latest-blog .links-element {
+#author-section .links-element {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #c8c8c8;
   padding-top: 20px;
 }
-#latest-blog .categories {
+#author-section .categories {
   text-transform: uppercase;
 }
 .social-links li {
@@ -187,16 +168,16 @@ img.books-image {
 }
 
 @media screen and (max-width: 999px) {
-  #latest-blog h3 {
+  #author-section h3 {
     font-size: 1.4em;
   }
 }
 
 @media screen and (max-width: 767px) {
-  #latest-blog .grid {
+  #author-section .grid {
     flex-wrap: wrap;
   }
-  #latest-blog article.column {
+  #author-section article.column {
     width: 100%;
   }
 }
