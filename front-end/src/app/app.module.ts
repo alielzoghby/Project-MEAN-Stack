@@ -28,9 +28,10 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './navbar/login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { AuthorsComponent } from './authors/authors.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   NgbPaginationModule,
@@ -54,6 +55,7 @@ import { PopularBookComponent } from './popular-book/popular-book.component';
     LoginComponent,
     SignupComponent,
     BookpageComponent,
+    AuthorsComponent,
     NotfoundComponent,
     BookComponent,
     PopularBookComponent,

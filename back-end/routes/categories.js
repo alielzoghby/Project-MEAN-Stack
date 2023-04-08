@@ -9,4 +9,5 @@ router.get('/', categoriesController.getAllCategories);
 router.get('/:id', categoriesController.getCategoryById);
 router.delete('/:id', categoriesController.deleteCategory);
 router.put('/:id', categoriesController.updateCategory);
+router.get('/categories/popularCategories', categoriesController.getPopularListOfCategories);
 module.exports = router;
