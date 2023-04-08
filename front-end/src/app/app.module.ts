@@ -31,6 +31,7 @@ import { FotterComponent } from './fotter/fotter.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { BookpageComponent } from './bookpage/bookpage.component';
     LoginComponent,
     SignupComponent,
     BookpageComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,

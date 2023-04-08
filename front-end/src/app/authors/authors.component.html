@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<!--  [indicators]="true" -->
+
+<section id="billboard">
+  <div class="main-slider pattern-overlay">
+    <mdb-carousel [controls]="true" [dark]="true">
+      <mdb-carousel-item>
+        <div class="slider-item">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
+                <img src="../../assets/images/team-1.jpg" />
+                <button>hello</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
+                <img src="../../assets/images/team-1.jpg" />
+                <button>hello</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
+              <img src="../../assets/images/team-1.jpg" />
+              <button>hello</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
+              <img src="../../assets/images/team-1.jpg" />
+              <button>hello</button>
+            </div>
+          </div>
+        </div>
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div>
+</section>
+
+<app-fotter></app-fotter>

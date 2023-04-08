@@ -7,6 +7,7 @@ import { AuthorPageComponent } from './author-page/author-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { AuthorsComponent } from './authors/authors.component';
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'profile', component: UserpageComponent },
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: 'author', component: AuthorPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  {path:"bookpage",component: BookpageComponent }
+  {path:"bookpage",component: BookpageComponent },
+  {path:"authors" , component: AuthorsComponent }
+
 
 ];
 
