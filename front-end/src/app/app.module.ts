@@ -31,6 +31,11 @@ import { FotterComponent } from './fotter/fotter.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -68,6 +73,9 @@ import { BookpageComponent } from './bookpage/bookpage.component';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    ReactiveFormsModule,
+    NgbPaginationModule,
+    NgbAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
