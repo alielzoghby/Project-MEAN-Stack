@@ -49,8 +49,8 @@ const loginUser = asyncFunction(async (req, res) => {
     return res.status(401).send({ error: 'Incorrect Email or password' });
   }
   const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
-  // res.cookie('x-auth-token', token);
-  res.status(200).cookie('x-auth-token', token).send({ message: 'login Successful' });
+  res.header('x-auth-token', token);
+  res.status(200).send({ Token: token })
 });
 
 /// //////////////////////////////// update user ///////////////////////////////////////
