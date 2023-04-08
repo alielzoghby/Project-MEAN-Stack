@@ -36,6 +36,7 @@ import {
   NgbPaginationModule,
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {
     LoginComponent,
     SignupComponent,
     BookpageComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,8 +15,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
+  content: any;
+  error: string = '';
   registerForm!: FormGroup;
-  constructor(private _router: Router, private modalService: NgbModal) {
+  constructor(
+    private _router: Router,
+    private modalService: NgbModal,
+    private _auth: AuthService
+  ) {
     this.registerForm = new FormGroup({
       firstName: new FormControl(null, [
         Validators.minLength(3),
@@ -47,10 +54,25 @@ export class SignupComponent {
   submitForm(registerForm: FormGroup) {
     delete registerForm.value.confirmPassword;
     console.log(registerForm.value);
+
+    this.open();
+
+    // this._auth.register(registerForm.value).subscribe((res) => {
+    //   if (res.message == 'success') {
+    //     // done
+    //     open();
+    //   } else {
+    //     this.error = res.errors.email.message;
+    //   }
+    // });
   }
 
-  open(content: any) {
-    this.modalService.open(content);
+  open() {
+    this.modalService.open(this.content);
+  }
+
+  sendContent(content: any) {
+    this.content = content;
   }
 
   navigate() {

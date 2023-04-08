@@ -6,6 +6,11 @@
         <div class="bg card cascading-right">
           <div class="card-body p-5 shadow-5 text-center">
             <h2 class="fw-bold mb-5">Sign up now</h2>
+
+            <div *ngIf="error" class="alert alert-danger">
+              <p>{{ error }}</p>
+            </div>
+
             <form
               [formGroup]="registerForm"
               (ngSubmit)="submitForm(registerForm)"
@@ -112,7 +117,6 @@
                   <p *ngIf="registerForm.get('email')?.errors?.['email']">
                     email is not valid
                   </p>
-                  <!-- <p>email is already exist</p> -->
                 </div>
               </div>
 
@@ -180,7 +184,7 @@
                 [disabled]="registerForm.invalid"
                 type="submit"
                 class="btn btn-primary btn-block mb-4"
-                (click)="open(content)"
+                (click)="sendContent(content)"
               >
                 Sign up
               </button>

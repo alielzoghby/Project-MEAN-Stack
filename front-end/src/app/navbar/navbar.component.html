@@ -10,13 +10,17 @@
           <a href="#"> <i class="fab mx-1 fa-google"></i> </a>
         </div>
         <div class="col-6 right-element">
-          <a routerLink="/login" class="user-account mx-2"
+          <a *ngIf="!isLoged" routerLink="/login" class="user-account mx-2"
             ><i class="fa-solid fa-user"></i
             ><span routerLinkActive="active">Login</span></a
           >
-          <a routerLink="/signup" class="user-account mx-2"
+          <a *ngIf="!isLoged" routerLink="/signup" class="user-account mx-2"
             ><span routerLinkActive="active">Register</span></a
           >
+          <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
+            ><span>Profile</span></a
+          >
+
           <a class="user-account mx-2" *ngIf="isLoged"><span>Logout</span></a>
         </div>
       </div>
