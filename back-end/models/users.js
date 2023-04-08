@@ -7,7 +7,7 @@ const userSchema = new Schema(
   {
     id: {
       type: Number,
-      unique: true,
+      // unique: true,
     },
     firstName: {
       type: String,
@@ -54,6 +54,7 @@ userSchema.pre('save', function preSave(next) {
 userSchema.methods.verifyPassword = function verifyPassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
+const User = mongoose.model('User', userSchema);
 
 userSchema.pre('save', async function () {
   const user = this;
@@ -62,8 +63,6 @@ userSchema.pre('save', async function () {
     user.id = count + 1;
   }
 });
-
-const User = mongoose.model('User', userSchema);
 
 module.exports = {
   User,

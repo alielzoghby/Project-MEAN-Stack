@@ -13,4 +13,6 @@ module.exports = asyncFunction((req, res, next) => {
   if (!decodedPayload.adminRole) {
     throw { status: 401, message: 'Access denied ' };
   }
+  req.currentUser = decodedPayload.id;
+  next();
 });

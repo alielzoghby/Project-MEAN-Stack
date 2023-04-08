@@ -8,6 +8,10 @@ const categorySchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  numberOfBooks: {
+    type: Number,
+    default: 0,
+  },
 
 });
 

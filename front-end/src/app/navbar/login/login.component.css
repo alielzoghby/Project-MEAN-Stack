@@ -1,6 +1,7 @@
 .image {
   background-image: url("https://mdbootstrap.com/img/new/textures/full/171.jpg");
   height: 300px;
+  background-attachment: fixed;
 }
 .bg {
   background: hsla(0, 0%, 100%, 0.8);

@@ -61,11 +61,6 @@ body {
 /** Slick Slider Css
 --------------------------------------------------------------*/
 
-/* Slider */
-.slick-loading .slick-list {
-  /* background: #fff url("./ajax-loader.gif") center center no-repeat; */
-}
-
 /* Arrows */
 .slick-prev,
 .slick-next {
@@ -365,9 +360,6 @@ body {
   transition: width 0.3s, left 0.1s;
 }
 
-.scrollspy-section {
-}
-
 /* Chocolat Lightbox */
 
 .chocolat-zoomable.chocolat-zoomed {
@@ -530,7 +522,7 @@ body {
   border-right: 1px solid rgba(255, 255, 255, 0.3);
 }
 .chocolat-wrapper .chocolat-pagination {
-  float: right;
+  /* float: right; */
   display: inline-block;
   padding-left: 15px;
   padding-right: 15px;
@@ -624,7 +616,6 @@ body.chocolat-open > .chocolat-image-wrapper {
   display: block;
   margin: 0;
   padding: 0;
-  vertical-align: middle;
 }
 .stellarnav li a {
   padding: 15px;

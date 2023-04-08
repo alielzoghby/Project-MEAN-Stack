@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<section class="text-center">
+  <div class="image p-5 bg-image"></div>
+
+  <div class="bg card shadow-5-strong">
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Log in</h2>
+          <div *ngIf="error" class="alert alert-danger">
+            <p>user name or password is wrong</p>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm)">
+            <div class="form-outline mb-4">
+              <input
+                type="email"
+                id="form3Example3"
+                class="form-control"
+                formControlName="email"
+              />
+              <label class="form-label" for="form3Example3"
+                >Email address</label
+              >
+              <div
+                *ngIf="
+                  loginForm.get('email')?.errors != null &&
+                  loginForm.get('email')?.touched
+                "
+                class="alert alert-danger"
+              >
+                <p *ngIf="loginForm.get('email')?.errors?.['required']">
+                  email is required
+                </p>
+                <p *ngIf="loginForm.get('email')?.errors?.['email']">
+                  email is not valid
+                </p>
+              </div>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input
+                type="password"
+                id="form3Example4"
+                class="form-control"
+                formControlName="password"
+              />
+              <label class="form-label" for="form3Example4">Password</label>
+              <div
+                *ngIf="
+                  loginForm.get('password')?.errors != null &&
+                  loginForm.get('password')?.touched
+                "
+                class="alert alert-danger"
+              >
+                <p>password is required</p>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-block mb-4"
+              [disabled]="loginForm.invalid"
+            >
+              Log in
+            </button>
+
+            <div class="text-center">
+              <p>Don't have an account?</p>
+              <a routerLink="/signup">Register here</a>
+            </div>
+            <div class="text-center">
+              <a routerLink="/signup">Login As Admin</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

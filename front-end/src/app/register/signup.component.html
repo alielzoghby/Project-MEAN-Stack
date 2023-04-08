@@ -1,0 +1,230 @@
+<app-navbar> </app-navbar>
+<section class="text-center text-lg-start content">
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-8 mb-5 mb-lg-0">
+        <div class="bg card cascading-right">
+          <div class="card-body p-5 shadow-5 text-center">
+            <h2 class="fw-bold mb-5">Sign up now</h2>
+
+            <div *ngIf="error" class="alert alert-danger">
+              <p>{{ error }}</p>
+            </div>
+
+            <form
+              [formGroup]="registerForm"
+              (ngSubmit)="submitForm(registerForm)"
+            >
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="form3Example1"
+                      class="form-control"
+                      formControlName="firstName"
+                    />
+                    <label class="form-label" for="form3Example1"
+                      >First name</label
+                    >
+                    <div
+                      *ngIf="
+                        registerForm.get('firstName')?.errors != null &&
+                        registerForm.get('firstName')?.touched
+                      "
+                      class="alert alert-danger my-2"
+                    >
+                      <p
+                        *ngIf="registerForm.get('firstName')?.errors?.['required']"
+                      >
+                        First Name is required
+                      </p>
+                      <p
+                        *ngIf="
+                      registerForm.get('firstName')?.errors?.['minlength']
+                    "
+                      >
+                        First Name is min length 2
+                      </p>
+                      <p
+                        *ngIf="registerForm.get('firstName')?.errors?.['maxlength']"
+                      >
+                        First Name is max length 10
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="form3Example2"
+                      class="form-control"
+                      formControlName="lastName"
+                    />
+                    <label class="form-label" for="form3Example2"
+                      >Last name</label
+                    >
+                  </div>
+                  <div
+                    *ngIf="
+                      registerForm.get('lastName')?.errors != null &&
+                      registerForm.get('lastName')?.touched
+                    "
+                    class="alert alert-danger my-2"
+                  >
+                    <p
+                      *ngIf="registerForm.get('lastName')?.errors?.['required']"
+                    >
+                      Last name is required
+                    </p>
+                    <p
+                      *ngIf="
+                    registerForm.get('lastName')?.errors?.['minlength']"
+                    >
+                      Last name is minLength 2
+                    </p>
+                    <p
+                      *ngIf="registerForm.get('lastName')?.errors?.['maxlength']"
+                    >
+                      Last name is maxLength 10
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="email"
+                  id="form3Example3"
+                  class="form-control"
+                  formControlName="email"
+                />
+                <label class="form-label" for="form3Example3"
+                  >Email address</label
+                >
+                <div
+                  *ngIf="
+                    registerForm.get('email')?.errors != null &&
+                    registerForm.get('email')?.touched
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  <p *ngIf="registerForm.get('email')?.errors?.['required']">
+                    email is required
+                  </p>
+                  <p *ngIf="registerForm.get('email')?.errors?.['email']">
+                    email is not valid
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form3Example4"
+                  class="form-control"
+                  formControlName="password"
+                />
+                <label class="form-label" for="form3Example4">Password</label>
+                <div
+                  *ngIf="
+                    registerForm.get('password')?.errors != null &&
+                    registerForm.get('password')?.touched
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  <p *ngIf="registerForm.get('password')?.errors?.['required']">
+                    password is required
+                  </p>
+                  <p *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                    password should have a-z,A-Z,1-9
+                  </p>
+                  <p
+                    *ngIf="registerForm.get('password')?.errors?.['minlength']"
+                  >
+                    password is min length is 6 character
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  id="form3Example5"
+                  class="form-control"
+                  formControlName="confirmPassword"
+                />
+                <label class="form-label" for="form3Example5"
+                  >Confirm Password</label
+                >
+                <div
+                  *ngIf="registerForm.get('confirmPassword')?.errors != null &&
+                  registerForm.get('confirmPassword')?.touched
+                  ||
+                  registerForm.errors?.['match_error']&&
+                  registerForm.get('confirmPassword')?.touched
+
+                  "
+                  class="alert alert-danger my-2"
+                >
+                  <p
+                    *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+                  >
+                    Confirm Password is required
+                  </p>
+                  <p *ngIf="registerForm.errors?.['match_error']">
+                    Confirm Password isn't match
+                  </p>
+                </div>
+              </div>
+
+              <button
+                [disabled]="registerForm.invalid"
+                type="submit"
+                class="btn btn-primary btn-block mb-4"
+                (click)="sendContent(content)"
+              >
+                Sign up
+              </button>
+
+              <div class="text-center">
+                <p>i already have acount</p>
+                <a routerLink="/login">login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <img
+          src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+          class="image rounded-4 shadow-4"
+          alt="sign up image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-body mx-auto text-center">
+    <img
+      class="rounded mx-auto d-block"
+      src="assets/icons8-checkmark.gif"
+      alt=""
+    />
+    <p>Registration Successful. Thank you for registering!</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark m-auto"
+      (click)="c('Save click'); navigate()"
+    >
+      ok
+    </button>
+  </div>
+</ng-template>

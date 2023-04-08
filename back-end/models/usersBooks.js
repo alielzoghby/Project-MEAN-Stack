@@ -9,9 +9,9 @@ const usersBooksSchema = new mongoose.Schema({
   books: [{
     bookId: {
       type: mongoose.Types.ObjectId,
-      ref: 'books',
+      ref: 'Book',
     },
-    shelve: {
+    shelf: {
       type: String,
       enum: ['Want to read', 'Read', 'Reading'],
       default: 'Want to read',
@@ -25,5 +25,7 @@ const usersBooksSchema = new mongoose.Schema({
   },
   ],
 });
-const usersBooks = mongoose.model('usersBooks', usersBooksSchema);
-module.exports = usersBooks;
+const UserBook = mongoose.model('usersBooks', usersBooksSchema);
+module.exports = {
+  UserBook,
+};

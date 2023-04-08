@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
   id: {
     type: Number,
-    unique: true,
+    // unique: true,
   },
   name: {
     type: String,
@@ -21,6 +21,7 @@ const bookSchema = new mongoose.Schema({
   },
   averageRating: {
     type: Number,
+    default: 0,
   },
   cover: {
     type: String,
@@ -29,6 +30,7 @@ const bookSchema = new mongoose.Schema({
   },
   numberOfRatings: {
     type: Number,
+    default: 0,
   },
   description: {
     type: String,
@@ -45,6 +47,7 @@ const bookSchema = new mongoose.Schema({
     },
   ],
 });
+const Book = mongoose.model('Book', bookSchema);
 
 bookSchema.pre('save', async function () {
   const book = this;
@@ -53,8 +56,6 @@ bookSchema.pre('save', async function () {
     book.id = count + 1;
   }
 });
-
-const Book = mongoose.model('Book', bookSchema);
 
 module.exports = {
   Book,

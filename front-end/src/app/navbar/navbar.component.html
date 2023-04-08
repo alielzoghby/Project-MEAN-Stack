@@ -2,21 +2,26 @@
   <div class="top-content">
     <div class="container">
       <div class="row">
-        <div class="col-6 social-links gap-2">
-          <!--social-links-->
-          <a href="#"> <i class="fa-brands fa-facebook"></i></a>
-          <a href="#"> <i class="fa-brands fa-twitter"></i></a>
-          <a href="#"> <i class="fa-brands fa-github"></i> </a>
-          <a href="#"> <i class="fa-brands fa-linkedin"></i> </a>
-          <a href="#"> <i class="fab fa-google"></i> </a>
+        <div class="col-6 social-links">
+          <a href="#"> <i class="fa-brands mx-1 fa-facebook"></i></a>
+          <a href="#"> <i class="fa-brands mx-1 fa-twitter"></i></a>
+          <a href="#"> <i class="fa-brands mx-1 fa-github"></i> </a>
+          <a href="#"> <i class="fa-brands mx-1 fa-linkedin"></i> </a>
+          <a href="#"> <i class="fab mx-1 fa-google"></i> </a>
         </div>
         <div class="col-6 right-element">
-          <a
-            [routerLink]="['/login']"
-            routerLinkActive="active"
-            class="user-account"
-            ><i class="fa-solid fa-user"></i><span>Account</span></a
+          <a *ngIf="!isLoged" routerLink="/login" class="user-account mx-2"
+            ><i class="fa-solid fa-user"></i
+            ><span routerLinkActive="active">Login</span></a
           >
+          <a *ngIf="!isLoged" routerLink="/signup" class="user-account mx-2"
+            ><span routerLinkActive="active">Register</span></a
+          >
+          <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
+            ><span>Profile</span></a
+          >
+
+          <a class="user-account mx-2" *ngIf="isLoged"><span>Logout</span></a>
         </div>
       </div>
     </div>
@@ -30,7 +35,7 @@
     <div class="container">
       <div class="row">
         <div class="main-logo col-md-2 d-flex align-items-center">
-          <a [routerLink]="['']" routerLinkActive="active"
+          <a href="home#header-wrap"
             ><img src="../../assets/images/main-logo.png" alt="logo"
           /></a>
         </div>
@@ -39,28 +44,34 @@
           <nav id="navbar  d-flex align-items-center">
             <div class="main-menu stellarnav">
               <ul class="menu-list">
-                <li class="menu-item active">
-                  <a href="#header-wrap">Home</a>
+                <li class="menu-item">
+                  <a routerLink="/home" routerLinkActive="active">Home</a>
                 </li>
                 <li class="menu-item">
-                  <a href="#featured-books" class="nav-link">Popular Books</a>
+                  <a href="home#featured-books" class="nav-link"
+                    >Popular Books</a
+                  >
                 </li>
                 <li class="menu-item">
-                  <a href="#popular-books" class="nav-link">Categories</a>
+                  <a
+                    routerLink="/categories"
+                    routerLinkActive="active"
+                    class="nav-link"
+                    >Categories</a
+                  >
                 </li>
                 <li class="menu-item">
-                  <a href="#latest-blog" class="nav-link">Authors</a>
+                  <a
+                    routerLink="/author"
+                    routerLinkActive="active"
+                    class="nav-link"
+                    >Authors</a
+                  >
                 </li>
                 <li class="menu-item">
-                  <a href="#" class="nav-link">About Us</a>
+                  <a class="nav-link">About Us</a>
                 </li>
               </ul>
-
-              <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-              </div>
             </div>
           </nav>
         </div>

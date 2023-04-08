@@ -28,10 +28,16 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './navbar/login/login.component';
+import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -47,14 +53,15 @@ import { AuthorsComponent } from './authors/authors.component';
     SignupComponent,
     BookpageComponent,
     AuthorsComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    BrowserAnimationsModule,
     MatSlideToggleModule,
+    BrowserAnimationsModule,
     MdbAccordionModule,
     MdbCarouselModule,
     MdbCheckboxModule,
@@ -70,6 +77,9 @@ import { AuthorsComponent } from './authors/authors.component';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    ReactiveFormsModule,
+    NgbPaginationModule,
+    NgbAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
