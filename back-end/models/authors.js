@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const { Schema } = mongoose;
 
 const authorSchema = new Schema(
@@ -38,10 +36,7 @@ authorSchema.pre('save', async function () {
   }
 });
 
-const Author = mongoose.model('author', authorSchema);
-
-
-
+const Author = mongoose.model('Author', authorSchema);
 
 module.exports = {
   Author,

@@ -41,10 +41,16 @@ const updateCategory = asyncFunction(async (req, res) => {
   }
   res.status(200).send(category);
 });
+
+const getPopularListOfCategories = asyncFunction(async (req, res) => {
+  const category = await Category.find().sort({ 'numberOfBooks': -1 }).limit(6);
+  res.status(200).send(category);
+});
 module.exports = {
   addNewCategory,
   getAllCategories,
   getCategoryById,
   deleteCategory,
   updateCategory,
+  getPopularListOfCategories,
 };
