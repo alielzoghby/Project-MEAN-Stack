@@ -40,12 +40,12 @@ const loginUser = asyncFunction(async (req, res) => {
   const { email, password } = req.body;
   const userAuthentication = await User.findOne({ email }).exec();
   if (!userAuthentication) {
-    return res.status(401).send({ error: 'Incorrect Email or Password' });
+    return res.status(401).send({ message: 'Incorrect Email or Password' });
   }
   // check password
   const isPasswordValid = userAuthentication.verifyPassword(password);
   if (!isPasswordValid) {
-    return res.status(401).send({ error: 'Incorrect Email or password' });
+    return res.status(401).send({ message: 'Incorrect Email or password' });
   }
   const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
   res.header('x-auth-token', token);
