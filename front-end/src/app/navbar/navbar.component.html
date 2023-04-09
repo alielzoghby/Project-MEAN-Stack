@@ -18,10 +18,14 @@
             ><span routerLinkActive="active">Register</span></a
           >
           <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
-            ><span>Profile</span></a
+            ><i class="fa-solid fa-user"></i><span> Profile</span></a
           >
 
-          <a (click)="logout()" class="user-account mx-2" *ngIf="isLoged"
+          <a
+            (click)="logout()"
+            routerLink="/home"
+            class="user-account mx-2"
+            *ngIf="isLoged"
             ><span>Logout</span></a
           >
         </div>

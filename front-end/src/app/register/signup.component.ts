@@ -57,14 +57,15 @@ export class SignupComponent {
 
     this.open();
 
-    // this._auth.register(registerForm.value).subscribe((res) => {
-    //   if (res.message == 'success') {
-    //     // done
-    //     open();
-    //   } else {
-    //     this.error = res.errors.email.message;
-    //   }
-    // });
+    this._auth.register(registerForm.value).subscribe((res) => {
+      // if (res.error == 'User already registered') {
+      //   // done
+      //   open();
+      // } else {
+      //   this.error = res.errors.email.message;
+      // }
+      console.log(res);
+    });
   }
 
   open() {

@@ -41,6 +41,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { BookComponent } from './book/book.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PopularBookComponent } from './popular-book/popular-book.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminSigninComponent } from './admin-signin/admin-signin.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { PopularBookComponent } from './popular-book/popular-book.component';
     NotfoundComponent,
     BookComponent,
     PopularBookComponent,
+    AdminComponent,
+    AdminSigninComponent,
   ],
   imports: [
     BrowserModule,
