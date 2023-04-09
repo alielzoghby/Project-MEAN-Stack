@@ -41,7 +41,7 @@ const addRating = asyncFunction(async (req, res) => {
     throw { status: 404, message: 'Book not found!' };
   }
   const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.rating': req.body.rating } }, { returnOriginal: false });
-  const bookNew = await Book.findOneAndUpdate(req.body.bookId, { $inc: { numberOfRatings: 1, sumOfRatings: req.body.rating } }, { returnOriginal: false });
+  await Book.findByIdAndUpdate(req.body.bookId, { $inc: { numberOfRatings: 1, sumOfRatings: req.body.rating } }, { returnOriginal: false });
   res.status(200).send(newEntry);
 });
 // update book shelf
@@ -49,13 +49,22 @@ const updateShelf = asyncFunction(async (req, res) => {
   const userBook = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.params.id }, { $set: { 'books.$.shelf': req.body.shelf } }, { returnOriginal: false });
   res.status(200).send(userBook);
 });
-
 // add review
-// calculate average rating
+const addReview = asyncFunction(async (req, res) => {
+  const book = await Book.findById(req.body.bookId);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
+  const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.review': req.body.review } }, { returnOriginal: false });
+  const reviewObject = { userId: req.currentUserId, review: req.body.review };
+  await Book.findByIdAndUpdate(req.body.bookId, { $push: { reviews: reviewObject } }, { returnOriginal: false });
+  res.status(200).send(newEntry);
+});
 
 module.exports = {
   addBook,
   getUserBooks,
   addRating,
   updateShelf,
+  addReview,
 };
