@@ -18,40 +18,51 @@ export class HomePageComponent implements OnInit {
 
   books = [
     {
+      id: 1,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'ali',
     },
     {
+      id: 2,
+
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'samy',
     },
     {
+      id: 3,
+
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'nada',
     },
     {
+      id: 4,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'alaa',
     },
     {
+      id: 5,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'hager',
     },
     {
+      id: 6,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'mn',
     },
     {
+      id: 7,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'mona',
     },
     {
+      id: 8,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'samar',
     },
     {
+      id: 9,
       name: 'Portrait photography',
-      author: 'ilber',
+      author: 'hosam',
     },
   ];
 }

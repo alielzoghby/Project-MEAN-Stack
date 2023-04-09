@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'bookpage', component: BookpageComponent },
+  { path: 'bookpage/:id', component: BookpageComponent },
   { path: 'authors', component: AuthorsComponent },
 
   {
