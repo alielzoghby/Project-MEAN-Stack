@@ -19,10 +19,20 @@ const addNewBook = asyncFunction(async (req, res) => {
   });
 });
 
+
+////////////////////////////////////////// get Books //////////////////////////////////
+
+
 const getAllBooks = asyncFunction(async (req, res) => {
-  const books = await Book.find();
+  const pageSize = 8;
+  const page = req.query.page || 1 ;
+  const skip = (page - 1) * pageSize; // currentPage = 4 ---> (4 - 1) * 8 then will count from number 25
+  const totalBooks = await Book.countDocuments();
+  const totalPages = Math.ceil(totalBooks / pageSize);
+  const books = await Book.find().skip(skip).limit(pageSize);
   // const books = await Book.find().select({ _id: 0 });
-  res.status(200).send(books);
+
+  res.status(200).send({page: page, data: books, totalPages: totalPages});
 });
 
 const getBookById = asyncFunction(async (req, res) => {
