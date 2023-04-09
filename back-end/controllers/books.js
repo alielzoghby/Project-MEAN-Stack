@@ -4,6 +4,10 @@ const asyncFunction = require('../middlewares/async');
 const { Book } = require('../models/books');
 const { Category } = require('../models/categories');
 
+
+/////////////////////////////////////////// add Books //////////////////////////////////
+
+
 const addNewBook = asyncFunction(async (req, res) => {
   const book = new Book({
     name: req.body.name,
@@ -19,7 +23,9 @@ const addNewBook = asyncFunction(async (req, res) => {
   });
 });
 
-/// /////////////////////////////////////// get Books //////////////////////////////////
+
+/////////////////////////////////////////// get all Books //////////////////////////////////
+
 
 const getAllBooks = asyncFunction(async (req, res) => {
   const pageSize = 8;
@@ -33,6 +39,10 @@ const getAllBooks = asyncFunction(async (req, res) => {
   res.status(200).send({ page, data: books, totalPages });
 });
 
+
+/////////////////////////////////////////// get Book by id //////////////////////////////////
+
+
 const getBookById = asyncFunction(async (req, res) => {
   const book = await Book.findById(req.params.id);
   if (!book) {
@@ -40,10 +50,20 @@ const getBookById = asyncFunction(async (req, res) => {
   }
   res.status(200).send(book);
 });
+
+
+/////////////////////////////////////////// get Book by category //////////////////////////////////
+
+
 const getBookByCategory = asyncFunction(async (req, res) => {
   const books = await Book.find({ categoryId: req.params.categoryId });
   res.status(200).send(books);
 });
+
+
+/////////////////////////////////////////// delete Books //////////////////////////////////
+
+
 const deleteBook = asyncFunction(async (req, res) => {
   const book = await Book.findByIdAndRemove(req.params.id);
   if (!book) {
@@ -55,6 +75,10 @@ const deleteBook = asyncFunction(async (req, res) => {
   res.status(200).send(book);
 });
 
+
+/////////////////////////////////////////// update Book //////////////////////////////////
+
+
 const updateBook = asyncFunction(async (req, res) => {
   // eslint-disable-next-line max-len
   const book = await Book.findByIdAndUpdate(req.params.id, req.body, { returnOriginal: false });
@@ -62,6 +86,11 @@ const updateBook = asyncFunction(async (req, res) => {
     throw { status: 404, message: 'Book not found!' };
   }res.status(200).send(book);
 });
+
+
+/////////////////////////////////////////// get Average Rating //////////////////////////////////
+
+
 const getAverageRating = asyncFunction(async (req, res) => {
   const book = await Book.findById(req.params.bookId);
   if (!book) {
@@ -75,6 +104,10 @@ const getAverageRating = asyncFunction(async (req, res) => {
  
   res.status(200).json(averageRating);
 });
+
+
+
+
 module.exports = {
   addNewBook,
   getAllBooks,
