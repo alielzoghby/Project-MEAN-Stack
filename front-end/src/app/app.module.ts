@@ -28,7 +28,6 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
@@ -43,7 +42,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PopularBookComponent } from './popular-book/popular-book.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminSigninComponent } from './admin-signin/admin-signin.component';
+import { LoginComponent } from './login/login.component';
 
+LoginComponent;
 @NgModule({
   declarations: [
     AppComponent,

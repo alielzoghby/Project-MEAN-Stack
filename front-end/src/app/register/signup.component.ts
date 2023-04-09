@@ -53,18 +53,14 @@ export class SignupComponent {
 
   submitForm(registerForm: FormGroup) {
     delete registerForm.value.confirmPassword;
-    console.log(registerForm.value);
-
-    this.open();
-
     this._auth.register(registerForm.value).subscribe((res) => {
-      // if (res.error == 'User already registered') {
-      //   // done
-      //   open();
-      // } else {
-      //   this.error = res.errors.email.message;
-      // }
+        // open();
       console.log(res);
+    },
+    (err) => {
+      console.log(err);
+
+      this.error = err.error.message;
     });
   }
 

@@ -11,38 +11,18 @@ export class DataService {
   constructor(private _http: HttpClient) {}
 
   getData(endPoint: string) {
-    return this._http.get(`${this.ROOT_URL + endPoint}`).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
+    return this._http.get(`${this.ROOT_URL + endPoint}`)
   }
 
   postData(endPoint: string, data: any) {
-    return this._http.post(`${this.ROOT_URL + endPoint}`, data).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
+    return this._http.post(`${this.ROOT_URL + endPoint}`, data)
   }
 
   deleteData(endPoint: string) {
-    return this._http.delete(`${this.ROOT_URL + endPoint}`).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
+    return this._http.delete(`${this.ROOT_URL + endPoint}`)
   }
 
   putData(endPoint: string, data: any) {
-    return this._http.put(`${this.ROOT_URL + endPoint}`, data).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
-  }
-
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error.error.error || 'server error.');
+    return this._http.put(`${this.ROOT_URL + endPoint}`, data)
   }
 }

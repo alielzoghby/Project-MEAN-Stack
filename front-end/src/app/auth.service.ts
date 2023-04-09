@@ -26,19 +26,11 @@ export class AuthService {
   }
 
   register(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/sing-up`, data).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
+    return this._http.post(`${this.baseAPI}/users/sing-up`, data)
   }
 
   login(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/login`, data).pipe(
-      catchError((err) => {
-        return this.errorHandler(err);
-      })
-    );
+    return this._http.post(`${this.baseAPI}/users/login`, data)
   }
 
   logout() {
@@ -52,7 +44,7 @@ export class AuthService {
     this.currentUser.next(jwtDecode(taken));
   }
 
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error.error.error || 'server error.');
-  }
+  // errorHandler(error: HttpErrorResponse) {
+  //   return throwError(error.message || 'server error.');
+  // }.pipe(catchError((err) => {return this.errorHandler(err);}));
 }
