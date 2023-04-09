@@ -4,10 +4,20 @@ const { Book } = require('../models/books');
 const asyncFunction = require('../middlewares/async');
 
 
+
 ////////////////////////////////////////// get authors //////////////////////////////////
 
 
 const getAuthors = asyncFunction(async (req, res) => {
+  const pageSize = 8;
+  let page = req.query.page || 1;
+  let skip = (page - 1) * pageSize; // currentPage = 4 ---> (4 - 1) * 8 then will count from number 25
+  const totalBooks = await Author.countDocuments();
+  let totalPages = Math.ceil(totalBooks / pageSize);
+  if(page > totalPages){
+    // page = 1;
+    throw { status: 404, message: 'There are no books on this page' };
+  }
   const authors = await Author.find();
   res.status(200).send(authors);
 });
@@ -44,7 +54,7 @@ const createNewAuthor = asyncFunction(async (req, res) => {
 
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
-  const author = await Author.findOneAndDelete({ id: req.body.authorId });
+  const author = await Author.findByIdAndDelete({ _id: req.params.authorId });
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
@@ -56,11 +66,9 @@ const deleteAuthorById = asyncFunction(async (req, res) => {
 
 
 const updateAuthorById = asyncFunction(async (req, res) => {
-  const {
-    authorId, firstName, lastName, dateOfBirth,
-  } = req.body;
+  const { firstName, lastName, dateOfBirth } = req.body;
   // eslint-disable-next-line max-len
-  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ _id: req.params.authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
@@ -72,10 +80,10 @@ const updateAuthorById = asyncFunction(async (req, res) => {
 
 
 const updateAuthorPhotoById = asyncFunction(async (req, res) => {
-  const { authorId } = req.body;
+  const { authorId } = req.params;
   const { filename } = req.file;
   // eslint-disable-next-line max-len
-  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { photo: filename } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ _id: authorId }, { $set: { photo: filename } }, { new: true });
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
@@ -103,6 +111,28 @@ const getPopularListOfAuthors = asyncFunction(async (req, res) => {
 });
 
 
+///////////////////////////////// get Books by Author ///////////////////////////////////////////
+
+
+const getBooksByAuthor = asyncFunction(async (req, res) => {
+  const pageSize = 8;
+  let page = req.query.page || 1;
+  // let skip = (page - 1) * pageSize; 
+  const totalBooks = await Book.find({ authorId: req.params.authorId }).countDocuments();
+  let totalPages = Math.ceil(totalBooks / pageSize);
+  if(page > totalPages){
+    page = 1;
+    // throw { status: 404, message: 'There are no books on this page' };
+  }
+  let skip = (page - 1) * pageSize;
+  const books = await Book.find({ authorId: req.params.authorId }).skip(skip).limit(pageSize);
+  if(!books){
+    throw { status: 404, message: 'There are no books for this author' };
+  }
+  res.status(200).send({ page, data: books, totalPages });
+});
+
+
 
 
 module.exports = {
@@ -113,4 +143,5 @@ module.exports = {
   updateAuthorById,
   updateAuthorPhotoById,
   getPopularListOfAuthors,
+  getBooksByAuthor
 };
