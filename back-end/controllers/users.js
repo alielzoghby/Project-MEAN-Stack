@@ -19,7 +19,6 @@ const addUserToUserBooks = function addUserToUserBooks(userId) {
 const createUser = asyncFunction(async (req, res) => {
   let user = await User.findOne({ email: req.body.email }).exec();
   if (user) {
-    // res.statusCode = 400;
     throw { status: 400, message: 'User already registered' };
   }
   user = new User({

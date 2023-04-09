@@ -19,20 +19,18 @@ const addNewBook = asyncFunction(async (req, res) => {
   });
 });
 
-
-////////////////////////////////////////// get Books //////////////////////////////////
-
+/// /////////////////////////////////////// get Books //////////////////////////////////
 
 const getAllBooks = asyncFunction(async (req, res) => {
   const pageSize = 8;
-  const page = req.query.page || 1 ;
+  const page = req.query.page || 1;
   const skip = (page - 1) * pageSize; // currentPage = 4 ---> (4 - 1) * 8 then will count from number 25
   const totalBooks = await Book.countDocuments();
   const totalPages = Math.ceil(totalBooks / pageSize);
   const books = await Book.find().skip(skip).limit(pageSize);
   // const books = await Book.find().select({ _id: 0 });
 
-  res.status(200).send({page: page, data: books, totalPages: totalPages});
+  res.status(200).send({ page, data: books, totalPages });
 });
 
 const getBookById = asyncFunction(async (req, res) => {
@@ -64,7 +62,19 @@ const updateBook = asyncFunction(async (req, res) => {
     throw { status: 404, message: 'Book not found!' };
   }res.status(200).send(book);
 });
+const getAverageRating = asyncFunction(async (req, res) => {
+  const book = await Book.findById(req.params.bookId);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
 
+  if (book.numberOfRatings === 0) {
+    res.status(200).json(book.sumOfRatings);
+  }
+  const averageRating = book.sumOfRatings / book.numberOfRatings;
+ 
+  res.status(200).json(averageRating);
+});
 module.exports = {
   addNewBook,
   getAllBooks,
@@ -72,4 +82,5 @@ module.exports = {
   deleteBook,
   updateBook,
   getBookByCategory,
+  getAverageRating,
 };

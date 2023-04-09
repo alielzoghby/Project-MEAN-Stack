@@ -10,4 +10,6 @@ router.get('/:id', booksController.getBookById);
 router.delete('/:id', booksController.deleteBook);
 router.put('/:id', booksController.updateBook);
 router.get('/category/:categoryId', booksController.getBookByCategory);
+router.get('/averageRating/:bookId', booksController.getAverageRating);
+
 module.exports = router;
