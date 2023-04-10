@@ -1,0 +1,21 @@
+table {
+  overflow-x: scroll;
+}
+
+td,
+th {
+  text-align: center;
+}
+td:first-of-type,
+th:first-of-type {
+  width: 21%;
+}
+td:last-of-type,
+th:last-of-type {
+  width: 15%;
+}
+
+th {
+  font-weight: 700;
+  font-size: 1.3em;
+}

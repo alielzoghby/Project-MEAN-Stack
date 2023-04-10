@@ -1,0 +1,178 @@
+<button (click)="open(content)" class="btn btn-link float-end">
+  <i class="fa-solid fa-circle-plus fa-xl my-3"></i>
+</button>
+
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>ID</th>
+      <th>Photo</th>
+      <th>Firs Name</th>
+      <th>Last Name</th>
+      <th>Date of Birth</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of authors">
+      <td>{{ author._id }}</td>
+      <td>{{ author }}</td>
+      <td>{{ author.firstName }}</td>
+      <td>{{ author.lastName }}</td>
+      <td>{{ author.dateOfBirth }}</td>
+
+      <td>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button type="button" class="btn btn-link btn-sm btn-rounded">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<nav
+  aria-label="Page navigation example"
+  class="d-flex justify-content-center my-3"
+>
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Author</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click'); authorForm.reset()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form
+      class="form-group"
+      [formGroup]="authorForm"
+      (ngSubmit)="postAuthor(authorForm)"
+    >
+      <div id="firstName">
+        <label for="Input1">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Input1"
+          placeholder="First Name"
+          formControlName="firstName"
+        />
+        <div
+          *ngIf="
+            authorForm.get('firstName')?.errors != null &&
+            authorForm.get('firstName')?.touched
+          "
+          class="alert alert-danger my-2"
+        >
+          <p *ngIf="authorForm.get('firstName')?.errors?.['required']">
+            First Name is required
+          </p>
+          <p *ngIf="authorForm.get('firstName')?.errors?.['maxlength']">
+            First Name max length is 10
+          </p>
+          <p *ngIf="authorForm.get('firstName')?.errors?.['minlength']">
+            First Name is min length is 3
+          </p>
+        </div>
+      </div>
+
+      <div id="lastName">
+        <label for="Input2">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Input2"
+          placeholder="Last Name"
+          formControlName="lastName"
+        />
+        <div
+          *ngIf="
+            authorForm.get('lastName')?.errors != null &&
+            authorForm.get('lastName')?.touched
+          "
+          class="alert alert-danger my-2"
+        >
+          <p *ngIf="authorForm.get('lastName')?.errors?.['required']">
+            First Name is required
+          </p>
+          <p *ngIf="authorForm.get('lastName')?.errors?.['maxlength']">
+            First Name max length is 10
+          </p>
+          <p *ngIf="authorForm.get('lastName')?.errors?.['minlength']">
+            First Name is min length is 3
+          </p>
+        </div>
+      </div>
+
+      <div id="dob">
+        <label for="Input3">date of birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="Input3"
+          formControlName="dateOfBirth"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="authorForm.get('dateOfBirth')?.errors?.['required'] &&
+          authorForm.get('dateOfBirth')?.touched"
+        >
+          date of birth is required
+        </p>
+      </div>
+
+      <label for="Input4">Picture</label>
+      <input
+        type="file"
+        class="form-control"
+        id="Input4"
+        placeholder="Book Name"
+        accept="image/png, image/jpg, image/jpeg"
+        required
+        (change)="onFileSelected($event)"
+      />
+
+      <div class="modal-footer">
+        <button
+          [disabled]="authorForm.invalid"
+          class="btn btn-outline-dark"
+          (click)="c()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!-- <ul class="list-group">
+  <li
+    *ngFor="let post of posts | paginate : { itemsPerPage: 10, currentPage: p }"
+    class="list-group-item"
+  >
+    {{ post.title }}
+  </li>
+</ul>
+<pagination-controls (pageChange)="p = $event"></pagination-controls> -->
