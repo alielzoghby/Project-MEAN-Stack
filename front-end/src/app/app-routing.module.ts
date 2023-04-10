@@ -10,6 +10,8 @@ import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthGardGuard } from './auth-gard.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { AdminSigninComponent } from './admin-signin/admin-signin.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +35,9 @@ const routes: Routes = [
     path: 'bookpage',
     component: BookpageComponent, // canActivate: [AuthGardGuard],
   },
+  { path: 'adminlogin', component: AdminSigninComponent },
+  { path: 'admin', component: AdminComponent },
+
   // path for 404 route not found please keap it in last
   { path: '**', component: NotfoundComponent },
 ];

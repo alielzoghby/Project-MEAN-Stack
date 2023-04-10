@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -62,8 +62,8 @@ LoginComponent;
     NotfoundComponent,
     BookComponent,
     PopularBookComponent,
-    AdminComponent,
     AdminSigninComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +91,7 @@ LoginComponent;
     NgbPaginationModule,
     NgbAlertModule,
     CarouselModule,
+    NgbNavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

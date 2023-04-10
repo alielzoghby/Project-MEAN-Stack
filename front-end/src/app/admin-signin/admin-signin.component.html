@@ -1,39 +1,33 @@
-<div id="box">
-  <div class="card">
-    <div class="card__face card__face--front">
-      <div class="i-more">
-        <i class="fa fa-ellipsis-h"></i>
-      </div>
-      <div class="input-container">
-        <div class="icon-wrapper"><i class="fa fa-user"></i></div>
-        <input
-          name="data[User][username]"
-          required="required"
-          placeholder="Username"
-          maxlength="255"
-          type="text"
-          id="UserUsername"
-        />
-      </div>
-      <div class="input-container">
-        <div class="icon-wrapper"><i class="fa fa-lock"></i></div>
-        <input
-          name="data[User][password]"
-          required="required"
-          placeholder="Password"
-          type="password"
-          id="UserPassword"
-        />
-      </div>
+<div class="body">
+  <div id="box">
+    <div class="card">
+      <div class="card__face card__face--front">
+        <div class="input-container">
+          <div class="icon-wrapper"><i class="fa fa-user"></i></div>
+          <input
+            name="data[User][username]"
+            required="required"
+            placeholder="Username"
+            maxlength="255"
+            type="text"
+            id="UserUsername"
+          />
+        </div>
 
-      <div class="input-container">
-        <input class="b-sign" type="submit" value="Sign in" />
-      </div>
-    </div>
+        <div class="input-container">
+          <div class="icon-wrapper"><i class="fa fa-lock"></i></div>
+          <input
+            name="data[User][password]"
+            required="required"
+            placeholder="Password"
+            type="password"
+            id="UserPassword"
+          />
+        </div>
 
-    <div class="card__face card__face--back">
-      <div class="i-more">
-        <i class="fa fa-ellipsis-h"></i>
+        <div class="input-container my-4">
+          <input class="b-sign" type="submit" value="Sign in" />
+        </div>
       </div>
     </div>
   </div>

@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +27,11 @@ export class AuthService {
   }
 
   register(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/sing-up`, data)
+    return this._http.post(`${this.baseAPI}/users/sing-up`, data);
   }
 
   login(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/login`, data)
+    return this._http.post(`${this.baseAPI}/users/login`, data);
   }
 
   logout() {

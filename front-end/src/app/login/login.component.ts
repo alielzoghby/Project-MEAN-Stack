@@ -32,6 +32,7 @@ export class LoginComponent {
         this._router.navigate(['/profile']);
       },
       (err) => {
+        console.log(err);
         this.error = err.error.message;
       }
     );
