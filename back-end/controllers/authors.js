@@ -3,25 +3,41 @@ const { Author } = require('../models/authors');
 const { Book } = require('../models/books');
 const asyncFunction = require('../middlewares/async');
 
-/// ////////////////////////////////////// get authors //////////////////////////////////
+
+
+////////////////////////////////////////// get authors //////////////////////////////////
+
 
 const getAuthors = asyncFunction(async (req, res) => {
+  const pageSize = 8;
+  let page = req.query.page || 1;
+  let skip = (page - 1) * pageSize; // currentPage = 4 ---> (4 - 1) * 8 then will count from number 25
+  const totalBooks = await Author.countDocuments();
+  let totalPages = Math.ceil(totalBooks / pageSize);
+  if(page > totalPages){
+    // page = 1;
+    throw { status: 404, message: 'There are no books on this page' };
+  }
   const authors = await Author.find();
   res.status(200).send(authors);
 });
 
-/// /////////////////////////////// get author //////////////////////////////////////////
+
+/////////////////////////////////// get author //////////////////////////////////////////
+
 
 const getAuthorById = asyncFunction(async (req, res) => {
-  const { authorId } = req.body;
-  const oneAuthor = await Author.findById({ id: authorId });
+  const { authorId } = req.params;
+  const oneAuthor = await Author.findById({ _id: authorId });
   if (!oneAuthor) {
     throw { status: 404, message: 'Author not found!' };
   }
   res.status(200).send(oneAuthor);
 });
 
-/// /////////////////////////////// create author ///////////////////////////////////////
+
+/////////////////////////////////// create author ///////////////////////////////////////
+
 
 const createNewAuthor = asyncFunction(async (req, res) => {
   const author = new Author({
@@ -33,44 +49,53 @@ const createNewAuthor = asyncFunction(async (req, res) => {
   author.save().then(() => { res.status(200).send(author); });
 });
 
-/// /////////////////////////////// delete author ///////////////////////////////////////
+
+/////////////////////////////////// delete author ///////////////////////////////////////
+
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
-  const author = await Author.findOneAndDelete({ id: req.body.authorId });
+  const author = await Author.findByIdAndDelete({ _id: req.params.authorId });
+  // const books = await Book.findOne({ authorId : req.params.authorId}).deleteMany();
+  // console.log(books)
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
   res.status(200).send(`Deleted author: ${author.firstName}`);
+  // and his books
 });
 
-/// /////////////////////////////// update author ///////////////////////////////////////
+
+/////////////////////////////////// update author ///////////////////////////////////////
+
 
 const updateAuthorById = asyncFunction(async (req, res) => {
-  const {
-    authorId, firstName, lastName, dateOfBirth,
-  } = req.body;
+  const { firstName, lastName, dateOfBirth } = req.body;
   // eslint-disable-next-line max-len
-  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ _id: req.params.authorId }, { $set: { firstName, lastName, dob: dateOfBirth } }, { new: true });
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
   res.status(200).send(author);
 });
 
-/// /////////////////////////////// update photo ////////////////////////////////////////
+
+/////////////////////////////////// update photo ////////////////////////////////////////
+
 
 const updateAuthorPhotoById = asyncFunction(async (req, res) => {
-  const { authorId } = req.body;
+  const { authorId } = req.params;
   const { filename } = req.file;
   // eslint-disable-next-line max-len
-  const author = await Author.findByIdAndUpdate({ id: authorId }, { $set: { photo: filename } }, { new: true });
+  const author = await Author.findByIdAndUpdate({ _id: authorId }, { $set: { photo: filename } }, { new: true });
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
   res.status(200).send(author);
 });
 
-/// ///////////////////////////// get popular list ///////////////////////////////////////////
+
+///////////////////////////////// get popular list ///////////////////////////////////////////
+
 
 const getPopularListOfAuthors = asyncFunction(async (req, res) => {
   // {categoryId:"643187aa6321613814c9e713"}
@@ -88,6 +113,31 @@ const getPopularListOfAuthors = asyncFunction(async (req, res) => {
   res.status(200).send(popularAuthor);
 });
 
+
+///////////////////////////////// get Books by Author ///////////////////////////////////////////
+
+
+const getBooksByAuthor = asyncFunction(async (req, res) => {
+  const pageSize = 8;
+  let page = req.query.page || 1;
+  // let skip = (page - 1) * pageSize; 
+  const totalBooks = await Book.find({ authorId: req.params.authorId }).countDocuments();
+  let totalPages = Math.ceil(totalBooks / pageSize);
+  if(page > totalPages){
+    page = 1;
+    // throw { status: 404, message: 'There are no books on this page' };
+  }
+  let skip = (page - 1) * pageSize;
+  const books = await Book.find({ authorId: req.params.authorId }).skip(skip).limit(pageSize);
+  if(!books){
+    throw { status: 404, message: 'There are no books for this author' };
+  }
+  res.status(200).send({ page, data: books, totalPages });
+});
+
+
+
+
 module.exports = {
   createNewAuthor,
   getAuthors,
@@ -96,4 +146,5 @@ module.exports = {
   updateAuthorById,
   updateAuthorPhotoById,
   getPopularListOfAuthors,
+  getBooksByAuthor
 };

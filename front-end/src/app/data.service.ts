@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,19 @@ export class DataService {
 
   constructor(private _http: HttpClient) {}
 
-  // getdata(type: string) {
-  //   return this._http.get(`${this.ROOT_URL + type}`);
-  // }
+  getData(endPoint: string) {
+    return this._http.get(`${this.ROOT_URL + endPoint}`);
+  }
+
+  postData(endPoint: string, data: any) {
+    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
+  }
+
+  deleteData(endPoint: string) {
+    return this._http.delete(`${this.ROOT_URL + endPoint}`);
+  }
+
+  putData(endPoint: string, data: any) {
+    return this._http.put(`${this.ROOT_URL + endPoint}`, data);
+  }
 }

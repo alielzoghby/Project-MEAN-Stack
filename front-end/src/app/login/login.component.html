@@ -8,7 +8,7 @@
         <div class="col-lg-8">
           <h2 class="fw-bold mb-5">Log in</h2>
           <div *ngIf="error" class="alert alert-danger">
-            <p>user name or password is wrong</p>
+            <p>{{error}}</p>
           </div>
           <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm)">
             <div class="form-outline mb-4">
@@ -69,7 +69,7 @@
               <a routerLink="/signup">Register here</a>
             </div>
             <div class="text-center">
-              <a routerLink="/signup">Login As Admin</a>
+              <a routerLink="/adminlogin">Login As Admin</a>
             </div>
           </form>
         </div>

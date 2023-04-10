@@ -14,7 +14,7 @@ const addUserToUserBooks = function addUserToUserBooks(userId) {
   userbook.save();
 };
 
-/// ///////////////////////////// create user (register) /////////////////////////////////
+///////////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   let user = await User.findOne({ email: req.body.email }).exec();
@@ -33,26 +33,26 @@ const createUser = asyncFunction(async (req, res) => {
   user.save().then(() => { res.status(200).send(user); });
 });
 
-/// ////////////////////////////// login user ///////////////////////////////////////////
+////////////////////////////////// login user ///////////////////////////////////////////
 
 const loginUser = asyncFunction(async (req, res) => {
   // check is user login with email already exist or not
   const { email, password } = req.body;
   const userAuthentication = await User.findOne({ email }).exec();
   if (!userAuthentication) {
-    return res.status(401).send({ error: 'Incorrect Email or Password' });
+    throw {status:401, message: 'Incorrect Email or Password' };
   }
   // check password
   const isPasswordValid = userAuthentication.verifyPassword(password);
   if (!isPasswordValid) {
-    return res.status(401).send({ error: 'Incorrect Email or password' });
+    throw {status:401, message: 'Incorrect Email or password' };
   }
   const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
   res.header('x-auth-token', token);
   res.status(200).send({ Token: token });
 });
 
-/// //////////////////////////////// update user ///////////////////////////////////////
+//////////////////////////////////// update user ///////////////////////////////////////
 
 const updateUserById = asyncFunction(async (req, res) => {
   const { id } = req.params;
@@ -60,6 +60,11 @@ const updateUserById = asyncFunction(async (req, res) => {
   const {
     firstName, lastName, password, email,
   } = req.body;
+  const user = await User.findById(id).exec();
+  if (!user) {
+    throw { status: 404, message: 'User not found' };
+  }
+
   const updateUser = await User.findByIdAndUpdate({ _id: id }, {
     $set: {
       firstName, lastName, password, email, photo: filename,
