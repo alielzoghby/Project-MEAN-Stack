@@ -27,8 +27,8 @@ const getAuthors = asyncFunction(async (req, res) => {
 
 
 const getAuthorById = asyncFunction(async (req, res) => {
-  const { authorId } = req.body;
-  const oneAuthor = await Author.findById({ id: authorId });
+  const { authorId } = req.params;
+  const oneAuthor = await Author.findById({ _id: authorId });
   if (!oneAuthor) {
     throw { status: 404, message: 'Author not found!' };
   }
@@ -55,10 +55,13 @@ const createNewAuthor = asyncFunction(async (req, res) => {
 
 const deleteAuthorById = asyncFunction(async (req, res) => {
   const author = await Author.findByIdAndDelete({ _id: req.params.authorId });
+  // const books = await Book.findOne({ authorId : req.params.authorId}).deleteMany();
+  // console.log(books)
   if (!author) {
     throw { status: 404, message: 'Author not found!' };
   }
   res.status(200).send(`Deleted author: ${author.firstName}`);
+  // and his books
 });
 
 
