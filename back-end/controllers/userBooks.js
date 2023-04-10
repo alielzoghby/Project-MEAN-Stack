@@ -40,13 +40,24 @@ const addRating = asyncFunction(async (req, res) => {
   if (!book) {
     throw { status: 404, message: 'Book not found!' };
   }
+  const userBook = await UserBook.findOne({ userId: req.currentUserId, 'books.bookId': req.body.bookId });
+  const bookModified = userBook.books.find((b) => b.bookId == req.body.bookId);
+  // if user didn't rate the bookk before
+  if (bookModified.rating === 0) {
+    await Book.findByIdAndUpdate(req.body.bookId, { $inc: { numberOfRatings: 1, sumOfRatings: req.body.rating } }, { returnOriginal: false });
+  } else {
+    await Book.findByIdAndUpdate(req.body.bookId, { $inc: { sumOfRatings: req.body.rating - bookModified.rating } }, { returnOriginal: false });
+  }
   const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.rating': req.body.rating } }, { returnOriginal: false });
-  await Book.findByIdAndUpdate(req.body.bookId, { $inc: { numberOfRatings: 1, sumOfRatings: req.body.rating } }, { returnOriginal: false });
   res.status(200).send(newEntry);
 });
 // update book shelf
 const updateShelf = asyncFunction(async (req, res) => {
-  const userBook = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.params.id }, { $set: { 'books.$.shelf': req.body.shelf } }, { returnOriginal: false });
+  const userBook = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.shelf': req.body.shelf } }, { returnOriginal: false });
+  const book = await Book.findById(req.body.bookId);
+  if (!book) {
+    throw { status: 404, message: 'Book not found!' };
+  }
   res.status(200).send(userBook);
 });
 // add review
@@ -54,6 +65,12 @@ const addReview = asyncFunction(async (req, res) => {
   const book = await Book.findById(req.body.bookId);
   if (!book) {
     throw { status: 404, message: 'Book not found!' };
+  }
+  const userBook = await UserBook.findOne({ userId: req.currentUserId, 'books.bookId': req.body.bookId });
+  const bookModified = userBook.books.find((b) => b.bookId == req.body.bookId);
+  // if user didn't rate the bookk before
+  if (bookModified.review) {
+    await Book.findByIdAndUpdate(req.body.bookId, { $pull: { reviews: { userId: req.currentUserId } } }, { returnOriginal: false });
   }
   const newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId, 'books.bookId': req.body.bookId }, { $set: { 'books.$.review': req.body.review } }, { returnOriginal: false });
   const reviewObject = { userId: req.currentUserId, review: req.body.review };

@@ -49,7 +49,7 @@ const loginUser = asyncFunction(async (req, res) => {
   }
   const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
   res.header('x-auth-token', token);
-  res.status(200).send({ Token: token })
+  res.status(200).send({ Token: token });
 });
 
 /// //////////////////////////////// update user ///////////////////////////////////////
