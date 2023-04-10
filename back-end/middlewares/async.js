@@ -3,7 +3,6 @@ module.exports = function asyncFunction(routeHandler) {
     try {
       await routeHandler(req, res, next);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   };

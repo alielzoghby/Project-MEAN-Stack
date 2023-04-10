@@ -104,22 +104,22 @@ const updateBook = asyncFunction(async (req, res) => {
 });
 
 
-/////////////////////////////////////////// get Average Rating //////////////////////////////////
+// /////////////////////////////////////////// get Average Rating //////////////////////////////////
 
 
-const getAverageRating = asyncFunction(async (req, res) => {
-  const book = await Book.findById(req.params.bookId);
-  if (!book) {
-    throw { status: 404, message: 'Book not found!' };
-  }
+// const getAverageRating = asyncFunction(async (req, res) => {
+//   const book = await Book.findById(req.params.bookId);
+//   if (!book) {
+//     throw { status: 404, message: 'Book not found!' };
+//   }
 
-  if (book.numberOfRatings === 0) {
-    res.status(200).json(book.sumOfRatings);
-  }
-  const averageRating = book.sumOfRatings / book.numberOfRatings;
+//   if (book.numberOfRatings === 0) {
+//     res.status(200).json(book.sumOfRatings);
+//   }
+//   const averageRating = book.sumOfRatings / book.numberOfRatings;
  
-  res.status(200).json(averageRating);
-});
+//   res.status(200).json(averageRating);
+// });
 
 
 /////////////////////////////////////////// get Popular Books //////////////////////////////////
