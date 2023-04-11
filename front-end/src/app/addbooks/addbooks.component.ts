@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
 
@@ -9,6 +9,15 @@ import { DataService } from '../data.service';
   styleUrls: ['./addbooks.component.css'],
 })
 export class AddbooksComponent {
+  @ViewChild('deleteC') delete!: HTMLElement;
+  @ViewChild('updateC') update!: HTMLElement;
+  @ViewChild('updateForm') formUpdate!: NgForm;
+
+  deleteId: string = '';
+  updateId: string = ''; ///DELETE
+
+  editingIndex = -1;
+
   books: any = [
     {
       averageRating: 0,
@@ -161,20 +170,54 @@ export class AddbooksComponent {
     this.bookForm.get('image')?.setValue(file);
   }
 
+  onFileSelectedFormUpdate(event: any) {
+    const file = event.target.files[0];
+    console.log(file);
+    this.formUpdate.value.cover = file;
+    console.log(this.formUpdate.value.cover);
+  }
+
+  open(content: any) {
+    this.modalService.open(content);
+  }
+
+  editItem(index: number) {
+    this.editingIndex = index;
+  }
+
+  isItemEditing(index: number) {
+    return index === this.editingIndex;
+  }
+
+  /////////////////////////////////GET METHOD
   getBooks() {
     this._data.get().subscribe((res) => {});
   }
 
+  /////////////////////////////////POST METHOD
   postBook(form: FormGroup) {
     console.log(form.value);
-
     this.bookForm.reset();
   }
 
-  deleteBook() {}
-  botBook() {}
+  /////////////////////////////////DELETE METHOD
+  getAlertDelete(event: any) {
+    this.deleteId = event.target.id;
+    this.modalService.open(this.delete);
+  }
 
-  open(content: any) {
-    this.modalService.open(content);
+  deleteBook() {
+    console.log(this.deleteId);
+    this.getBooks();
+  }
+
+  /////////////////////////////////BOT METHOD
+  getAlertUpdate(form: any) {
+    this.updateId = form.value;
+    this.modalService.open(this.update);
+  }
+
+  botBook() {
+    console.log(this.updateId);
   }
 }

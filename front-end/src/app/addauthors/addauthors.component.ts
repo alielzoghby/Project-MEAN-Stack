@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-addauthors',
@@ -8,8 +9,14 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./addauthors.component.css'],
 })
 export class AddauthorsComponent {
-  posts: any;
-  p: number = 1;
+  @ViewChild('deleteC') delete!: HTMLElement;
+  @ViewChild('updateC') update!: HTMLElement;
+  @ViewChild('updateForm') formUpdate!: NgForm;
+
+  deleteId: string = '';
+  updateId: string = '';
+
+  editingIndex = -1;
 
   authors: any = [
     {
@@ -44,7 +51,11 @@ export class AddauthorsComponent {
     },
   ];
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(
+    config: NgbModalConfig,
+    private modalService: NgbModal,
+    private _data: DataService
+  ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
@@ -70,17 +81,54 @@ export class AddauthorsComponent {
     this.authorForm.get('photo')?.setValue(file);
   }
 
-  getAuthors() {}
+  onFileSelectedFormUpdate(event: any) {
+    const file = event.target.files[0];
+    this.formUpdate.value.cover = file;
+  }
 
+  open(content: any) {
+    this.modalService.open(content);
+  }
+
+  editItem(index: number) {
+    this.editingIndex = index;
+  }
+
+  isItemEditing(index: number) {
+    return index === this.editingIndex;
+  }
+
+  /////////////////////////////////GET METHOD
+  getAuthors() {
+    this._data.get().subscribe((res) => {});
+  }
+
+  /////////////////////////////////POST METHOD
   postAuthor(form: FormGroup) {
     console.log(form.value);
     this.authorForm.reset();
   }
 
-  deleteAuthor() {}
-  botAuthor() {}
+  /////////////////////////////////DELETE METHOD
+  getAlertDelete(event: any) {
+    this.deleteId = event.target.id;
+    this.modalService.open(this.delete);
+  }
 
-  open(content: any) {
-    this.modalService.open(content);
+  deleteAuthor() {
+    console.log(this.deleteId);
+    this.getAuthors();
+  }
+
+  /////////////////////////////////BOT METHOD
+  getAlertUpdate(form: any) {
+    this.updateId = form.value;
+    this.modalService.open(this.update);
+    console.log(form);
+    console.log(form.value);
+  }
+
+  botAuthor() {
+    console.log(this.updateId);
   }
 }

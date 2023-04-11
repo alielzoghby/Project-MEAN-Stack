@@ -11,21 +11,43 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let categorie of allCategories">
+    <tr *ngFor="let categorie of allCategories; let i = index">
       <td>{{ categorie._id }}</td>
-      <td>{{ categorie.name }}</td>
+      <td
+        [class.edit]="categorie.editable"
+        [attr.contenteditable]="categorie.editable"
+      >
+        {{ categorie.name }}
+      </td>
       <td>
-        <button type="button" class="btn btn-link btn-sm btn-rounded">
+        <button
+          *ngIf="categorie.editable"
+          type="button"
+          class="btn btn-link btn-sm btn-rounded"
+          (click)="getAlertUpdate(i)"
+        >
+          <i class="fa-solid fa-square-check"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-link btn-sm btn-rounded"
+          (click)="updateForm(i)"
+        >
           <i class="fa-solid fa-pen-to-square"></i>
         </button>
-        <button type="button" class="btn btn-link btn-sm btn-rounded">
-          <i class="fa-solid fa-trash-can"></i>
+        <button
+          type="button"
+          class="btn btn-link btn-sm btn-rounded"
+          (click)="getAlertDelete($event)"
+        >
+          <i [id]="categorie._id" class="fa-solid fa-trash-can"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
 
+<!-- ////////////////////////////pagination -->
 <nav
   aria-label="Page navigation example"
   class="d-flex justify-content-center my-3"
@@ -47,6 +69,7 @@
   </ul>
 </nav>
 
+<!-- ////////////////////////////add -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add Categorie</h4>
@@ -83,12 +106,64 @@
       <div class="modal-footer">
         <button
           [disabled]="categorieForm.invalid"
-          class="btn btn-outline-dark"
+          class="btn btn-success"
           (click)="c()"
         >
           Save
         </button>
       </div>
     </form>
+  </div>
+</ng-template>
+
+<!-- ////////////////////////////delete -->
+<ng-template #deleteC let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Alert !</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure delete this Categorie</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">
+      cansel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="c(); deleteCategorie()"
+    >
+      ok
+    </button>
+  </div>
+</ng-template>
+
+<!-- ////////////////////////////update -->
+<ng-template #updateC let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Alert !</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure update this Categorie</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">
+      cansel
+    </button>
+    <button type="button" class="btn btn-danger" (click)="c(); botCategorie()">
+      ok
+    </button>
   </div>
 </ng-template>

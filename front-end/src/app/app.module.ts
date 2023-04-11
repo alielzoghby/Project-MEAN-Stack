@@ -35,7 +35,7 @@ import { FotterComponent } from './fotter/fotter.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { BookComponent } from './book/book.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -103,6 +103,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CarouselModule,
     NgbNavModule,
     NgxPaginationModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

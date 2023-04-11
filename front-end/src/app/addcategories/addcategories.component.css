@@ -1,10 +1,15 @@
 table {
   overflow-x: scroll;
 }
-
+tr {
+  padding: 4px;
+  margin: 4px;
+}
 td,
 th {
   text-align: center;
+  padding: 4px;
+  margin: 4px;
 }
 td:first-of-type,
 th:first-of-type {
@@ -18,4 +23,16 @@ th:last-of-type {
 th {
   font-weight: 700;
   font-size: 1.3em;
+}
+
+label {
+  margin: 10px 0 5px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.edit {
+  border: 1px black solid;
 }
