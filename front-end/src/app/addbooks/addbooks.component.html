@@ -237,6 +237,14 @@
         (change)="onFileSelected($event)"
       />
 
+      <label for="Input5">Discription</label>
+      <textarea
+        class="form-control"
+        id="Input5"
+        rows="3"
+        placeholder="Discription"
+        formControlName="discription"
+      ></textarea>
       <div class="modal-footer">
         <button
           [disabled]="bookForm.invalid"
