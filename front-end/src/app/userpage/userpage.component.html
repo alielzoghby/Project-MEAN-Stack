@@ -30,8 +30,8 @@
              <td >
               <img src="../../assets/images/product-item2.jpg" />
             </td> 
-            <td ><a [routerLink]="['bookpage/i.bookId.id']">{{i.bookId.name}}</a></td>
-            <td ><a [routerLink]="['author/i']"> {{i.authorName}}</a></td>
+            <td ><a [routerLink]="['/bookpage/i.bookId.id']">{{i.bookId.name}}</a></td>
+            <td ><a [routerLink]="['/author/id']"> {{i.authorName}}</a></td>
             <td class=" rate">
               <i  [ngClass]="i.rating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,1)"></i>
               <i  [ngClass]="i.rating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,2)"></i>
