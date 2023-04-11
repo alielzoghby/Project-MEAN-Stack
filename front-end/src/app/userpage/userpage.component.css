@@ -10,6 +10,11 @@ ul{
     border-left:1px solid
 }
 
+.rate i {
+    padding:0;
+    margin: 0;
+}
+
 
 ul li {
     padding-bottom:50px;
@@ -32,13 +37,26 @@ th{
 
 th,td{
     border:0px;
-    padding-right: 30px;
+    
 }
 
 
 
 .tablerow td img{
     max-height: 100px;
+    max-width: 50px;
+}
+
+.pagination{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    
+}
+.pagination nav {
+
+margin: auto;
+
 }
 
 
@@ -58,9 +76,9 @@ th,td{
 }
 
 .skip i {
-    font-size: 30px;
+    font-size: 20px;
     color:lightgray;
-    padding-left:20px;
+    padding-left:10px;
     cursor: pointer;
 }
 
@@ -68,6 +86,23 @@ th,td{
 .skip i:active{
     color: gray;
 }
+
+@media only screen and (max-width: 760px){
+ 
+.shelveNav{
+    display: flex;
+   
+}
+.shelveNav li {
+    padding-left: 10%;
+    width:20%;
+    padding-bottom: 0px;
+}
+.slider{
+    border-width:0px
+}
+}
+
 
 
 

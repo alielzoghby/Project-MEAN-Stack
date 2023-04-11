@@ -19,7 +19,7 @@ export class UserpageComponent {
    this.isLogged = this._auth.islogged; 
   }
   
-changeShelve(choosenShelve:string ,){
+changeShelve(choosenShelve:string ){
 
 this.shelve=choosenShelve
 }
