@@ -4,57 +4,99 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserBooksService {
-data = [
-  {
-      "books": [
-          {
-              "bookId": {
-                  "averageRating": 0,
-                  "numberOfRatings": 0,
-                  "_id": "64274168329bc1119a1bcdcb",
-                  "name": "The Adventures of Sherlock Holmes",
-                  "categoryId": "6425e41c1239e0e71ad9dfbd",
-                  "cover": "product-item1.jpg",
-                  "reviews": [],
-                  "id": 4,
-                  "__v": 0
-              },
-              "shelf": "Read",
-              "_id": "642dfc2f33b3aa8910559750",
-              "rating": 2
-          },
-          {
-              "bookId": {
-                  "averageRating": 0,
-                  "numberOfRatings": 0,
-                  "_id": "64273d332125294507be1209",
-                  "name": "Arsine Lupin",
-                  "categoryId": "6425e41c1239e0e71ad9dfbd",
-                  "reviews": [],
-                  "id": 7,
-                  "__v": 0
-              },
-              "shelf": "Reading",
-              "_id": "642dfc5d33b3aa8910559755"
-          },
-          {
-              "bookId": {
-                  "averageRating": 0,
-                  "_id": "6426fea121e7c5e9910f1da8",
-                  "name": "The Adventures of Sherlock Holmes",
-                  "categoryId": "6425e41c1239e0e71ad9dfbd",
-                  "reviews": [],
-                  "__v": 0,
-                  "numberOfRatings": 1,
-                  "id": 17
-              },
-              "shelf": "Want to read",
-              "_id": "642f5570f61ee5f46b0ea139",
-              "rating": 3
-          }
-      ]
-  }
-]
+ data = [{
+
+  userId: {
+  id: 161720,
+  firstName: "nada",
+  lastName: "hisham",
+  email: "ion@gmail.com",
+  password:"1234567",
+  isAdmin:"true",
+  photo:"../.../assets/images/mm.jpg"
+},
+    books: [{  //books.bookId,id  , books.shelf
+    bookId:
+     {
+          id: 123445,
+          name:"hell",
+          categoryId:"lhkjbkb",
+          authorId:"lhkjbhvjhvjv",
+          // averageRating: {
+          //   type: Number,
+          //   default: 0,
+          // },
+          cover:"../../assets/images/",
+          numberOfRatings: 4,
+          sumOfRatings: 11,
+          description: "diegfxxxxfgf",
+          reviews: [
+            {
+              userId:"lhkgjgj",
+              review: "ohiugiugigigig",
+            },
+          ],
+        },
+      
+    shelf: "Reading",
+    rating:5,
+    review:"",
+    authorName:"hany"
+},
+
+{
+  bookId:  {
+      id: 123445,
+      name:"hell",
+      categoryId:"lhkjbkb",
+      authorId:"lhkjbhvjhvjv",
+      // averageRating: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      cover:"../../assets/images/",
+      numberOfRatings: 4,
+      sumOfRatings: 11,
+      description: "diegfxxxxfgf",
+      reviews: [
+        {
+          userId:"lhkgjgj",
+          review: "ohiugiugigigig",
+        },
+      ],
+    },
+  shelf: "want to read",
+  rating:2,
+  review:"",
+  authorName:"hany"
+},
+{
+  bookId:  {
+      id: 123445,
+      name:"hello",
+      categoryId:"lhkjbkb",
+      authorId:"lhkjbhvjhvjv",
+      // averageRating: {
+      //   type: Number,
+      //   default: 0,
+      // },
+      cover:"../../assets/images/",
+      numberOfRatings: 4,
+      sumOfRatings: 11,
+      description: "diegfxxxxfgf",
+      reviews: [
+        {
+          userId:"lhkgjgj",
+          review: "ohiugiugigigig",
+        },
+      ],
+    },
+  shelf: "Read",
+  rating:3,
+  review:"",
+  authorName:"ahmed"
+}]
+}]
   constructor() {
 
 

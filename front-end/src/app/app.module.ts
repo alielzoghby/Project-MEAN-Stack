@@ -51,6 +51,10 @@ import { AddcategoriesComponent } from './addcategories/addcategories.component'
 import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BarRatingModule } from "ngx-bar-rating";
+import { MatToolbarModule} from "@angular/material/toolbar"
+import { MatButtonModule } from "@angular/material/button"
+import {MatIconModule}    from "@angular/material/icon"
 
 @NgModule({
   declarations: [
@@ -74,6 +78,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AddcategoriesComponent,
     AddbooksComponent,
     AddauthorsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -104,6 +109,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgbNavModule,
     NgxPaginationModule,
     FormsModule,
+    BarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

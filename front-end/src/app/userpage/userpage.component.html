@@ -3,15 +3,15 @@
   <div class="row">
     <div class="col-md-2">
       <ul class="shelveNav">
-        <li (click)="changeShelve('All')">All</li>
-        <li (click)="changeShelve('Read')">read</li>
-        <li (click)="changeShelve('want to read')">want to read</li>
-        <li>currently read</li>
+        <li (click)="changeShelf('ALL')">All</li>
+        <li (click)="changeShelf('Read')">read</li>
+        <li (click)="changeShelf('want to read')">want to read</li>
+        <li (click)="changeShelf('Reading')">reading</li>
       </ul>
     </div>
 
     <div class="col-md-8 col-sm-12 slider">
-      <div class="shelve">{{ shelve }}</div>
+      <div class="shelve">{{ shelf }}</div>
 
       <table class="table caption-top">
 
@@ -26,23 +26,30 @@
           </tr>
         </thead>
         <tbody >
-          <tr class="tablerow">
+          <tr class="tablerow"*ngFor="let i of shownData">
              <td >
               <img src="../../assets/images/product-item2.jpg" />
             </td> 
-            <td >book1</td>
-            <td >Otto</td>
+            <td >{{i.bookId.name}}</td>
+            <td >{{i.authorName}}</td>
             <td class=" rate">
-              <i class="fa">&#xf005;</i>
+              <bar-rating [(rate)]="rate" [max]="5">
+                <ng-template ratingActive>
+                  <i class="bi bi-star-fill" style="margin: 2px; color: #edb867"></i>
+                </ng-template>
+                <ng-template ratingInactive>
+                  <i class="bi bi-star-fill" style="margin: 2px; color: #d2d2d2"></i>
+                </ng-template>
+              </bar-rating>
             </td>
             <td class=" rate">
-              <i class="fa">&#xf005;</i>
+              
             </td>
             <td class="">
-              <select class="form-select">
-                <option selected>Want to Read</option>
-                <option value="1">Currently Read</option>
-                <option value="2">Read</option>
+              <select class="form-select"#shelf (change)="onSelected(i,shelf.value)">
+                <option value='want to read' [attr.selected]="i.shelf=='want to read' ? 'true' : null" >Want to Read</option>
+                <option value='Reading' [attr.selected]="i.shelf=='Reading' ? 'true' : null">Reading</option>
+                <option value='Read' [attr.selected]="i.shelf=='Read' ? 'true' : null">Read</option>
               </select>
             </td>
           </tr>
