@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthGardGuard } from '../auth-gard.guard'; 
+import { UserBooksService } from '../services/user-books.service';
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
@@ -11,15 +12,21 @@ export class UserpageComponent {
   shelves:string[] = ["ALL","Read","Want to Read","Currently Read"]
   pos:number = 0 ;
   isLogged   = false;
+  data:Array<any> = []
+  AvgRated:number=0
+  AvgUnRated:number=0
+  userRated:number=0
+  userUnrated:number=0
 
-  /**
+/**
    *
    */
-  constructor(private _auth:AuthGardGuard) {
+  constructor(private _auth:AuthGardGuard, private _userBooks:UserBooksService) {
    this.isLogged = this._auth.islogged; 
+   this.data     = this._userBooks.getAllUserBooks()
   }
   
-changeShelve(choosenShelve:string ){
+changeShelve(choosenShelve:string ,){
 
 this.shelve=choosenShelve
 }

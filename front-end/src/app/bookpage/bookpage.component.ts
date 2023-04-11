@@ -7,24 +7,22 @@ import { DataService } from '../data.service';
   templateUrl: './bookpage.component.html',
   styleUrls: ['./bookpage.component.css'],
 })
-export class BookpageComponent implements OnDestroy, OnInit {
-  id: string = '';
-  bookDetail: any;
-  sub: any;
+export class BookpageComponent {
+  
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _data: DataService
+    
   ) {}
 
   ngOnInit(): void {
-    this.id = this._ActivatedRoute.snapshot.params['id'];
-    this.sub = this._data.getData(`/books/${this.id}`).subscribe((res) => {
-      this.bookDetail = res;
-    });
+    // this.id = this._ActivatedRoute.snapshot.params['id'];
+    // this.sub = this._data.getData(`/books/${this.id}`).subscribe((res) => {
+    //   this.bookDetail = res;
+    // });
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+    
+  // }
 }
