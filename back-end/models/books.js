@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-    // unique: true,
-    },
     name: {
       type: String,
       required: true,
@@ -61,14 +57,6 @@ bookSchema.virtual('averageRating').get(function () {
   return this.sumOfRatings / this.numberOfRatings;
 });
 const Book = mongoose.model('Book', bookSchema);
-
-bookSchema.pre('save', async function () {
-  const book = this;
-  if (!book.id) {
-    const count = await Book.countDocuments();
-    book.id = count + 1;
-  }
-});
 
 module.exports = {
   Book,

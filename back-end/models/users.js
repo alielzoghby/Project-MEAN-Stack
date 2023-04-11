@@ -5,10 +5,6 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    id: {
-      type: Number,
-      // unique: true,
-    },
     firstName: {
       type: String,
       required: true,
@@ -55,14 +51,6 @@ userSchema.methods.verifyPassword = function verifyPassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
 const User = mongoose.model('User', userSchema);
-
-userSchema.pre('save', async function () {
-  const user = this;
-  if (!user.id) {
-    const count = await User.countDocuments();
-    user.id = count + 1;
-  }
-});
 
 module.exports = {
   User,
