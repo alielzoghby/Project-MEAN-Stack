@@ -524,6 +524,10 @@ body.stellarnav-noscroll-x {
 .stellarnav.desktop > ul > li.mega > ul > li > a {
   color: #ff0;
 }
+.pagination {
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 768px) {
   .stellarnav {
     overflow: hidden;

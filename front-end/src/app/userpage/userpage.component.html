@@ -19,8 +19,8 @@
             <th scope="col">name</th>
             <th scope="col">Author</th>
             <th scope="col">AVG Rate</th>
-            <th scope="col">Rate</th>
-            <th scope="col">Shelve</th>
+            <th scope="col" *ngIf="isLogged">Rate</th>
+            <th scope="col"*ngIf="isLogged">Shelve</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
               <i class="fa">&#xf005;</i>
               <i class="fa">&#xf005;</i>
             </td>
-            <td class="rate">
+            <td class="rate" *ngIf="isLogged">
               <i class="fa">&#xf005;</i>
               <i class="fa">&#xf005;</i>
               <i class="fa">&#xf005;</i>
@@ -45,7 +45,7 @@
               <i class="fa">&#xf005;</i>
             </td>
             <td>
-              <select class="form-select">
+              <select class="form-select"*ngIf="isLogged">
                 <option selected>Want to Read</option>
                 <option value="1">Currently Read</option>
                 <option value="2">Read</option>
@@ -53,7 +53,7 @@
             </td>
           </tr>
 
-          <tr class="tablerow">
+          <!-- <tr class="tablerow">
             <td scope="row">
               <img src="../../assets/images/product-item2.jpg" />
             </td>
@@ -81,13 +81,30 @@
               </select>
             </td>
           </tr>
-        </tbody>
+        </tbody> -->
       </table>
 
-      <div class="skip">
-        <i class="fa" (click)="prev()">&#xf137;</i>
-        <i class="fa" (click)="next()">&#xf138;</i>
+      <div class="pagination">
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#" >1</a></li>
+          <li class="page-item"><a class="page-link" href="#" >2</a></li>
+          <li class="page-item"><a class="page-link" href="#" >3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      </div>
       </div>
     </div>
   </div>
-</div>
+

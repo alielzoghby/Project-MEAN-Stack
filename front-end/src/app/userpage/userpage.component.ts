@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AuthGardGuard } from '../auth-gard.guard'; 
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
@@ -10,9 +10,17 @@ export class UserpageComponent {
   rate:string ="&#xf005;"
   shelves:string[] = ["ALL","Read","Want to Read","Currently Read"]
   pos:number = 0 ;
+  isLogged   = false;
 
+  /**
+   *
+   */
+  constructor(private _auth:AuthGardGuard) {
+   this.isLogged = this._auth.islogged; 
+  }
   
-changeShelve(choosenShelve:string){
+changeShelve(choosenShelve:string ,){
+
 this.shelve=choosenShelve
 }
 next(){

@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   { path: 'categories', component: CategoriesComponent },
   {
-    path: 'author',
+    path: 'author/:id',
     component: AuthorPageComponent, // canActivate: [AuthGardGuard],
   },
   { path: 'login', component: LoginComponent },
