@@ -75,7 +75,6 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     AddcategoriesComponent,
     AddbooksComponent,
     AddauthorsComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -107,7 +106,6 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     NgxPaginationModule,
     FormsModule,
     NgxStarRatingModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent],
