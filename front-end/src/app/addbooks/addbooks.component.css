@@ -1,0 +1,41 @@
+table {
+  overflow-x: scroll;
+}
+tr {
+  padding: 4px;
+  margin: 4px;
+}
+td,
+th {
+  text-align: center;
+  padding: 4px;
+  margin: 4px;
+}
+td:first-of-type,
+th:first-of-type {
+  width: 21%;
+}
+td:last-of-type,
+th:last-of-type {
+  width: 15%;
+}
+
+th {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+label {
+  margin: 10px 0 5px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.fix-width1 {
+  width: 11% !important;
+}
+.fix-width {
+  width: 31% !important;
+}

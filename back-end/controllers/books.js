@@ -143,5 +143,6 @@ module.exports = {
   deleteBook,
   updateBook,
   getBookByCategory,
-  getPopularListOfBooks,
+  // getAverageRating,
+  getPopularListOfBooks
 };
