@@ -70,7 +70,7 @@ export class UserBooksService {
       name:"hello",
       categoryId:"lhkjbkb",
       authorId:"lhkjbhvjhvjv",
-       averageRating: 5,
+      averageRating: 5,
       cover:"../../assets/images/",
       numberOfRatings: 4,
       sumOfRatings: 11,

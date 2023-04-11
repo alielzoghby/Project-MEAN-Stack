@@ -47,7 +47,7 @@ import { AddcategoriesComponent } from './addcategories/addcategories.component'
 import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgxStarRatingModule } from 'ngx-star-rating';
+// import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   declarations: [
@@ -101,7 +101,8 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     NgbNavModule,
     NgxPaginationModule,
     FormsModule,
-    NgxStarRatingModule,
+    // NgxStarRatingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
