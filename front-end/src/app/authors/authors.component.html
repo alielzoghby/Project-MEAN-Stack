@@ -1,46 +1,43 @@
 <app-navbar></app-navbar>
 
-<!--  [indicators]="true" -->
 
-<section id="billboard">
-  <div class="main-slider pattern-overlay">
-    <mdb-carousel [controls]="true" [dark]="true">
-      <mdb-carousel-item>
-        <div class="slider-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
-                <img src="../../assets/images/team-1.jpg" />
-                <button>hello</button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
-                <img src="../../assets/images/team-1.jpg" />
-                <button>hello</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </mdb-carousel-item>
-      <mdb-carousel-item>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
-              <img src="../../assets/images/team-1.jpg" />
-              <button>hello</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pt-5 parent" *ngFor="let i of [0, 1, 2]">
-              <img src="../../assets/images/team-1.jpg" />
-              <button>hello</button>
-            </div>
-          </div>
-        </div>
-      </mdb-carousel-item>
-    </mdb-carousel>
+<div class="container" >
+  <div class="row">
+
+    <div class="col-md-4 pt-5 pb-5 parent" *ngFor="let author of Datashown">
+ 
+      <img src={{author.photo}} />
+      <div class="date">was born in : <br>
+       <span>{{author.dateOfBirth}}</span> 
+
+     </div>
+
+  <div class="name"> <a (click)="setAuthor()" [routerLink]="['/author/{{author.id}}']" > writer : {{author.firstName}} {{author.lastName}} </a>
   </div>
-</section>
+  </div>
+</div>
+
+  <div class="pagination">
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#" >1</a></li>
+    <li class="page-item"><a class="page-link" href="#" >2</a></li>
+    <li class="page-item"><a class="page-link" href="#" >3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+</div>
+</div>
+
 
 <app-fotter></app-fotter>

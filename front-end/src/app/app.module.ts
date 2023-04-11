@@ -3,11 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  NgbModule,
-  NgbNavModule,
-  NgbPagination,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -51,6 +47,7 @@ import { AddcategoriesComponent } from './addcategories/addcategories.component'
 import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+// import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   declarations: [
@@ -104,6 +101,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgbNavModule,
     NgxPaginationModule,
     FormsModule,
+    // NgxStarRatingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
