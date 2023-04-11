@@ -32,6 +32,7 @@
     "ngx-bar-rating": "^5.0.0",
     "ngx-owl-carousel-o": "^15.0.0",
     "ngx-pagination": "^6.0.3",
+    "ngx-star-rating": "^2.1.0",
     "rxjs": "~7.8.0",
     "semantic-ui-css": "^2.5.0",
     "tslib": "^2.3.0",

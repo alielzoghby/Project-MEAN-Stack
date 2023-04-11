@@ -15,17 +15,14 @@ export class UserBooksService {
   isAdmin:"true",
   photo:"../.../assets/images/mm.jpg"
 },
-    books: [{  //books.bookId,id  , books.shelf
+    books: [{ 
     bookId:
      {
           id: 123445,
           name:"hell",
           categoryId:"lhkjbkb",
           authorId:"lhkjbhvjhvjv",
-          // averageRating: {
-          //   type: Number,
-          //   default: 0,
-          // },
+          averageRating: 5,
           cover:"../../assets/images/",
           numberOfRatings: 4,
           sumOfRatings: 11,
@@ -50,13 +47,10 @@ export class UserBooksService {
       name:"hell",
       categoryId:"lhkjbkb",
       authorId:"lhkjbhvjhvjv",
-      // averageRating: {
-      //   type: Number,
-      //   default: 0,
-      // },
+      averageRating: 3,
       cover:"../../assets/images/",
-      numberOfRatings: 4,
-      sumOfRatings: 11,
+      numberOfRatings: 5,
+      sumOfRatings: 15,
       description: "diegfxxxxfgf",
       reviews: [
         {
@@ -76,10 +70,7 @@ export class UserBooksService {
       name:"hello",
       categoryId:"lhkjbkb",
       authorId:"lhkjbhvjhvjv",
-      // averageRating: {
-      //   type: Number,
-      //   default: 0,
-      // },
+       averageRating: 5,
       cover:"../../assets/images/",
       numberOfRatings: 4,
       sumOfRatings: 11,

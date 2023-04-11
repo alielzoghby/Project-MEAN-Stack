@@ -20,8 +20,8 @@
             <th>img</th>
             <th >name</th>
             <th >Author</th>
-            <th >AVG Rate</th>
             <th >Rate</th>
+            <th >AVG Rate</th>
             <th >Shelve</th>
           </tr>
         </thead>
@@ -30,20 +30,21 @@
              <td >
               <img src="../../assets/images/product-item2.jpg" />
             </td> 
-            <td >{{i.bookId.name}}</td>
-            <td >{{i.authorName}}</td>
+            <td ><a [routerLink]="['bookpage/i.bookId.id']">{{i.bookId.name}}</a></td>
+            <td ><a [routerLink]="['author/i']"> {{i.authorName}}</a></td>
             <td class=" rate">
-              <bar-rating [(rate)]="rate" [max]="5">
-                <ng-template ratingActive>
-                  <i class="bi bi-star-fill" style="margin: 2px; color: #edb867"></i>
-                </ng-template>
-                <ng-template ratingInactive>
-                  <i class="bi bi-star-fill" style="margin: 2px; color: #d2d2d2"></i>
-                </ng-template>
-              </bar-rating>
+              <i  [ngClass]="i.rating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,1)"></i>
+              <i  [ngClass]="i.rating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,2)"></i>
+              <i  [ngClass]="i.rating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,3)"></i>
+              <i  [ngClass]="i.rating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,4)"></i>
+              <i  [ngClass]="i.rating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,5)"></i>
             </td>
             <td class=" rate">
-              
+              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
+              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
             </td>
             <td class="">
               <select class="form-select"#shelf (change)="onSelected(i,shelf.value)">
