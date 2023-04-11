@@ -3,7 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModule,
+  NgbNavModule,
+  NgbPagination,
+} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -28,19 +32,25 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { CarouselComponent } from './carousel/carousel.component';
 import { FotterComponent } from './fotter/fotter.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import {
-  NgbPaginationModule,
-  NgbAlertModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { BookComponent } from './book/book.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PopularBookComponent } from './popular-book/popular-book.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminSigninComponent } from './admin-signin/admin-signin.component';
+import { LoginComponent } from './login/login.component';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { AddcategoriesComponent } from './addcategories/addcategories.component';
+import { AddbooksComponent } from './addbooks/addbooks.component';
+import { AddauthorsComponent } from './addauthors/addauthors.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -59,6 +69,11 @@ import { PopularBookComponent } from './popular-book/popular-book.component';
     NotfoundComponent,
     BookComponent,
     PopularBookComponent,
+    AdminSigninComponent,
+    AdminComponent,
+    AddcategoriesComponent,
+    AddbooksComponent,
+    AddauthorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +101,9 @@ import { PopularBookComponent } from './popular-book/popular-book.component';
     NgbPaginationModule,
     NgbAlertModule,
     CarouselModule,
+    NgbNavModule,
+    NgxPaginationModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

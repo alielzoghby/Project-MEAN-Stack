@@ -1,0 +1,42 @@
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="jumbotronExample.toggle()"
+        aria-controls="jumbotronExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div
+        mdbCollapse
+        #jumbotronExample="mdbCollapse"
+        class="collapse navbar-collapse"
+        id="jumbotronExample"
+      >
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link">Add User</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <mdb-tabs [fill]="true">
+      <mdb-tab title="Categories">
+        <app-addcategories></app-addcategories>
+      </mdb-tab>
+
+      <mdb-tab title="Books">
+        <app-addbooks></app-addbooks>
+      </mdb-tab>
+      <mdb-tab title="Authors"> <app-addauthors></app-addauthors></mdb-tab>
+    </mdb-tabs>
+  </div>
+</header>

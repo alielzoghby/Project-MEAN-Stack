@@ -1,15 +1,26 @@
 <div id="header-wrap">
   <div class="top-content">
     <div class="container">
-      <div class="row">
-        <div class="col-6 social-links">
+      <div class="parent d-flex align-items-center justify-content-between">
+        <div class="social-links my-2">
           <a href="#"> <i class="fa-brands mx-1 fa-facebook"></i></a>
           <a href="#"> <i class="fa-brands mx-1 fa-twitter"></i></a>
           <a href="#"> <i class="fa-brands mx-1 fa-github"></i> </a>
           <a href="#"> <i class="fa-brands mx-1 fa-linkedin"></i> </a>
           <a href="#"> <i class="fab mx-1 fa-google"></i> </a>
         </div>
-        <div class="col-6 right-element">
+
+        <form class="d-flex input-group w-auto">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Search for Book"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-primary" type="button">Search</button>
+        </form>
+
+        <div class="my-2">
           <a *ngIf="!isLoged" routerLink="/login" class="user-account mx-2"
             ><i class="fa-solid fa-user"></i
             ><span routerLinkActive="active">Login</span></a
@@ -18,16 +29,21 @@
             ><span routerLinkActive="active">Register</span></a
           >
           <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
-            ><span>Profile</span></a
+            ><i class="fa-solid fa-user"></i><span> Profile</span></a
           >
 
-          <a (click)="logout()" class="user-account mx-2" *ngIf="isLoged"
+          <a
+            (click)="logout()"
+            routerLink="/home"
+            class="user-account mx-2"
+            *ngIf="isLoged"
             ><span>Logout</span></a
           >
         </div>
       </div>
     </div>
   </div>
+
   <header
     id="header"
     class="fixed"
@@ -43,7 +59,7 @@
         </div>
 
         <div class="col-md-10">
-          <nav id="navbar  d-flex align-items-center">
+          <nav id="navbar d-flex align-items-center">
             <div class="main-menu stellarnav">
               <ul class="menu-list">
                 <li class="menu-item">

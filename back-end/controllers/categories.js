@@ -44,6 +44,9 @@ const updateCategory = asyncFunction(async (req, res) => {
 
 const getPopularListOfCategories = asyncFunction(async (req, res) => {
   const category = await Category.find().sort({ 'numberOfBooks': -1 }).limit(6);
+  if(!category){
+    throw { status: 404, message: 'Not found any Category!' };
+  }
   res.status(200).send(category);
 });
 module.exports = {

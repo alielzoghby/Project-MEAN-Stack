@@ -208,23 +208,3 @@
     </div>
   </div>
 </section>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-body mx-auto text-center">
-    <img
-      class="rounded mx-auto d-block"
-      src="assets/icons8-checkmark.gif"
-      alt=""
-    />
-    <p>Registration Successful. Thank you for registering!</p>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark m-auto"
-      (click)="c('Save click'); navigate()"
-    >
-      ok
-    </button>
-  </div>
-</ng-template>

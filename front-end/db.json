@@ -1,0 +1,71 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "books": [
+    {
+      "averageRating": 0,
+      "numberOfRatings": 0,
+      "_id": "64274168329bc1119a1bcdcb",
+      "name": "The Adventures of Sherlock Holmes",
+      "categoryId": "6425e41c1239e0e71ad9dfbd",
+      "cover": "sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031",
+      "reviews": [],
+      "__v": 0
+    },
+    {
+      "averageRating": 0,
+      "_id": "643177aec9448aa2b78af34a",
+      "name": "New Book for Sherlock",
+      "categoryId": "6425e41c1239e0e71ad9dfbd",
+      "cover": "sherlock.png-d6c3ce04-b731-466d-b336-8d55a644f7a9",
+      "numberOfRatings": 0,
+      "reviews": [],
+      "__v": 0
+    },
+    {
+      "averageRating": 0,
+      "_id": "6431797f6e223a6c1a6f5056",
+      "name": "New Book for horror",
+      "categoryId": "6425f9b05d26ee6953c545ef",
+      "cover": "sherlock.png-896bd709-c00e-4821-bb7b-61346e38bf48",
+      "numberOfRatings": 0,
+      "reviews": [],
+      "__v": 0
+    },
+    {
+      "averageRating": 0,
+      "_id": "643179996e223a6c1a6f505b",
+      "name": "horror book",
+      "categoryId": "6425f9b05d26ee6953c545ef",
+      "cover": "sherlock.png-4295f803-4fdd-4eaa-afa8-b4c8936bcf31",
+      "numberOfRatings": 0,
+      "reviews": [],
+      "__v": 0
+    },
+    {
+      "averageRating": 0,
+      "_id": "64317a3b6e223a6c1a6f5061",
+      "name": "horrors",
+      "categoryId": "6425f9b05d26ee6953c545ef",
+      "cover": "sherlock.png-31a0d4a9-0815-4ff5-8bbe-cb8396db44eb",
+      "numberOfRatings": 0,
+      "reviews": [],
+      "__v": 0
+    }
+  ]
+}

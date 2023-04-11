@@ -1,0 +1,311 @@
+<button (click)="open(content)" class="btn btn-link float-end">
+  <i class="fa-solid fa-circle-plus fa-xl my-3"></i>
+</button>
+
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>ID</th>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>CategoryId</th>
+      <th>AuthorId</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books; let i = index">
+      <ng-container *ngIf="!isItemEditing(i); else editingRow">
+        <td>{{ book._id }}</td>
+        <td>{{ book }}</td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.category }}</td>
+        <td>{{ book.author }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-link btn-sm btn-rounded"
+            (click)="editItem(i)"
+          >
+            <i [id]="book._id" class="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-link btn-sm btn-rounded"
+            (click)="getAlertDelete($event)"
+          >
+            <i [id]="book._id" class="fa-solid fa-trash-can"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-template #editingRow>
+        <td colspan="6">
+          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm)">
+            <table class="table align-middle mb-0 bg-white">
+              <tr>
+                <td>
+                  <div>{{ book._id }}</div>
+                </td>
+                <td class="fix-width1">
+                  <div>
+                    <input
+                      class="form-control"
+                      type="file"
+                      ngModel
+                      name="cover"
+                      accept="image/png, image/jpg, image/jpeg"
+                      required
+                      (change)="onFileSelectedFormUpdate($event)"
+                    />
+                  </div>
+                </td>
+                <td class="fix-width">
+                  <div>
+                    <input
+                      class="form-control"
+                      type="text"
+                      [(ngModel)]="books[i].name"
+                      name="name"
+                      ngModel
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <select
+                      class="form-control"
+                      id="Input2"
+                      name="categoryId"
+                      ngModel
+                    >
+                      <option
+                        *ngFor="let category of catagorys"
+                        value="{{ category._id }}"
+                      >
+                        {{ category.category }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <select
+                      class="form-control"
+                      id="Input3"
+                      name="authorId"
+                      ngModel
+                    >
+                      <option
+                        *ngFor="let author of authors"
+                        value="{{ author._id }}"
+                      >
+                        {{ author.firstName + " " + author.lastName }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <button
+                      type="submit"
+                      class="btn btn-link btn-sm btn-rounded"
+                    >
+                      <i class="fa-solid fa-square-check"></i>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-link btn-sm btn-rounded"
+                      (click)="editingIndex = -1"
+                    >
+                      <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ////////////////////////////pagination -->
+<nav
+  aria-label="Page navigation example"
+  class="d-flex justify-content-center my-3"
+>
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ////////////////////////////add -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Book</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click'); bookForm.reset()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form
+      class="form-group"
+      [formGroup]="bookForm"
+      (ngSubmit)="postBook(bookForm)"
+    >
+      <div id="bookName">
+        <label for="Input1">Book Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Input1"
+          placeholder="First Name"
+          formControlName="name"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="bookForm.get('name')?.errors?.['required'] &&
+        bookForm.get('name')?.touched"
+        >
+          Book Name is required
+        </p>
+      </div>
+
+      <div id="category">
+        <label for="Input2">Category</label>
+
+        <select class="form-control" id="Input2" formControlName="categoryId">
+          <option *ngFor="let category of catagorys" value="{{ category._id }}">
+            {{ category.category }}
+          </option>
+        </select>
+
+        <p
+          class="alert alert-danger"
+          *ngIf="bookForm.get('categoryId')?.errors?.['required'] &&
+      bookForm.get('categoryId')?.touched"
+        >
+          Category is required
+        </p>
+      </div>
+
+      <div id="author">
+        <label for="Input3">Author</label>
+
+        <select class="form-control" id="Input3" formControlName="authorId">
+          <option *ngFor="let author of authors" value="{{ author._id }}">
+            {{ author.firstName + " " + author.lastName }}
+          </option>
+        </select>
+
+        <p
+          class="alert alert-danger"
+          *ngIf="bookForm.get('authorId')?.errors?.['required'] &&
+        bookForm.get('authorId')?.touched"
+        >
+          date of birth is required
+        </p>
+      </div>
+
+      <label for="Input4">Picture</label>
+      <input
+        type="file"
+        class="form-control"
+        id="Input4"
+        placeholder="Book
+      Name"
+        accept="image/png, image/jpg, image/jpeg"
+        required
+        (change)="onFileSelected($event)"
+      />
+
+      <label for="Input5">Discription</label>
+      <textarea
+        class="form-control"
+        id="Input5"
+        rows="3"
+        placeholder="Discription"
+        formControlName="discription"
+      ></textarea>
+      <div class="modal-footer">
+        <button
+          [disabled]="bookForm.invalid"
+          class="btn btn-success"
+          (click)="c()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!-- ////////////////////////////delete -->
+<ng-template #deleteC let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Alert !</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure delete this Categorie</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">
+      cansel
+    </button>
+    <button type="button" class="btn btn-danger" (click)="c(); deleteBook()">
+      ok
+    </button>
+  </div>
+</ng-template>
+
+<!-- ////////////////////////////update -->
+<ng-template #updateC let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Alert !</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure update this Categorie</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c()">
+      cansel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="c(); botBook(); editingIndex = -1"
+    >
+      ok
+    </button>
+  </div>
+</ng-template>

@@ -23,7 +23,7 @@ a {
   transition: 0.3s color ease-out;
   font-weight: 700;
   position: relative;
-  z-index: 999999;
+  z-index: 9;
 }
 
 a:hover {

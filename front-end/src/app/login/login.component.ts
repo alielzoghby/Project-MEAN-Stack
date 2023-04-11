@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -25,16 +25,16 @@ export class LoginComponent {
   }
 
   submitForm(loginForm: FormGroup) {
-    // this._auth.login(loginForm.value).subscribe((res) => {
-    //   if (res.message == 'success') {
-    //     // done
-    //     // get taken from header or cookies
-    //     //save in localstorige or cookies
-    //     this._auth.saveCurrentUser();
-    //     this._router.navigate(['/profile']);
-    //   } else {
-    //     this.error = res.errors.email.message;
-    //   }
-    // });
+    this._auth.login(loginForm.value).subscribe(
+      (res) => {
+        localStorage.setItem('userTaken', res.Token);
+        this._auth.saveCurrentUser();
+        this._router.navigate(['/profile']);
+      },
+      (err) => {
+        console.log(err);
+        this.error = err.error.message;
+      }
+    );
   }
 }

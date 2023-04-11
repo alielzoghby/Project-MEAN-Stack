@@ -53,18 +53,15 @@ export class SignupComponent {
 
   submitForm(registerForm: FormGroup) {
     delete registerForm.value.confirmPassword;
-    console.log(registerForm.value);
+    this._auth.register(registerForm.value).subscribe((res) => {
+        // open();
+      console.log(res);
+    },
+    (err) => {
+      console.log(err);
 
-    this.open();
-
-    // this._auth.register(registerForm.value).subscribe((res) => {
-    //   if (res.message == 'success') {
-    //     // done
-    //     open();
-    //   } else {
-    //     this.error = res.errors.email.message;
-    //   }
-    // });
+      this.error = err.error.message;
+    });
   }
 
   open() {

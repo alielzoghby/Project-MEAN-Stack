@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +24,9 @@ export class DataService {
 
   putData(endPoint: string, data: any) {
     return this._http.put(`${this.ROOT_URL + endPoint}`, data);
+  }
+
+  get() {
+    return this._http.get('https://dummyjson.com/products');
   }
 }
