@@ -14,7 +14,7 @@ const addUserToUserBooks = function addUserToUserBooks(userId) {
   userbook.save();
 };
 
-///////////////////////////////// create user (register) /////////////////////////////////
+/// ////////////////////////////// create user (register) /////////////////////////////////
 
 const createUser = asyncFunction(async (req, res) => {
   let user = await User.findOne({ email: req.body.email }).exec();
@@ -25,7 +25,6 @@ const createUser = asyncFunction(async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    isAdmin: req.body.admin,
     password: req.body.password,
     photo: req.file && req.file.filename,
   });
@@ -33,30 +32,75 @@ const createUser = asyncFunction(async (req, res) => {
   user.save().then(() => { res.status(200).send(user); });
 });
 
-////////////////////////////////// login user ///////////////////////////////////////////
+/// /////////////////////////////// login user ///////////////////////////////////////////
 
 const loginUser = asyncFunction(async (req, res) => {
   // check is user login with email already exist or not
   const { email, password } = req.body;
   const userAuthentication = await User.findOne({ email }).exec();
   if (!userAuthentication) {
-    throw {status:401, message: 'Incorrect Email or Password' };
+    throw { status: 401, message: 'Incorrect Email or Password' };
   }
   // check password
   const isPasswordValid = userAuthentication.verifyPassword(password);
   if (!isPasswordValid) {
-    throw {status:401, message: 'Incorrect Email or password' };
+    throw { status: 401, message: 'Incorrect Email or password' };
   }
-  const token = jwt.sign({ id: userAuthentication._id, adminRole: userAuthentication.isAdmin }, JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ id: userAuthentication._id, role: 'user' }, JWT_SECRET, { expiresIn: '1d' });
   res.header('x-auth-token', token);
   res.status(200).send({ Token: token });
 });
 
-//////////////////////////////////// update user ///////////////////////////////////////
+/// ////////////////////////////// get user by id ///////////////////////////////////////////
+
+const getUserById = asyncFunction(async (req, res) => {
+  const adminToken = req.headers.authorization;
+  if (!adminToken) {
+    throw { status: 401, message: 'You are not allowed to get this user' };
+  }
+  const { userId } = req.body;
+  const oneUser = await User.findOne({ id: userId });
+  if (!oneUser || oneUser === undefined) {
+    throw { status: 404, message: 'User not found' };
+  }
+  res.status(200).send(oneUser);
+});
+
+/// //////////////////////////////// get all user ///////////////////////////////////////////
+
+const getUsers = asyncFunction(async (req, res) => {
+  const adminToken = req.headers.authorization;
+  if (!adminToken) {
+    throw { status: 401, message: 'You are not allowed to get all users' };
+  }
+  const users = await User.find();
+  res.status(200).send(users);
+});
+
+/// /////////////////////////////////// delete user /////////////////////////////////////////
+
+const deleteUserById = asyncFunction(async (req, res) => {
+  const { userId } = req.body;
+  const adminToken = req.headers.authorization;
+  if (!adminToken) {
+    throw { status: 401, message: 'You are not allowed to delete user' };
+  }
+  const deleteUser = await User.findOneAndDelete({ id: userId });
+  if (!deleteUser || deleteUser === undefined) {
+    throw { status: 401, message: 'User not found' };
+  }
+  res.status(200).send(`Deleted User: ${deleteUser}`);
+});
+
+/// ///////////////////////////////// update user ///////////////////////////////////////
 
 const updateUserById = asyncFunction(async (req, res) => {
   const { id } = req.params;
-  const { filename } = req.file;
+  let photo;
+  if (req.file) {
+    photo = req.file.filename;
+  }
+
   const {
     firstName, lastName, password, email,
   } = req.body;
@@ -67,14 +111,21 @@ const updateUserById = asyncFunction(async (req, res) => {
 
   const updateUser = await User.findByIdAndUpdate({ _id: id }, {
     $set: {
-      firstName, lastName, password, email, photo: filename,
+      firstName, lastName, password, email, photo,
     },
   }, { new: true });
+  if (!updateUser) {
+    throw { status: 406, message: 'Request not acceptable' };
+  }
+  updateUser.save();
   res.status(200).send(`Update User: ${updateUser}`);
 });
 
 module.exports = {
   createUser,
   loginUser,
+  getUserById,
+  getUsers,
+  deleteUserById,
   updateUserById,
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoClient = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
+require('./boot/seedAdmin');
 require('dotenv').config(); // to use file .env
 
 const app = express();

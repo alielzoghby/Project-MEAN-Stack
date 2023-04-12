@@ -10,7 +10,7 @@ module.exports = asyncFunction((req, res, next) => {
     throw { status: 401, message: 'Access denied ' };
   }
   const decodedPayload = jwt.verify(token, JWT_SECRET);
-  if (!decodedPayload.adminRole) {
+  if (decodedPayload.role !== 'admin' ) {
     throw { status: 401, message: 'Access denied ' };
   }
   req.currentUser = decodedPayload.id;

@@ -3,16 +3,8 @@ const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const adminSchema = new Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
@@ -21,11 +13,6 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-    },
-    photo: {
-      type: String,
-      required: false,
-      default: '../public/defaultPhoto/defaultImage2.jpeg',
     },
   },
   {
@@ -38,16 +25,18 @@ const userSchema = new Schema(
   },
 );
 
-userSchema.pre('save', function preSave(next) {
+adminSchema.pre('save', function preSave(next) {
   this.password = bcrypt.hashSync(this.password, 10);
   next();
 });
 
-userSchema.methods.verifyPassword = function verifyPassword(password) {
+adminSchema.methods.verifyPassword = function verifyPassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
-const User = mongoose.model('User', userSchema);
+const Admin = mongoose.model('Admin', adminSchema);
+
+
 
 module.exports = {
-  User,
+  Admin,
 };
