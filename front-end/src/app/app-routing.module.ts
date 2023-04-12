@@ -8,10 +8,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './register/signup.component';
 import { BookpageComponent } from './bookpage/bookpage.component';
 import { AuthorsComponent } from './authors/authors.component';
-import { AuthGardGuard } from './auth-gard.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AdminSigninComponent } from './admin-signin/admin-signin.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthGardGuard } from './auth-gard.guard';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,21 +23,18 @@ const routes: Routes = [
     // canActivate: [AuthGardGuard],
   },
   { path: 'categories', component: CategoriesComponent },
-  {
-    path: 'author/:id',
-    component: AuthorPageComponent, // canActivate: [AuthGardGuard],
-  },
+  { path: 'author/:id', component: AuthorPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'bookpage/:id', component: BookpageComponent },
   { path: 'authors', component: AuthorsComponent },
-
-  {
-    path: 'bookpage',
-    component: BookpageComponent, // canActivate: [AuthGardGuard],
-  },
+  { path: 'bookpage', component: BookpageComponent },
   { path: 'adminlogin', component: AdminSigninComponent },
-  { path: 'admin', component: AdminComponent },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    // canActivate: [AdminGuard],
+  },
 
   // path for 404 route not found please keap it in last
   { path: '**', component: NotfoundComponent },

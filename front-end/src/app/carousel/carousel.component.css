@@ -94,3 +94,7 @@
   border: 1px solid #74642f;
   background-color: #e5e3da;
 }
+
+h2 {
+  line-height: 56px !important;
+}

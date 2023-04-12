@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -47,6 +47,7 @@ import { AddcategoriesComponent } from './addcategories/addcategories.component'
 import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
@@ -102,9 +103,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     FormsModule,
     // NgxStarRatingModule,
-    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

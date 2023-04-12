@@ -14,12 +14,6 @@
   backdrop-filter: blur(10px);
 }
 
-#author-section::before {
-  background-image: url("/assets/Curve\ Line.svg");
-}
-#categories::before {
-  background-image: url("/assets/Curve\ Line\ \(1\).svg");
-}
 #popular-books::before {
   background-image: url("/assets/Curve\ Line\ \(2\).svg");
 }

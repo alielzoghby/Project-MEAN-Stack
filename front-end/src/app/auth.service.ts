@@ -41,8 +41,12 @@ export class AuthService {
   }
 
   saveCurrentUser() {
-    let taken: any = localStorage.getItem('userTaken');
-    this.currentUser.next(jwtDecode(taken));
+    let token: any = localStorage.getItem('userTaken');
+    this.currentUser.next(jwtDecode(token));
+  }
+
+  getTaken() {
+    return localStorage.getItem('userTaken');
   }
 
   // errorHandler(error: HttpErrorResponse) {

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
@@ -8,36 +8,13 @@ import { DataService } from '../data.service';
   templateUrl: './addcategories.component.html',
   styleUrls: ['./addcategories.component.css'],
 })
-export class AddcategoriesComponent {
+export class AddcategoriesComponent implements OnInit {
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
 
   deleteId: string = '';
   updateId: any = '';
-
-  allCategories: any = [
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeaa',
-      id: 1,
-      __v: 0,
-    },
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeab',
-      id: 1,
-      __v: 0,
-    },
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeac',
-      id: 1,
-      __v: 0,
-    },
-  ];
+  allCategories: any;
 
   constructor(
     config: NgbModalConfig,
@@ -58,7 +35,31 @@ export class AddcategoriesComponent {
   }
 
   /////////////////////////////////GET METHOD
-  getCategories() {}
+  getCategories() {
+    this.allCategories = [
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeaa',
+        id: 1,
+        __v: 0,
+      },
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeab',
+        id: 1,
+        __v: 0,
+      },
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeac',
+        id: 1,
+        __v: 0,
+      },
+    ];
+  }
 
   /////////////////////////////////POST METHOD
   postCategorie(form: FormGroup) {
@@ -91,6 +92,10 @@ export class AddcategoriesComponent {
 
   botCategorie() {
     this.updateId.editable = !this.updateId.editable;
-    console.log(this.updateId._id);
+    console.log(this.updateId);
+  }
+
+  ngOnInit(): void {
+    this.getCategories();
   }
 }
