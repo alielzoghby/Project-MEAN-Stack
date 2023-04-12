@@ -99,9 +99,7 @@ export class AddauthorsComponent {
   }
 
   /////////////////////////////////GET METHOD
-  getAuthors() {
-    this._data.get().subscribe((res) => {});
-  }
+  getAuthors() {}
 
   /////////////////////////////////POST METHOD
   postAuthor(form: FormGroup) {
