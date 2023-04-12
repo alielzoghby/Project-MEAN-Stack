@@ -126,7 +126,7 @@ const updateBook = asyncFunction(async (req, res) => {
 
 
 const getPopularListOfBooks = asyncFunction(async (req, res) => {
-  const books = await Book.find().sort({ 'averageRating': -1 }).limit(8);
+  const books = await Book.find().sort({ 'averageRating': -1 }).limit(6);
   if(!books){
     throw { status: 404, message: 'No books found!' };
   }

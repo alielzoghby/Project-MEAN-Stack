@@ -9,7 +9,7 @@ const asyncFunction = require('../middlewares/async');
 
 
 const getAuthors = asyncFunction(async (req, res) => {
-  const pageSize = 8;
+  const pageSize = 6;
   let page = req.query.page || 1;
   let skip = (page - 1) * pageSize; // currentPage = 4 ---> (4 - 1) * 8 then will count from number 25
   const totalBooks = await Author.countDocuments();
@@ -18,7 +18,7 @@ const getAuthors = asyncFunction(async (req, res) => {
     // page = 1;
     throw { status: 404, message: 'There are no books on this page' };
   }
-  const authors = await Author.find();
+  const authors = await Author.find().skip(skip).limit(pageSize);
   res.status(200).send(authors);
 });
 
@@ -101,7 +101,7 @@ const getPopularListOfAuthors = asyncFunction(async (req, res) => {
   // {categoryId:"643187aa6321613814c9e713"}
   const highRatingsOfBooks = await Book.find().populate({
     path: 'authorId',
-  }).limit(6);
+  }).limit(3);
   //  console.log(highRatingsOfBooks);
   if (!highRatingsOfBooks || highRatingsOfBooks.length === 0) {
     throw { status: 404, message: 'No books exist' };
