@@ -191,9 +191,7 @@ export class AddbooksComponent {
   }
 
   /////////////////////////////////GET METHOD
-  getBooks() {
-    this._data.get().subscribe((res) => {});
-  }
+  getBooks() {}
 
   /////////////////////////////////POST METHOD
   postBook(form: FormGroup) {

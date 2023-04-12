@@ -10,12 +10,7 @@ declare let AOS: any;
 export class AppComponent implements OnInit {
   title = 'app';
   constructor(private _data: DataService) {}
-  // get() {
-  //   console.log(123);
-  //   this._data.get().subscribe((res) => {
-  //     console.log(res);
-  //   });
-  // }
+
   ngOnInit(): void {
     AOS.init();
   }
