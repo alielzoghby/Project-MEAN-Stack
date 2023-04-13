@@ -8,5 +8,4 @@ router.get('/getAuthors', authorsController.getAuthors);
 router.get('/books/:authorId', authorsController.getBooksByAuthor); // Not tested
 router.get('/:authorId', authorsController.getAuthorById);
 
-
 module.exports = router;

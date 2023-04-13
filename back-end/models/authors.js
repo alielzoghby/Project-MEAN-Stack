@@ -21,6 +21,10 @@ const authorSchema = new Schema(
       type: Date,
       optional: true,
     },
+    bio: {
+      type: String,
+      required: false,
+    },
   },
 );
 

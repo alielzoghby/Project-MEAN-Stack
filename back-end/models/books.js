@@ -36,6 +36,14 @@ const bookSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    popularity: {
+      type: Number,
+      default: 0,
+    },
+    Interactions: {
+      type: Number,
+      default: 0,
+    },
     reviews: [
       {
         userId: {
@@ -54,6 +62,7 @@ const bookSchema = new mongoose.Schema(
   },
 );
 bookSchema.virtual('averageRating').get(function () {
+  this.popularity = (this.sumOfRatings / this.numberOfRatings) * this.Interactions;
   return this.sumOfRatings / this.numberOfRatings;
 });
 const Book = mongoose.model('Book', bookSchema);

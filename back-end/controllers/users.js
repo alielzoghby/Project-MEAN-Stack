@@ -54,12 +54,7 @@ const loginUser = asyncFunction(async (req, res) => {
 /// ////////////////////////////// get user by id ///////////////////////////////////////////
 
 const getUserById = asyncFunction(async (req, res) => {
-  const adminToken = req.headers.authorization;
-  if (!adminToken) {
-    throw { status: 401, message: 'You are not allowed to get this user' };
-  }
-  const { userId } = req.body;
-  const oneUser = await User.findOne({ id: userId });
+  const oneUser = await User.findById(req.currentUserId);
   if (!oneUser || oneUser === undefined) {
     throw { status: 404, message: 'User not found' };
   }
@@ -69,10 +64,6 @@ const getUserById = asyncFunction(async (req, res) => {
 /// //////////////////////////////// get all user ///////////////////////////////////////////
 
 const getUsers = asyncFunction(async (req, res) => {
-  const adminToken = req.headers.authorization;
-  if (!adminToken) {
-    throw { status: 401, message: 'You are not allowed to get all users' };
-  }
   const users = await User.find();
   res.status(200).send(users);
 });
@@ -81,10 +72,6 @@ const getUsers = asyncFunction(async (req, res) => {
 
 const deleteUserById = asyncFunction(async (req, res) => {
   const { userId } = req.body;
-  const adminToken = req.headers.authorization;
-  if (!adminToken) {
-    throw { status: 401, message: 'You are not allowed to delete user' };
-  }
   const deleteUser = await User.findOneAndDelete({ id: userId });
   if (!deleteUser || deleteUser === undefined) {
     throw { status: 401, message: 'User not found' };

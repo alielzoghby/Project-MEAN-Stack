@@ -4,12 +4,11 @@ const router = express.Router();
 
 const booksController = require('../../controllers/books');
 
-
-router.get('/', booksController.getAllBooks);
-router.get('/category/:categoryId', booksController.getBookByCategory);
-router.get('/:id', booksController.getBookById);
 router.post('/', booksController.addNewBook);
-router.put('/:id', booksController.updateBook);
+router.get('/', booksController.getAllBooks);
+router.get('/:id', booksController.getBookById);
+router.get('/category/:categoryId', booksController.getBooksByCategory);
+router.patch('/:id', booksController.updateBook);
 router.delete('/:id', booksController.deleteBook);
 
 module.exports = router;

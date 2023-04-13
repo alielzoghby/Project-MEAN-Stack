@@ -6,9 +6,9 @@ const userBooksController = require('../../controllers/userBooks');
 const currentUser = require('../../middlewares/getCurrentUser');
 
 router.post('/', currentUser, userBooksController.addBook);
-router.put('/rating', currentUser, userBooksController.addRating);
 router.get('/:shelf', currentUser, userBooksController.getUserBooks);
-router.put('/shelf', currentUser, userBooksController.updateShelf);
-router.put('/add/review', currentUser, userBooksController.addReview);
+router.patch('/add/review', currentUser, userBooksController.addReview);
+router.patch('/shelf', currentUser, userBooksController.updateShelf);
+router.patch('/rating', userBooksController.addRating);
 
 module.exports = router;

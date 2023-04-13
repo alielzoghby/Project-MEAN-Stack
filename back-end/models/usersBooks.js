@@ -18,6 +18,8 @@ const usersBooksSchema = new mongoose.Schema({
     },
     rating: {
       type: Number,
+      min: 0,
+      max: 5,
     },
     review: {
       type: String,
@@ -25,8 +27,6 @@ const usersBooksSchema = new mongoose.Schema({
   },
   ],
 });
-
-
 
 const UserBook = mongoose.model('usersBooks', usersBooksSchema);
 module.exports = {

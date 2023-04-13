@@ -18,6 +18,7 @@ const addBook = asyncFunction(async (req, res) => {
   } else {
     const newBook = { bookId: req.body.bookId, shelf: req.body.shelf };
     newEntry = await UserBook.findOneAndUpdate({ userId: req.currentUserId }, { $push: { books: newBook } }, { returnOriginal: false });
+    await Book.findByIdAndUpdate(req.body.bookId, { $inc: { Interactions: 1 } }, { returnOriginal: false });
   }
   res.status(200).send(newEntry);
 });
@@ -43,7 +44,7 @@ const addRating = asyncFunction(async (req, res) => {
   const userBook = await UserBook.findOne({ userId: req.currentUserId, 'books.bookId': req.body.bookId });
   const bookModified = userBook.books.find((b) => b.bookId == req.body.bookId);
   // if user didn't rate the bookk before
-  if (bookModified.rating === 0) {
+  if (!bookModified.rating) {
     await Book.findByIdAndUpdate(req.body.bookId, { $inc: { numberOfRatings: 1, sumOfRatings: req.body.rating } }, { returnOriginal: false });
   } else {
     await Book.findByIdAndUpdate(req.body.bookId, { $inc: { sumOfRatings: req.body.rating - bookModified.rating } }, { returnOriginal: false });
