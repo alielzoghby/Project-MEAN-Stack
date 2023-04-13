@@ -15,6 +15,6 @@ router.use(adminAuthentication);
 router.use('/category', categories);
 router.use('/author', authors); // 2 functions not tested
 router.use('/book', books);
-
 router.use('/user', user);
+
 module.exports = router;

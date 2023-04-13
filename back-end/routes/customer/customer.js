@@ -12,7 +12,7 @@ const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/category', category);
 router.use('/author', authors);
-router.use('/book', books); // Not tested 
+router.use('/book', books);
 
 router.use(userAuthentication);
 router.use('/user', user);
