@@ -25,7 +25,7 @@ export class LoginComponent {
   }
 
   submitForm(loginForm: FormGroup) {
-    this._auth.login(loginForm.value).subscribe(
+    this._auth.login(loginForm.value, '/auth/login').subscribe(
       (res) => {
         localStorage.setItem('userTaken', res.Token);
         this._auth.saveCurrentUser();

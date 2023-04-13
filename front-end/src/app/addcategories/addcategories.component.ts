@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-addcategories',
@@ -9,6 +10,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./addcategories.component.css'],
 })
 export class AddcategoriesComponent implements OnInit {
+  @Input() data: any;
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
 
@@ -17,14 +19,14 @@ export class AddcategoriesComponent implements OnInit {
   updateId: any = '';
   editingIndex = -1;
 
-  allCategories: any;
-  totalItem = 40;
-  curentPage = 4;
+  categories: any;
+  totalItem = 0;
+  curentPage = 1;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: DataService
+    private _data: AuthService
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -47,34 +49,6 @@ export class AddcategoriesComponent implements OnInit {
     return index === this.editingIndex;
   }
 
-  /////////////////////////////////GET METHOD
-  getCategories() {
-    // write here number of page whate do you wont
-    this.allCategories = [
-      {
-        name: 'kids',
-        numberOfBooks: 0,
-        _id: '6433f6ebcd5a5629b6cffeaa',
-        id: 1,
-        __v: 0,
-      },
-      {
-        name: 'kids',
-        numberOfBooks: 0,
-        _id: '6433f6ebcd5a5629b6cffeab',
-        id: 1,
-        __v: 0,
-      },
-      {
-        name: 'kids',
-        numberOfBooks: 0,
-        _id: '6433f6ebcd5a5629b6cffeac',
-        id: 1,
-        __v: 0,
-      },
-    ];
-  }
-
   /////////////////////////////////POST METHOD
   postCategorie(form: FormGroup) {
     console.log(form.value);
@@ -90,8 +64,6 @@ export class AddcategoriesComponent implements OnInit {
 
   deleteCategorie() {
     console.log(this.deleteId);
-
-    this.getCategories();
   }
 
   /////////////////////////////////BOT METHOD
@@ -102,11 +74,9 @@ export class AddcategoriesComponent implements OnInit {
   }
 
   botCategorie() {
-    console.log(this.updateId, this.allCategories[this.i]._id);
+    console.log(this.updateId, this.categories[this.i]._id);
   }
 
   ///////////////////////////////////////////
-  ngOnInit(): void {
-    this.getCategories();
-  }
+  ngOnInit(): void {}
 }

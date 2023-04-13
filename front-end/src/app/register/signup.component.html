@@ -184,7 +184,6 @@
                 [disabled]="registerForm.invalid"
                 type="submit"
                 class="btn btn-primary btn-block mb-4"
-                (click)="sendContent(content)"
               >
                 Sign up
               </button>
@@ -208,3 +207,17 @@
     </div>
   </div>
 </section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div
+    class="modal-body d-flex flex-column justify-content-center align-items-center"
+  >
+    <img src="../../assets/icons8-checkmark.gif" alt="registration" />
+    <p>registration completed successfully</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="c(); navigate()">
+      Ok
+    </button>
+  </div>
+</ng-template>

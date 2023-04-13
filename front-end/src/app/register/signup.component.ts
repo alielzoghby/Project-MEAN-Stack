@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   ValidatorFn,
 } from '@angular/forms';
+
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -15,14 +17,20 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  content: any;
+  @ViewChild('content') content!: HTMLElement;
+
   error: string = '';
   registerForm!: FormGroup;
+
   constructor(
     private _router: Router,
     private modalService: NgbModal,
-    private _auth: AuthService
+    private _auth: AuthService,
+    config: NgbModalConfig
   ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+
     this.registerForm = new FormGroup({
       firstName: new FormControl(null, [
         Validators.minLength(3),
@@ -53,27 +61,22 @@ export class SignupComponent {
 
   submitForm(registerForm: FormGroup) {
     delete registerForm.value.confirmPassword;
-    this._auth.register(registerForm.value).subscribe((res) => {
-        // open();
-      console.log(res);
-    },
-    (err) => {
-      console.log(err);
-
-      this.error = err.error.message;
-    });
+    this._auth.register(registerForm.value, '/auth/sing-up').subscribe(
+      (res) => {
+        open();
+      },
+      (err) => {
+        this.error = err.error.message;
+      }
+    );
   }
 
   open() {
     this.modalService.open(this.content);
   }
 
-  sendContent(content: any) {
-    this.content = content;
-  }
-
   navigate() {
-    this._router.navigate(['login']);
+    this._router.navigate(['/login']);
   }
 }
 

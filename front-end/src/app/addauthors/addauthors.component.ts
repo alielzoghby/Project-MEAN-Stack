@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-addauthors',
@@ -9,6 +10,8 @@ import { DataService } from '../data.service';
   styleUrls: ['./addauthors.component.css'],
 })
 export class AddauthorsComponent implements OnInit {
+  @Input() data: any;
+
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
   @ViewChild('updateForm') formUpdate!: NgForm;
@@ -19,13 +22,13 @@ export class AddauthorsComponent implements OnInit {
   editingIndex = -1;
 
   authors: any;
-  totalItem = 40;
-  curentPage = 4;
+  totalItem = 0;
+  curentPage = 1;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: DataService
+    private _data: AuthService
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -69,43 +72,6 @@ export class AddauthorsComponent implements OnInit {
     return index === this.editingIndex;
   }
 
-  /////////////////////////////////GET METHOD
-  getAuthors() {
-    // write here number of page whate do you wont
-    this.authors = [
-      {
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-      {
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-      {
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-      {
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-      {
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-    ];
-  }
-
   /////////////////////////////////POST METHOD
   postAuthor(form: FormGroup) {
     console.log(form.value);
@@ -120,7 +86,6 @@ export class AddauthorsComponent implements OnInit {
 
   deleteAuthor() {
     console.log(this.deleteId);
-    this.getAuthors();
   }
 
   /////////////////////////////////BOT METHOD
@@ -136,7 +101,5 @@ export class AddauthorsComponent implements OnInit {
     console.log(this.updateId, this.authors[this.i]._id);
   }
 
-  ngOnInit(): void {
-    this.getAuthors();
-  }
+  ngOnInit(): void {}
 }

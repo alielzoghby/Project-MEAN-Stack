@@ -18,7 +18,7 @@ export class MyInterceptorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     let token = this._auth.getTaken();
     const authReq = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`),
+      headers: req.headers.set('x-auth-token', `${token}`),
     });
     return next.handle(authReq);
   }

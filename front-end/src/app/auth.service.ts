@@ -18,7 +18,7 @@ import { DataService } from './data.service';
 })
 export class AuthService {
   currentUser = new BehaviorSubject(null);
-  baseAPI: string = 'http://localhost:3000';
+  ROOT_URL: string = 'https://good-reads-a4s1.onrender.com';
 
   constructor(private _http: HttpClient, private _router: Router) {
     if (localStorage.getItem('userTaken') != null) {
@@ -26,18 +26,34 @@ export class AuthService {
     }
   }
 
-  register(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/sing-up`, data);
+  register(data: any, endPoint: string): Observable<any> {
+    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
   }
 
-  login(data: any): Observable<any> {
-    return this._http.post(`${this.baseAPI}/users/login`, data);
+  login(data: any, endPoint: string): Observable<any> {
+    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
   }
 
   logout() {
     this.currentUser.next(null);
     localStorage.removeItem('userTaken');
     this._router.navigate(['/home']);
+  }
+
+  getData(endPoint: string) {
+    return this._http.get(`${this.ROOT_URL + endPoint}`);
+  }
+
+  postData(endPoint: string, data: any) {
+    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
+  }
+
+  deleteData(endPoint: string) {
+    return this._http.delete(`${this.ROOT_URL + endPoint}`);
+  }
+
+  putData(endPoint: string, data: any) {
+    return this._http.put(`${this.ROOT_URL + endPoint}`, data);
   }
 
   saveCurrentUser() {

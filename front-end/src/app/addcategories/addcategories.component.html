@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let categorie of allCategories; let i = index">
+    <tr *ngFor="let categorie of categories; let i = index">
       <ng-container *ngIf="!isItemEditing(i); else editingRow">
         <td>{{ categorie._id }}</td>
         <td>{{ categorie.name }}</td>
@@ -38,13 +38,13 @@
           <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm, i)">
             <table class="table align-middle bg-white">
               <tr>
-                <td name="_id">{{ allCategories[i]._id }}</td>
+                <td name="_id">{{ categories[i]._id }}</td>
                 <td>
                   <div>
                     <input
                       class="form-control w-50 m-auto align-center"
                       type="text"
-                      [(ngModel)]="allCategories[i].name"
+                      [(ngModel)]="categories[i].name"
                       name="name"
                       ngModel
                     />
@@ -84,6 +84,9 @@
     [collectionSize]="totalItem"
     [(page)]="curentPage"
     [boundaryLinks]="true"
+    [maxSize]="5"
+    [rotate]="true"
+    [ellipses]="false"
   ></ngb-pagination>
 </div>
 

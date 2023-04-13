@@ -1,161 +1,37 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-addbooks',
   templateUrl: './addbooks.component.html',
   styleUrls: ['./addbooks.component.css'],
 })
-export class AddbooksComponent {
+export class AddbooksComponent implements OnInit {
+  @Input() data: any;
+
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
   @ViewChild('updateForm') formUpdate!: NgForm;
 
   i: any;
   deleteId: string = '';
-  updateId: string = ''; 
+  updateId: string = '';
   editingIndex = -1;
 
-  totalItem = 40;
-  curentPage = 4;
+  totalItem = 0;
+  curentPage = 1;
 
-  books: any = [
-    {
-      averageRating: 0,
-      numberOfRatings: 0,
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      name: 'The Adventures of Sherlock Holmes',
-      category: 'history',
-      cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-      reviews: [],
-      author: 'Asdasdas',
-      description: 'sadasdasdasdasdasdasdsadasd',
-      __v: 0,
-    },
-    {
-      averageRating: 0,
-      numberOfRatings: 0,
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      name: 'The Adventures of Sherlock Holmes',
-      category: 'history',
-      cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-      reviews: [],
-      author: 'Asdasdas',
-      description: 'sadasdasdasdasdasdasdsadasd',
-      __v: 0,
-    },
-    {
-      averageRating: 0,
-      numberOfRatings: 0,
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      name: 'The Adventures of Sherlock Holmes',
-      category: 'history',
-      cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-      reviews: [],
-      author: 'Asdasdas',
-      description: 'sadasdasdasdasdasdasdsadasd',
-      __v: 0,
-    },
-    {
-      averageRating: 0,
-      numberOfRatings: 0,
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      name: 'The Adventures of Sherlock Holmes',
-      category: 'history',
-      cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-      reviews: [],
-      author: 'Asdasdas',
-      description: 'sadasdasdasdasdasdasdsadasd',
-      __v: 0,
-    },
-    {
-      averageRating: 0,
-      numberOfRatings: 0,
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      name: 'The Adventures of Sherlock Holmes',
-      category: 'history',
-      cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-      reviews: [],
-      author: 'Asdasdas',
-      description: 'sadasdasdasdasdasdasdsadasd',
-      __v: 0,
-    },
-  ];
-
-  catagorys: any = [
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      category: 'history',
-    },
-  ];
-
-  authors: any = [
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'ali',
-      lastName: 'saad',
-    },
-  ];
+  books: any;
+  catagorys: any;
+  authors: any;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: DataService
+    private _data: AuthService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -193,9 +69,6 @@ export class AddbooksComponent {
     return index === this.editingIndex;
   }
 
-  /////////////////////////////////GET METHOD
-  getBooks() {}
-
   /////////////////////////////////POST METHOD
   postBook(form: FormGroup) {
     console.log(form.value);
@@ -210,7 +83,6 @@ export class AddbooksComponent {
 
   deleteBook() {
     console.log(this.deleteId);
-    this.getBooks();
   }
 
   /////////////////////////////////BOT METHOD
@@ -222,4 +94,6 @@ export class AddbooksComponent {
   botBook() {
     console.log(this.updateId);
   }
+
+  ngOnInit(): void {}
 }
