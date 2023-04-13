@@ -11,6 +11,7 @@ const { MONGO_URL } = process.env;
 const PORT = process.env.PORT || 3000;
 
 /// to use cors to connect between front and back
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use(routes);

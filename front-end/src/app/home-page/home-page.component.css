@@ -1,5 +1,3 @@
-@import "../../root.css";
-
 /*----- Cient-holder Section
 --------------------------------------------------------------*/
 #books-holder {
@@ -29,6 +27,12 @@
   background-size: cover;
   background-attachment: fixed;
   backdrop-filter: blur(10px);
+}
+#author-section::before {
+  background-image: url("/assets/Curve\ Line.svg");
+}
+#categories::before {
+  background-image: url("/assets/Curve\ Line\ \(1\).svg");
 }
 
 /*----- Best book Section Section
@@ -88,8 +92,10 @@
 .tabs .tab {
   font-weight: 600;
   color: #999;
-  margin-right: 50px;
+  padding: 5px;
+  margin: 5px;
   cursor: pointer;
+  text-align: center;
 }
 .tabs .tab.active,
 .tabs .tab:hover {
@@ -122,6 +128,7 @@ img.books-image {
   display: block;
   font-size: 1.6em;
   padding: 40px 0;
+  line-height: 27px;
 }
 #quotation .author-name {
   font-family: "Prata", Georgia, serif;

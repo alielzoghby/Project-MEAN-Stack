@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<app-carousel></app-carousel>
+<app-carousel [books]="popularBooks"></app-carousel>
 
 <section id="books-holder" data-aos="fade-up" data-aos-duration="2000">
   <div class="container">
@@ -27,7 +27,7 @@
   </div>
 </section>
 
-<app-popular-book [books]="books"></app-popular-book>
+<app-popular-book [books]="popularBooks"></app-popular-book>
 
 <section id="best-book" class="leaf-pattern-overlay">
   <div class="corner-pattern-overlay"></div>
@@ -44,22 +44,21 @@
               />
             </figure>
           </div>
- 
-        <div class="col-md-6">
+
+          <div class="col-md-6">
             <div class="product-entry">
               <h2 class="section-title divider">Best Reading Book</h2>
 
               <div class="products-content">
-                <div class="author-name">By Timbur Hood</div>
-                <h3 class="item-title">Birds gonna be happy</h3>
+                <div class="author-name">By {{ popularBooks[0].author }}</div>
+                <h3 class="item-title">{{ popularBooks[0].name }}</h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  eu feugiat amet, libero ipsum enim pharetra hac.
+                  {{ popularBooks[0].description }}
                 </p>
                 <div class="btn-wrap">
-                  <a href="#" class="btn-accent-arrow"
-                    >Read it now <i class="icon icon-ns-arrow-right"></i
-                  ></a>
+                  <a [routerLink]="['/bookpage', popularBooks[0].id]"
+                    >Read it now</a
+                  >
                 </div>
               </div>
             </div>
@@ -81,53 +80,30 @@
           <h2 class="section-title">Categories</h2>
         </div>
 
-        <ul class="tabs">
+        <ul
+          class="tabs w-50 d-flex justify-content-center mx-auto flex-md-wrap"
+        >
           <li
+            [class.active]="selectedIndex === -1"
             data-tab-target="#all-genre"
             class="active tab"
             data-aos="fade-down"
+            (click)="selectedIndex = -1"
           >
-            All Genre
+            <span (click)="getAllBooks()"> All Genre </span>
           </li>
           <li
+            *ngFor="let category of categoerys; let i = index"
+            [class.active]="selectedIndex === i"
             data-tab-target="#business"
             class="tab"
             data-aos="fade-down"
             data-aos-duration="2000"
+            (click)="selectedIndex = i"
           >
-            Business
-          </li>
-          <li
-            data-tab-target="#technology"
-            class="tab"
-            data-aos="fade-down"
-            data-aos-duration="2200"
-          >
-            Technology
-          </li>
-          <li
-            data-tab-target="#romantic"
-            class="tab"
-            data-aos="fade-down"
-            data-aos-duration="2400"
-          >
-            Romantic
-          </li>
-          <li
-            data-tab-target="#adventure"
-            class="tab"
-            data-aos="fade-down"
-            data-aos-duration="2600"
-          >
-            Adventure
-          </li>
-          <li
-            data-tab-target="#fictional"
-            class="tab"
-            data-aos="fade-down"
-            data-aos-duration="2800"
-          >
-            Fictional
+            <span (click)="getCategoryBooks(category._id)">{{
+              category.name
+            }}</span>
           </li>
         </ul>
 
@@ -136,7 +112,7 @@
             <div class="row">
               <app-book
                 class="col-md-3"
-                *ngFor="let book of books"
+                *ngFor="let book of categoryBooks"
                 [data]="book"
               ></app-book>
             </div>
@@ -168,11 +144,8 @@
   >
     <h2 class="section-title divider">Quote of the day</h2>
     <blockquote data-aos="fade-up">
-      <q
-        >“The more that you read, the more things you will know. The more that
-        you learn, the more places you’ll go.”</q
-      >
-      <div class="author-name">Dr. Seuss</div>
+      <q>“{{ quote.quote }}”</q>
+      <div class="author-name">{{ quote.says }}</div>
     </blockquote>
   </div>
 </section>
@@ -185,11 +158,14 @@
           <h2 class="section-title">Popular Authors</h2>
         </div>
 
-        <div class="row">
-          <div class="col-md-4">
+        <div class="row my-5">
+          <div class="col-md-4" *ngFor="let author of authors">
             <article class="column" data-aos="fade-up" data-aos-duration="3000">
               <figure class="parent-image">
-                <a href="#" class="image-hvr-effect">
+                <a
+                  [routerLink]="['/author', author._id]"
+                  class="image-hvr-effect"
+                >
                   <img
                     src="../../assets/images/post-img1.jpg"
                     alt="post"
@@ -199,61 +175,11 @@
               </figure>
 
               <div class="post-item">
-                <div class="meta-date">Mar 30, 2021</div>
+                <div class="meta-date">{{ author.dateOfBirth | date }}</div>
                 <h3>
-                  <a href="#">Lorem ipsum dolor </a>
-                </h3>
-
-                <div class="links-element">
-                  <div class="categories">inspiration</div>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article
-              class="column"
-              data-aos="fade-down"
-              data-aos-duration="3000"
-            >
-              <figure>
-                <a href="#" class="image-hvr-effect">
-                  <img
-                    src="../../assets/images/post-img1.jpg"
-                    alt="post"
-                    class="post-image"
-                  />
-                </a>
-              </figure>
-
-              <div class="post-item">
-                <div class="meta-date">Mar 30, 2021</div>
-                <h3>
-                  <a href="#">Lorem ipsum dolor </a>
-                </h3>
-
-                <div class="links-element">
-                  <div class="categories">inspiration</div>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="column" data-aos="fade-up" data-aos-duration="3000">
-              <figure>
-                <a href="#" class="image-hvr-effect">
-                  <img
-                    src="../../assets/images/post-img1.jpg"
-                    alt="post"
-                    class="post-image"
-                  />
-                </a>
-              </figure>
-
-              <div class="post-item">
-                <div class="meta-date">Mar 30, 2021</div>
-                <h3>
-                  <a href="#">Lorem ipsum dolor </a>
+                  <a [routerLink]="['/author', author._id]"
+                    >{{ author.firstName + " " + author.lastName }}
+                  </a>
                 </h3>
 
                 <div class="links-element">
@@ -280,4 +206,4 @@
   </div>
 </section>
 
-<app-fotter></app-fotter> 
+<app-fotter></app-fotter>

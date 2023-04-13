@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
@@ -8,36 +8,18 @@ import { DataService } from '../data.service';
   templateUrl: './addcategories.component.html',
   styleUrls: ['./addcategories.component.css'],
 })
-export class AddcategoriesComponent {
+export class AddcategoriesComponent implements OnInit {
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
 
+  i: any;
   deleteId: string = '';
   updateId: any = '';
+  editingIndex = -1;
 
-  allCategories: any = [
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeaa',
-      id: 1,
-      __v: 0,
-    },
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeab',
-      id: 1,
-      __v: 0,
-    },
-    {
-      name: 'kids',
-      numberOfBooks: 0,
-      _id: '6433f6ebcd5a5629b6cffeac',
-      id: 1,
-      __v: 0,
-    },
-  ];
+  allCategories: any;
+  totalItem = 40;
+  curentPage = 4;
 
   constructor(
     config: NgbModalConfig,
@@ -57,8 +39,41 @@ export class AddcategoriesComponent {
     this.modalService.open(content);
   }
 
+  editItem(index: number) {
+    this.editingIndex = index;
+  }
+
+  isItemEditing(index: number) {
+    return index === this.editingIndex;
+  }
+
   /////////////////////////////////GET METHOD
-  getCategories() {}
+  getCategories() {
+    // write here number of page whate do you wont
+    this.allCategories = [
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeaa',
+        id: 1,
+        __v: 0,
+      },
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeab',
+        id: 1,
+        __v: 0,
+      },
+      {
+        name: 'kids',
+        numberOfBooks: 0,
+        _id: '6433f6ebcd5a5629b6cffeac',
+        id: 1,
+        __v: 0,
+      },
+    ];
+  }
 
   /////////////////////////////////POST METHOD
   postCategorie(form: FormGroup) {
@@ -70,27 +85,28 @@ export class AddcategoriesComponent {
   getAlertDelete(event: any) {
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
+    console.log();
   }
 
   deleteCategorie() {
     console.log(this.deleteId);
+
     this.getCategories();
   }
 
   /////////////////////////////////BOT METHOD
-  updateForm(index: any) {
-    const categorie = this.allCategories[index];
-    categorie.editable = !categorie.editable;
-  }
-
-  getAlertUpdate(index: any) {
-    const categorie = this.allCategories[index];
-    this.updateId = categorie;
+  getAlertUpdate(form: any, i: any) {
+    this.i = i;
+    this.updateId = form.value;
     this.modalService.open(this.update);
   }
 
   botCategorie() {
-    this.updateId.editable = !this.updateId.editable;
-    console.log(this.updateId._id);
+    console.log(this.updateId, this.allCategories[this.i]._id);
+  }
+
+  ///////////////////////////////////////////
+  ngOnInit(): void {
+    this.getCategories();
   }
 }

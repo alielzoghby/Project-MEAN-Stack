@@ -28,24 +28,24 @@
             class="btn btn-link btn-sm btn-rounded"
             (click)="editItem(i)"
           >
-            <i [id]="author._id" class="fa-solid fa-pen-to-square"></i>
+            <i class="fa-solid fa-pen-to-square"></i>
           </button>
           <button
             type="button"
             class="btn btn-link btn-sm btn-rounded"
             (click)="getAlertDelete($event)"
           >
-            <i [id]="author._id" class="fa-solid fa-trash-can"></i>
+            <i class="fa-solid fa-trash-can"></i>
           </button>
         </td>
       </ng-container>
       <ng-template #editingRow>
         <td colspan="6">
-          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm)">
+          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm, i)">
             <table class="table align-middle mb-0 bg-white">
               <tr>
                 <td>
-                  <div>{{ author._id }}</div>
+                  <div name="_id">{{ authors[i]._id }}</div>
                 </td>
                 <td class="fix-width1">
                   <div>
@@ -120,26 +120,14 @@
 </table>
 
 <!-- ////////////////////////////pagination -->
-<nav
-  aria-label="Page navigation example"
-  class="d-flex justify-content-center my-3"
->
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<div class="my-4">
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="totalItem"
+    [(page)]="curentPage"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+</div>
 
 <!-- ////////////////////////////add -->
 <ng-template #content let-c="close" let-d="dismiss">

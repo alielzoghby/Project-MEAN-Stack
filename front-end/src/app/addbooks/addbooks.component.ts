@@ -13,10 +13,13 @@ export class AddbooksComponent {
   @ViewChild('updateC') update!: HTMLElement;
   @ViewChild('updateForm') formUpdate!: NgForm;
 
+  i: any;
   deleteId: string = '';
-  updateId: string = ''; ///DELETE
-
+  updateId: string = ''; 
   editingIndex = -1;
+
+  totalItem = 40;
+  curentPage = 4;
 
   books: any = [
     {

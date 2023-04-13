@@ -8,6 +8,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class PopularBookComponent {
   @Input() books: any;
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,

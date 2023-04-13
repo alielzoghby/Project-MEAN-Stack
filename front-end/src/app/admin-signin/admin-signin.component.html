@@ -2,32 +2,60 @@
   <div id="box">
     <div class="card">
       <div class="card__face card__face--front">
-        <div class="input-container">
-          <div class="icon-wrapper"><i class="fa fa-user"></i></div>
-          <input
-            name="data[User][username]"
-            required="required"
-            placeholder="Username"
-            maxlength="255"
-            type="text"
-            id="UserUsername"
-          />
-        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm)">
+          <p *ngIf="error" class="alert alert-danger">{{ error }}</p>
+          <div class="input-container">
+            <div class="icon-wrapper"><i class="fa fa-user"></i></div>
+            <input
+              placeholder="Email"
+              type="email"
+              id="email"
+              formControlName="email"
+            />
+          </div>
+          <div
+            *ngIf="
+              loginForm.get('email')?.errors != null &&
+              loginForm.get('email')?.touched
+            "
+            class="alert alert-danger"
+          >
+            <p *ngIf="loginForm.get('email')?.errors?.['required']">
+              email is required
+            </p>
+            <p *ngIf="loginForm.get('email')?.errors?.['email']">
+              email is not valid
+            </p>
+          </div>
 
-        <div class="input-container">
-          <div class="icon-wrapper"><i class="fa fa-lock"></i></div>
-          <input
-            name="data[User][password]"
-            required="required"
-            placeholder="Password"
-            type="password"
-            id="UserPassword"
-          />
-        </div>
+          <div class="input-container">
+            <div class="icon-wrapper"><i class="fa fa-lock"></i></div>
+            <input
+              placeholder="Password"
+              type="password"
+              id="UserPassword"
+              formControlName="password"
+            />
+          </div>
+          <div
+            *ngIf="
+              loginForm.get('password')?.errors != null &&
+              loginForm.get('password')?.touched
+            "
+            class="alert alert-danger"
+          >
+            <p>password is required</p>
+          </div>
 
-        <div class="input-container my-4">
-          <input class="b-sign" type="submit" value="Sign in" />
-        </div>
+          <div class="input-container my-4">
+            <input
+              class="b-sign"
+              type="submit"
+              value="Sign in"
+              [disabled]="loginForm.invalid"
+            />
+          </div>
+        </form>
       </div>
     </div>
   </div>
