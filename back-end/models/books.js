@@ -61,10 +61,15 @@ const bookSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   },
 );
-bookSchema.virtual('averageRating').get(function () {
+bookSchema.methods.calculatePopularity = function() {
   this.popularity = (this.sumOfRatings / this.numberOfRatings) * this.Interactions;
+  return this.save();
+};
+bookSchema.virtual('averageRating').get(function () {
+  this.calculatePopularity();
   return this.sumOfRatings / this.numberOfRatings;
 });
+
 const Book = mongoose.model('Book', bookSchema);
 
 module.exports = {

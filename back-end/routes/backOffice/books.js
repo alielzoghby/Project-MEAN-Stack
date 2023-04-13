@@ -11,4 +11,6 @@ router.get('/category/:categoryId', booksController.getBooksByCategory);
 router.patch('/:id', booksController.updateBook);
 router.delete('/:id', booksController.deleteBook);
 
+router.get('/popular/books', booksController.getPopularListOfBooks);
+
 module.exports = router;
