@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
@@ -8,48 +8,19 @@ import { DataService } from '../data.service';
   templateUrl: './addauthors.component.html',
   styleUrls: ['./addauthors.component.css'],
 })
-export class AddauthorsComponent {
+export class AddauthorsComponent implements OnInit {
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
   @ViewChild('updateForm') formUpdate!: NgForm;
 
+  i: any;
   deleteId: string = '';
   updateId: string = '';
-
   editingIndex = -1;
 
-  authors: any = [
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'Ahmed',
-      lastName: 'Ali',
-      dateOfBirth: '1-1-1980',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'Ahmed',
-      lastName: 'Ali',
-      dateOfBirth: '1-1-1980',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'Ahmed',
-      lastName: 'Ali',
-      dateOfBirth: '1-1-1980',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'Ahmed',
-      lastName: 'Ali',
-      dateOfBirth: '1-1-1980',
-    },
-    {
-      _id: '6433f6ebcd5a5629b6cffeaf',
-      firstName: 'Ahmed',
-      lastName: 'Ali',
-      dateOfBirth: '1-1-1980',
-    },
-  ];
+  authors: any;
+  totalItem = 40;
+  curentPage = 4;
 
   constructor(
     config: NgbModalConfig,
@@ -99,7 +70,41 @@ export class AddauthorsComponent {
   }
 
   /////////////////////////////////GET METHOD
-  getAuthors() {}
+  getAuthors() {
+    // write here number of page whate do you wont
+    this.authors = [
+      {
+        _id: '6433f6ebcd5a5629b6cffeaf',
+        firstName: 'Ahmed',
+        lastName: 'Ali',
+        dateOfBirth: '1-1-1980',
+      },
+      {
+        _id: '6433f6ebcd5a5629b6cffeaf',
+        firstName: 'Ahmed',
+        lastName: 'Ali',
+        dateOfBirth: '1-1-1980',
+      },
+      {
+        _id: '6433f6ebcd5a5629b6cffeaf',
+        firstName: 'Ahmed',
+        lastName: 'Ali',
+        dateOfBirth: '1-1-1980',
+      },
+      {
+        _id: '6433f6ebcd5a5629b6cffeaf',
+        firstName: 'Ahmed',
+        lastName: 'Ali',
+        dateOfBirth: '1-1-1980',
+      },
+      {
+        _id: '6433f6ebcd5a5629b6cffeaf',
+        firstName: 'Ahmed',
+        lastName: 'Ali',
+        dateOfBirth: '1-1-1980',
+      },
+    ];
+  }
 
   /////////////////////////////////POST METHOD
   postAuthor(form: FormGroup) {
@@ -119,7 +124,8 @@ export class AddauthorsComponent {
   }
 
   /////////////////////////////////BOT METHOD
-  getAlertUpdate(form: any) {
+  getAlertUpdate(form: any, i: any) {
+    this.i = i;
     this.updateId = form.value;
     this.modalService.open(this.update);
     console.log(form);
@@ -127,6 +133,10 @@ export class AddauthorsComponent {
   }
 
   botAuthor() {
-    console.log(this.updateId);
+    console.log(this.updateId, this.authors[this.i]._id);
+  }
+
+  ngOnInit(): void {
+    this.getAuthors();
   }
 }

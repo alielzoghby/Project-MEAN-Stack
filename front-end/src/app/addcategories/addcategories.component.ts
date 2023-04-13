@@ -12,9 +12,14 @@ export class AddcategoriesComponent implements OnInit {
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
 
+  i: any;
   deleteId: string = '';
   updateId: any = '';
+  editingIndex = -1;
+
   allCategories: any;
+  totalItem = 40;
+  curentPage = 4;
 
   constructor(
     config: NgbModalConfig,
@@ -34,8 +39,17 @@ export class AddcategoriesComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  editItem(index: number) {
+    this.editingIndex = index;
+  }
+
+  isItemEditing(index: number) {
+    return index === this.editingIndex;
+  }
+
   /////////////////////////////////GET METHOD
   getCategories() {
+    // write here number of page whate do you wont
     this.allCategories = [
       {
         name: 'kids',
@@ -71,30 +85,27 @@ export class AddcategoriesComponent implements OnInit {
   getAlertDelete(event: any) {
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
+    console.log();
   }
 
   deleteCategorie() {
     console.log(this.deleteId);
+
     this.getCategories();
   }
 
   /////////////////////////////////BOT METHOD
-  updateForm(index: any) {
-    const categorie = this.allCategories[index];
-    categorie.editable = !categorie.editable;
-  }
-
-  getAlertUpdate(index: any) {
-    const categorie = this.allCategories[index];
-    this.updateId = categorie;
+  getAlertUpdate(form: any, i: any) {
+    this.i = i;
+    this.updateId = form.value;
     this.modalService.open(this.update);
   }
 
   botCategorie() {
-    this.updateId.editable = !this.updateId.editable;
-    console.log(this.updateId);
+    console.log(this.updateId, this.allCategories[this.i]._id);
   }
 
+  ///////////////////////////////////////////
   ngOnInit(): void {
     this.getCategories();
   }

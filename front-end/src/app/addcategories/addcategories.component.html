@@ -12,62 +12,80 @@
   </thead>
   <tbody>
     <tr *ngFor="let categorie of allCategories; let i = index">
-      <td>{{ categorie._id }}</td>
-      <td
-        [class.edit]="categorie.editable"
-        [attr.contenteditable]="categorie.editable"
-      >
-        {{ categorie.name }}
-      </td>
-      <td>
-        <button
-          *ngIf="categorie.editable"
-          type="button"
-          class="btn btn-link btn-sm btn-rounded"
-          (click)="getAlertUpdate(i)"
-        >
-          <i class="fa-solid fa-square-check"></i>
-        </button>
-        <button
-          type="button"
-          class="btn btn-link btn-sm btn-rounded"
-          (click)="updateForm(i)"
-        >
-          <i class="fa-solid fa-pen-to-square"></i>
-        </button>
-        <button
-          type="button"
-          class="btn btn-link btn-sm btn-rounded"
-          (click)="getAlertDelete($event)"
-        >
-          <i [id]="categorie._id" class="fa-solid fa-trash-can"></i>
-        </button>
-      </td>
+      <ng-container *ngIf="!isItemEditing(i); else editingRow">
+        <td>{{ categorie._id }}</td>
+        <td>{{ categorie.name }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-link btn-sm btn-rounded"
+            (click)="editItem(i)"
+          >
+            <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-link btn-sm btn-rounded"
+            (click)="getAlertDelete($event)"
+          >
+            <i id="{{ categorie._id }}" class="fa-solid fa-trash-can"></i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-template #editingRow>
+        <td colspan="6">
+          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm, i)">
+            <table class="table align-middle bg-white">
+              <tr>
+                <td name="_id">{{ allCategories[i]._id }}</td>
+                <td>
+                  <div>
+                    <input
+                      class="form-control w-50 m-auto align-center"
+                      type="text"
+                      [(ngModel)]="allCategories[i].name"
+                      name="name"
+                      ngModel
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <button
+                      type="submit"
+                      class="btn btn-link btn-sm btn-rounded"
+                    >
+                      <i class="fa-solid fa-square-check"></i>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-link btn-sm btn-rounded"
+                      (click)="editingIndex = -1"
+                    >
+                      <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </td>
+      </ng-template>
     </tr>
   </tbody>
 </table>
 
 <!-- ////////////////////////////pagination -->
-<nav
-  aria-label="Page navigation example"
-  class="d-flex justify-content-center my-3"
->
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<div class="my-4">
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="totalItem"
+    [(page)]="curentPage"
+    [boundaryLinks]="true"
+  ></ngb-pagination>
+</div>
 
 <!-- ////////////////////////////add -->
 <ng-template #content let-c="close" let-d="dismiss">
@@ -162,7 +180,11 @@
     <button type="button" class="btn btn-outline-dark" (click)="c()">
       cansel
     </button>
-    <button type="button" class="btn btn-danger" (click)="c(); botCategorie()">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="c(); botCategorie(); editingIndex = -1"
+    >
       ok
     </button>
   </div>
