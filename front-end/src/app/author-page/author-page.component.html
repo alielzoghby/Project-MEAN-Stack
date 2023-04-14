@@ -1,22 +1,18 @@
 <app-navbar></app-navbar>
+<body>
 <header>
   <div class="container">
     <div class="row">
       <div class="img col-md-6 col-sm-12">
-        <img src="../../assets/images/team-1.jpg" />
+        <img src={{authorData.photo}} />
       </div>
 
       <div class="col-md-6 col-sm-12 brief">
-        <h1>Author Name</h1>
+        <h1>{{authorData.firstName}}{{authorData.lastName}}</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat
-          minus incidunt dolorum voluptas similique repellendus nulla explicabo
-          esse illum, quaerat architecto adipisci, aspernatur vitae assumenda
-          consectetur optio id ut in quae ipsum consequatur a odio, maxime
-          cumque. Modi quasi culpa quibusdam ullam eaque molestias. Laborum,
-          voluptatem corrupti? Ipsum, doloribus aspernatur.
+          {{authorData.bio}}
         </p>
-        <div class="date">20-11-1990</div>
+        <div class="date">{{authorData.dateOfBirth}}</div>
       </div>
     </div>
   </div>
@@ -33,24 +29,24 @@
 
 <div class="AuthorsBooks">
   <div class="container">
-    <h1>Author's Books</h1>
-    <div class="row">
+    <h1>{{authorData.firstName}}{{authorData.lastName}}'s Books</h1>
+    <div class="row" *ngFor="let book of authorBooks">
       <div class="col-md-6 col-sm-12 book">
-        <img src="../../assets/images/product-item3.jpg" />
+        <img src= {{book.cover}} />
         <div class="bookinfo">
-          <div class="bookname">Book Name</div>
+          <div class="bookname">{{book.name}}</div>
           <div class="AVGRating">
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <div>5 - 350</div>
+            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
+            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
+            <div>{{book.numberOfRatings}}-{{book.sumOfRatings}}</div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-sm-12 rating-shelve">
+      <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged">
         <div class="pt-3 shelve">
           <select class="form-select">
             <option selected>Want to Read</option>
@@ -59,46 +55,17 @@
           </select>
         </div>
         <div class="userRate">
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
+          <!-- <i  [ngClass]="i.rating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,1)"></i>
+          <i  [ngClass]="i.rating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,2)"></i>
+          <i  [ngClass]="i.rating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,3)"></i>
+          <i  [ngClass]="i.rating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,4)"></i>
+          <i  [ngClass]="i.rating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,5)"></i> -->
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-12 book">
-        <img src="../../assets/images/product-item3.jpg" />
-        <div class="bookinfo">
-          <div class="bookname">Book Name</div>
-          <div class="AVGRating">
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <div>5 - 350</div>
-          </div>
-        </div>
-      </div>
+   
 
-      <div class="col-md-6 col-sm-12 rating-shelve">
-        <div class="pt-3 shelve">
-          <select class="form-select">
-            <option selected>Want to Read</option>
-            <option value="1">Currently Read</option>
-            <option value="2">Read</option>
-          </select>
-        </div>
-        <div class="userRate">
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-          <i class="fa">&#xf005;</i>
-        </div>
       </div>
     </div>
-  </div>
-</div>
+
+</body>

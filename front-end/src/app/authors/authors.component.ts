@@ -6,21 +6,22 @@ import { AuthorService}from'../services/author.service'
   styleUrls: ['./authors.component.css'],
 })
 export class AuthorsComponent {
-data:Array<any>=[]
+data:any=[]
 countData:number=0
 paginationCount = 0
-Datashown:Array<any>=[]
+Datashown:any=[]
 paginationItem:Array<number>= []
 constructor(private _authorServices :AuthorService){
   this.getAllAuthors()
   }
   getAllAuthors(){
-  //  this._authorServices.getAllAuthors().subscribe((res)=>{
-  //   console.log(res)
-  //  })
+    this.data=this._authorServices.getAllAuthors().subscribe((res)=>{
+    console.log(res)
+    this.Datashown=res
+   })
+   
+   
 
-  this.data = this._authorServices.getAllAuthors()
-  this.Datashown= this.data.slice(0, 6)
  
   }
 

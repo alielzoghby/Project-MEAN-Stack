@@ -1,41 +1,36 @@
 <app-navbar></app-navbar>
+<body>
 <header>
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-6 img">
-        <div><img src="../../assets/images/product-item1.jpg" /></div>
+        <div><img class= "authorImg"src="../../assets/images/product-item1.jpg" /></div>
       </div>
       <div class="col-md-6 ps-md-5">
         <div class="bookname">
-          <h1>bookname</h1>
-          <h4><a [routerLink]="['/author']">Author name</a></h4>
-          <h4><a [routerLink]="['/categories']">category name</a></h4>
+          <h1>{{bookDetail.name}}</h1>
+          <h4><a [routerLink]="['/author/:id']">{{bookDetail.authorId.firstName}} {{bookDetail.authorId.laststName}}</a></h4>
+          <h4><a [routerLink]="['/categories']">{{bookDetail.categoryId.name}}</a></h4>
         </div>
         <p class="brife">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius,
-          ratione non. Laborum quas voluptates voluptas earum dolorem voluptate.
-          Quidem ex odio sint! Quaerat natus atque saepe doloribus expedita,
-          quos error ducimus non odit, numquam sequi magni ex incidunt
-          praesentium suscipit, impedit perferendis eos dignissimos excepturi
-          officiis doloremque voluptas? Laboriosam, ipsum.
+              {{bookDetail.description}}
         </p>
       </div>
     </div>
-
     <div class="row">
       <div class="col-md-3 col-sm-6 ">
-        <select class="shelve form-select">
-          <option selected>Want to Read</option>
-          <option value="1">Currently Read</option>
-          <option value="2">Read</option>
+        <select class="shelve form-select" #shelf (change)="onSelected(bookDetail,shelf.value)">
+          <option value='want to read' [attr.selected]="bookDetail.shelf=='want to read' ? 'true' : null" >Want to Read</option>
+          <option value='Reading'      [attr.selected]="bookDetail.shelf=='Reading' ? 'true' : null">Reading</option>
+          <option value='Read'         [attr.selected]="bookDetail.shelf=='Read' ? 'true' : null">Read</option>
         </select>
        <div class="AVGrate">
           <div class="rate">
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
-            <i class="fa">&#xf005;</i>
+              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
+              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
           </div>
         </div>
       </div>
@@ -44,11 +39,11 @@
       <div class="col-md-3 col-sm-6 ps-md-5">
         <div class="rating">
           <h3 class="userrate">your rate</h3>
-          <i class="fa-regular fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-          <i class="fa-regular fa-star"></i>
+          <i  [ngClass]="bookDetail.rating >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
+          <i  [ngClass]="bookDetail.rating >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
+          <i  [ngClass]="bookDetail.rating >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
+          <i  [ngClass]="bookDetail.rating >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
+          <i  [ngClass]="bookDetail.rating >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
         </div>
       </div>
     </div>
@@ -65,28 +60,29 @@
       <div class="col-5 usercomment">
         <form action="">
           <input
+          [(ngModel)]='commentInput'
             class="form-control"
             type="text"
-            name=""
-            id=""
+            name="review"
+            id="2"
             placeholder="enter your review"
-          />
-          <button class="submit" title="send your comment">
+             (click)="addReview()"
+          /> 
+          <button class="bookDetailmit" title="send your comment" (click)="addReview()">
             <i class="fa-regular fa-paper-plane"></i>
           </button>
         </form>
       </div>
     </div>
-    <div class="comments">
+    <div class="comments" *ngFor = "let review of bookDetail.reviews">
       <div class="row">
         <div class="col-1 userimg">
-          <img src="../../assets/images/team-1.jpg" />
+          <img src={{review.userId.photo}} />
         </div>
         <div class="col-5 otherReviews">
-          <h3 class="pname">jon haper</h3>
+          <h3 class="pname">{{review.userId.firstName}} {{review.userId.lastName}}</h3>
           <p>
-            Soluta fugit porro alias. Explicabo temporibus ullam velit
-            distinctio architecto!
+          {{review.review}}
           </p>
         </div>
       </div>
@@ -95,3 +91,4 @@
 </div>
 
 <app-fotter></app-fotter>
+</body>

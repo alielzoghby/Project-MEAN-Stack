@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthGardGuard } from '../auth-gard.guard'; 
-import { UserBooksService } from '../services/user-books.service';
+import { DataService } from '../data.service';
 
 
 @Component({
@@ -12,7 +12,6 @@ export class UserpageComponent {
   shelf:string="ALL"
   shelves:string[] = ["ALL","Read","want to read","Reading"]
   pos:number = 0 ;
-  isLogged   = false;
   data:Array<any> = []
   AvgRated:number=0
   AvgUnRated:number=0
@@ -21,11 +20,13 @@ export class UserpageComponent {
   shownData  : Array<any> = []
   rating :number = 0;
   Math = Math
-  
+  temp:any;
 
-  constructor(private _auth:AuthGardGuard, private _userBooks:UserBooksService) {
-   this.isLogged = this._auth.islogged; 
-   this.data     = this._userBooks.getAllUserBooks()[0].books
+  constructor(private _auth:AuthGardGuard, private _userBooks:DataService) {
+  
+   this.temp    = this._userBooks.getData("/userBooks/all").subscribe((res)=>{
+             console.log(res)
+   })
    this.shownData= this.data
    
    

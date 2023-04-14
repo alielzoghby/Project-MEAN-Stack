@@ -101,19 +101,18 @@ data  = [
 
 
 
-httpUrl:string="http://localhost:3000/authors/"
+httpUrl:string="http://localhost:3000/"
   constructor(private httpclient :HttpClient) { }
 
 getAllAuthors(){
 
-  // return (this.httpclient.get(this.httpUrl+"getAuthors"))
-
-    return this.data
+  return (this.httpclient.get(this.httpUrl+"author/getAuthors"))
 
   }
 
-getAuthorById(id:number){
-
+getAuthorById(id:string){
+  console.log(this.httpUrl+"author/"+id)
+  return (this.httpclient.get(this.httpUrl+"author/"+id))
 }
 
 updateAuthor(){

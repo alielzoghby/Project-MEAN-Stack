@@ -11,8 +11,8 @@
        <span>{{author.dateOfBirth}}</span> 
 
      </div>
-
-  <div class="name"> <a (click)="setAuthor()" [routerLink]="['/author/{{author.id}}']" > writer : {{author.firstName}} {{author.lastName}} </a>
+     
+  <div class="name"> <a [routerLink]="['/author/',author._id]" > writer : {{author.firstName}} {{author.lastName}} </a>
   </div>
   </div>
 </div>

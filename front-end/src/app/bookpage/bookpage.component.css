@@ -8,6 +8,11 @@ header {
 img {
   /* max-width: 200px; */
   max-height: 250px;
+ 
+}
+
+.authorImg{
+   padding-top: 30px;
 }
 
 
@@ -33,7 +38,7 @@ img {
 }
 
 p {
-  height: 35%;
+  min-height: 35%;
   line-height: 25px;
   color:var(--body-text-color);
   padding-top:10px;
@@ -91,6 +96,11 @@ form button {
   border-width: 0px 0px 1px 0px;
   border-radius: 0;
   padding-bottom: 20px;
+  background-color: transparent;
+}
+
+button:active{
+color:lightslategray
 }
 
 .comments h4 {
