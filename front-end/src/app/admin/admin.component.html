@@ -30,13 +30,19 @@
   <div class="container my-5">
     <mdb-tabs [fill]="true">
       <mdb-tab title="Categories">
-        <app-addcategories></app-addcategories>
+        <app-addcategories [apiData]="catagorys"></app-addcategories>
       </mdb-tab>
 
       <mdb-tab title="Books">
-        <app-addbooks></app-addbooks>
+        <app-addbooks
+          [booksApi]="books"
+          [catagorysApi]="catagorys"
+          [authorsApi]="authors"
+        ></app-addbooks>
       </mdb-tab>
-      <mdb-tab title="Authors"> <app-addauthors></app-addauthors></mdb-tab>
+      <mdb-tab title="Authors">
+        <app-addauthors [apiData]="authors"></app-addauthors
+      ></mdb-tab>
     </mdb-tabs>
   </div>
 </header>

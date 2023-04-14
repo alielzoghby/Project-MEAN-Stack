@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
+import { BehaviorSubject } from 'rxjs';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-addauthors',
@@ -10,27 +11,29 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./addauthors.component.css'],
 })
 export class AddauthorsComponent implements OnInit {
-  @Input() data: any;
+  @Input() apiData!: BehaviorSubject<any>;
 
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
   @ViewChild('updateForm') formUpdate!: NgForm;
+  @ViewChild('alert') alert!: HTMLElement;
 
   i: any;
   deleteId: string = '';
   updateId: string = '';
   editingIndex = -1;
+  message: any;
+  error: any;
 
   authors: any;
-  totalItem = 0;
+  totalItem = 1;
   curentPage = 1;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: AuthService
+    private _data: DataService
   ) {
-    // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -74,18 +77,54 @@ export class AddauthorsComponent implements OnInit {
 
   /////////////////////////////////POST METHOD
   postAuthor(form: FormGroup) {
-    console.log(form.value);
+    this._data.postData('/backOffice/author/', form.value).subscribe(
+      (res) => {
+        this.message = 'added Success';
+        this.error = false;
+        this.authors.unshift(res);
+      },
+      (err) => {
+        this.error = 'added Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
+
     this.authorForm.reset();
   }
 
   /////////////////////////////////DELETE METHOD
-  getAlertDelete(event: any) {
+  getAlertDelete(event: any, i: any) {
+    this.i = i;
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
   }
 
   deleteAuthor() {
-    console.log(this.deleteId);
+    this._data.deleteData(`/backOffice/author/${this.deleteId}`).subscribe(
+      (res) => {
+        this.message = 'delete Success';
+        this.error = false;
+        this.authors.splice(this.i, 1);
+      },
+      (err) => {
+        this.error = 'delete Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
   /////////////////////////////////BOT METHOD
@@ -93,13 +132,37 @@ export class AddauthorsComponent implements OnInit {
     this.i = i;
     this.updateId = form.value;
     this.modalService.open(this.update);
-    console.log(form);
-    console.log(form.value);
   }
 
-  botAuthor() {
-    console.log(this.updateId, this.authors[this.i]._id);
+  potAuthor() {
+    let id = this.authors[this.i]._id;
+    this._data.patchData(`/backOffice/author/${id}`, this.updateId).subscribe(
+      (res) => {
+        this.message = 'Update Success';
+        this.error = false;
+      },
+      (err) => {
+        this.error = 'Update Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
-  ngOnInit(): void {}
+  fixDate(date: any) {
+    return new Date(date).toISOString().substr(0, 10);
+  }
+
+  ngOnInit(): void {
+    this.apiData.subscribe((res) => {
+      let data = this.apiData.getValue().reverse();
+      this.authors = data;
+    });
+  }
 }

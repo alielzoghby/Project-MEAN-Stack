@@ -56,6 +56,10 @@ export class AuthService {
     return this._http.put(`${this.ROOT_URL + endPoint}`, data);
   }
 
+  patchData(endPoint: string, data: any) {
+    return this._http.patch(`${this.ROOT_URL + endPoint}`, data);
+  }
+
   saveCurrentUser() {
     let token: any = localStorage.getItem('userTaken');
     this.currentUser.next(jwtDecode(token));
@@ -64,8 +68,4 @@ export class AuthService {
   getTaken() {
     return localStorage.getItem('userTaken');
   }
-
-  // errorHandler(error: HttpErrorResponse) {
-  //   return throwError(error.message || 'server error.');
-  // }.pipe(catchError((err) => {return this.errorHandler(err);}));
 }

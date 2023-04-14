@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-addbooks',
@@ -10,7 +11,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./addbooks.component.css'],
 })
 export class AddbooksComponent implements OnInit {
-  @Input() data: any;
+  @Input() booksApi!: BehaviorSubject<any>;
+  @Input() authorsApi!: BehaviorSubject<any>;
+  @Input() catagorysApi!: BehaviorSubject<any>;
 
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
@@ -20,18 +23,20 @@ export class AddbooksComponent implements OnInit {
   deleteId: string = '';
   updateId: string = '';
   editingIndex = -1;
+  message: any;
+  error: any;
+
+  books: any;
+  categories: any;
+  authors: any;
 
   totalItem = 0;
   curentPage = 1;
 
-  books: any;
-  catagorys: any;
-  authors: any;
-
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: AuthService
+    private _data: DataService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -71,29 +76,97 @@ export class AddbooksComponent implements OnInit {
 
   /////////////////////////////////POST METHOD
   postBook(form: FormGroup) {
-    console.log(form.value);
+    this._data.postData('/backOffice/book/', form.value).subscribe(
+      (res) => {
+        this.message = 'added Success';
+        this.error = false;
+        this.books.unshift(res);
+      },
+      (err) => {
+        this.error = 'added Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
     this.bookForm.reset();
   }
 
   /////////////////////////////////DELETE METHOD
-  getAlertDelete(event: any) {
+  getAlertDelete(event: any, i: any) {
+    this.i = i;
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
   }
 
   deleteBook() {
-    console.log(this.deleteId);
+    this._data.deleteData(`/backOffice/book/${this.deleteId}`).subscribe(
+      (res) => {
+        this.message = 'delete Success';
+        this.error = false;
+        this.books.splice(this.i, 1);
+      },
+      (err) => {
+        this.error = 'delete Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
   /////////////////////////////////BOT METHOD
-  getAlertUpdate(form: any) {
+  getAlertUpdate(form: any, i: any) {
+    this.i = i;
     this.updateId = form.value;
     this.modalService.open(this.update);
   }
 
-  botBook() {
-    console.log(this.updateId);
+  putBook() {
+    let id = this.books[this.i]._id;
+    this._data.patchData(`/backOffice/book/${id}`, this.updateId).subscribe(
+      (res) => {
+        this.message = 'Update Success';
+        this.error = false;
+      },
+      (err) => {
+        this.error = 'Update Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.booksApi.subscribe((res) => {
+      let data = this.booksApi.getValue();
+      this.totalItem = data.totalPages;
+      this.books = data.data;
+    });
+
+    this.catagorysApi.subscribe((res) => {
+      this.categories = this.catagorysApi.getValue().reverse();
+    });
+
+    this.authorsApi.subscribe((res) => {
+      let data = this.authorsApi.getValue().reverse();
+      this.authors = data;
+    });
+  }
 }

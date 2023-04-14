@@ -24,4 +24,8 @@ export class DataService {
   putData(endPoint: string, data: any) {
     return this._http.put(`${this.ROOT_URL + endPoint}`, data);
   }
+
+  patchData(endPoint: string, data: any) {
+    return this._http.patch(`${this.ROOT_URL + endPoint}`, data);
+  }
 }

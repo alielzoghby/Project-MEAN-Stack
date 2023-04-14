@@ -1,3 +1,13 @@
+<div
+  #alert
+  class="alert"
+  *ngIf="message || error"
+  [class]="message ? 'alert-success' : error ? 'alert-danger' : ''"
+>
+  <p *ngIf="error">{{ error }}</p>
+  <p *ngIf="message">{{ message }}</p>
+</div>
+
 <button (click)="open(content)" class="btn btn-link float-end">
   <i class="fa-solid fa-circle-plus fa-xl my-3"></i>
 </button>
@@ -26,7 +36,7 @@
           <button
             type="button"
             class="btn btn-link btn-sm btn-rounded"
-            (click)="getAlertDelete($event)"
+            (click)="getAlertDelete($event, i)"
           >
             <i id="{{ categorie._id }}" class="fa-solid fa-trash-can"></i>
           </button>
@@ -186,7 +196,7 @@
     <button
       type="button"
       class="btn btn-danger"
-      (click)="c(); botCategorie(); editingIndex = -1"
+      (click)="c(); putCategorie(); editingIndex = -1"
     >
       ok
     </button>
