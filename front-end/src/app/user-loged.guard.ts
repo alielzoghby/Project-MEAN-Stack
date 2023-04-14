@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGardGuard implements CanActivate {
+export class UserLogedGuard implements CanActivate {
   islogged: boolean = false;
 
   constructor(private _auth: AuthService, private router: Router) {
@@ -29,9 +29,9 @@ export class AuthGardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.islogged) return true;
+    if (!this.islogged) return true;
     else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/profile']);
       return false;
     }
   }

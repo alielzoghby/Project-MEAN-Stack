@@ -21,3 +21,8 @@
   width: 400px;
   height: 400px;
 }
+
+.spinner-grow {
+  width: 0.75rem;
+  height: 0.75rem;
+}

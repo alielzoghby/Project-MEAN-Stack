@@ -12,21 +12,23 @@
           </div>
           <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm)">
             <div class="form-outline mb-4">
-              <input
-                type="email"
-                id="form3Example3"
-                class="form-control"
-                formControlName="email"
-              />
-              <label class="form-label" for="form3Example3"
-                >Email address</label
-              >
+              <mdb-form-control>
+                <input
+                  mdbInput
+                  type="email"
+                  id="form1"
+                  class="form-control"
+                  formControlName="email"
+                />
+                <label mdbLabel class="form-label" for="form1">Email</label>
+              </mdb-form-control>
+
               <div
                 *ngIf="
                   loginForm.get('email')?.errors != null &&
                   loginForm.get('email')?.touched
                 "
-                class="alert alert-danger"
+                class="alert alert-danger my-2"
               >
                 <p *ngIf="loginForm.get('email')?.errors?.['required']">
                   email is required
@@ -38,19 +40,22 @@
             </div>
 
             <div class="form-outline mb-4">
-              <input
-                type="password"
-                id="form3Example4"
-                class="form-control"
-                formControlName="password"
-              />
-              <label class="form-label" for="form3Example4">Password</label>
+              <mdb-form-control>
+                <input
+                  mdbInput
+                  type="password"
+                  id="form2"
+                  class="form-control"
+                  formControlName="password"
+                />
+                <label mdbLabel class="form-label" for="form2">Password</label>
+              </mdb-form-control>
               <div
                 *ngIf="
                   loginForm.get('password')?.errors != null &&
                   loginForm.get('password')?.touched
                 "
-                class="alert alert-danger"
+                class="alert alert-danger my-2"
               >
                 <p>password is required</p>
               </div>
@@ -58,10 +63,28 @@
 
             <button
               type="submit"
-              class="btn btn-primary btn-block mb-4"
+              class="btn btn-primary btn-block mb-4 d-flex align-center justify-content-center gap-2"
               [disabled]="loginForm.invalid"
             >
               Log in
+
+              <div *ngIf="lodaing">
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </div>
             </button>
 
             <div class="text-center">

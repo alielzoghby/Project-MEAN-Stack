@@ -30,7 +30,7 @@
         <td><img src="{{ author.cover }}" alt="" /></td>
         <td>{{ author.firstName }}</td>
         <td>{{ author.lastName }}</td>
-        <td>{{ author.dob }}</td>
+        <td>{{ author.dob | date : "yyyy-MM-dd" }}</td>
 
         <td>
           <button
@@ -55,7 +55,7 @@
             <table class="table align-middle mb-0 bg-white">
               <tr>
                 <td>
-                  <div name="_id">{{ authors[i]._id }}</div>
+                  <div name="_id">{{ author._id }}</div>
                 </td>
                 <td class="fix-width1">
                   <div>
@@ -75,7 +75,7 @@
                     <input
                       class="form-control"
                       type="text"
-                      [(ngModel)]="authors[i].firstName"
+                      [(ngModel)]="author.firstName"
                       name="firstName"
                       ngModel
                     />
@@ -86,7 +86,7 @@
                     <input
                       class="form-control"
                       type="text"
-                      [(ngModel)]="authors[i].lastName"
+                      [(ngModel)]="author.lastName"
                       name="lastName"
                       ngModel
                     />
@@ -98,7 +98,7 @@
                       type="date"
                       class="form-control"
                       name="dateOfBirth"
-                      [attr.value]="fixDate(authors[i].dob)"
+                      [ngModel]="author.dob | date : 'yyyy-MM-dd'"
                       ngModel
                     />
                   </div>
