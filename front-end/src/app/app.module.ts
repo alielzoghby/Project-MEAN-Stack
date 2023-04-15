@@ -48,11 +48,9 @@ import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
-<<<<<<< HEAD
-import { DatePipe } from '@angular/common';
-=======
 import { SearchComponent } from './search/search.component';
->>>>>>> d5d02b852f66e7ea193a389f5206d2c8d5e87ecd
+import { DatePipe } from '@angular/common';
+
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
@@ -62,13 +60,13 @@ import { SearchComponent } from './search/search.component';
     NavbarComponent,
     UserpageComponent,
     CategoriesComponent,
-    AuthorPageComponent,
     CarouselComponent,
     FotterComponent,
     LoginComponent,
+    AuthorPageComponent,
+    AuthorsComponent,
     SignupComponent,
     BookpageComponent,
-    AuthorsComponent,
     NotfoundComponent,
     BookComponent,
     PopularBookComponent,
@@ -108,14 +106,12 @@ import { SearchComponent } from './search/search.component';
     NgbNavModule,
     NgxPaginationModule,
     FormsModule,
-    // NgxStarRatingModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptorInterceptor,
       multi: true,
-    
     },
   ],
   bootstrap: [AppComponent],

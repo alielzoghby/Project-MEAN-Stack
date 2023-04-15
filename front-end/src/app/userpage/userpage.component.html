@@ -14,43 +14,134 @@
       <div class="shelve">{{ shelf }}</div>
 
       <table class="table caption-top">
-
-        <thead >
+        <thead>
           <tr>
             <th>img</th>
-            <th >name</th>
-            <th >Author</th>
-            <th >Rate</th>
-            <th >AVG Rate</th>
-            <th >Shelve</th>
+            <th>name</th>
+            <th>Author</th>
+            <th>Rate</th>
+            <th>AVG Rate</th>
+            <th>Shelve</th>
           </tr>
         </thead>
-        <tbody >
-          <tr class="tablerow"*ngFor="let i of shownData" >
-             <td >
+        <tbody>
+          <tr class="tablerow" *ngFor="let i of shownData">
+            <td>
               <img src="../../assets/images/product-item2.jpg" />
-            </td> 
-            <td ><a [routerLink]="['/bookpage/',i.bookId.id]"> {{i.bookId.name}}</a></td>
-            <td ><a [routerLink]="['/author/',i.bookId.authorId]" > {{getAuthorName(i.bookId.authorId)}}</a></td>
-            <td class=" rate">
-              <i  [ngClass]="i.rating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,1)"></i>
-              <i  [ngClass]="i.rating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,2)"></i>
-              <i  [ngClass]="i.rating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,3)"></i>
-              <i  [ngClass]="i.rating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,4)"></i>
-              <i  [ngClass]="i.rating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,5)"></i>
             </td>
-            <td class=" rate">
-              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
-              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(i.bookId.sumOfRatings/i.bookId.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
+            <td>
+              <a [routerLink]="['/bookpage/', i.bookId.id]">
+                {{ i.bookId.name }}</a
+              >
+            </td>
+            <td>
+              <a [routerLink]="['/author/', i.bookId.authorId]">
+                {{ getAuthorName(i.bookId.authorId) }}</a
+              >
+            </td>
+            <td class="rate">
+              <i
+                [ngClass]="
+                  i.rating >= 1 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+                "
+                (click)="UpdateRating(i, 1)"
+              ></i>
+              <i
+                [ngClass]="
+                  i.rating >= 2 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+                "
+                (click)="UpdateRating(i, 2)"
+              ></i>
+              <i
+                [ngClass]="
+                  i.rating >= 3 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+                "
+                (click)="UpdateRating(i, 3)"
+              ></i>
+              <i
+                [ngClass]="
+                  i.rating >= 4 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+                "
+                (click)="UpdateRating(i, 4)"
+              ></i>
+              <i
+                [ngClass]="
+                  i.rating >= 5 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+                "
+                (click)="UpdateRating(i, 5)"
+              ></i>
+            </td>
+            <td class="rate">
+              <i
+                [ngClass]="
+                  Math.floor(
+                    i.bookId.sumOfRatings / i.bookId.numberOfRatings
+                  ) >= 1
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(
+                    i.bookId.sumOfRatings / i.bookId.numberOfRatings
+                  ) >= 2
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(
+                    i.bookId.sumOfRatings / i.bookId.numberOfRatings
+                  ) >= 3
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(
+                    i.bookId.sumOfRatings / i.bookId.numberOfRatings
+                  ) >= 4
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(
+                    i.bookId.sumOfRatings / i.bookId.numberOfRatings
+                  ) >= 5
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
             </td>
             <td class="">
-              <select class="form-select"#shelf (change)="onSelected(i,shelf.value)">
-                <option value='want to read' [attr.selected]="i.shelf=='want to read' ? 'true' : null" >Want to Read</option>
-                <option value='Reading' [attr.selected]="i.shelf=='Reading' ? 'true' : null">Reading</option>
-                <option value='Read' [attr.selected]="i.shelf=='Read' ? 'true' : null">Read</option>
+              <select
+                class="form-select"
+                #shelf
+                (change)="onSelected(i, shelf.value)"
+              >
+                <option
+                  value="want to read"
+                  [attr.selected]="i.shelf == 'want to read' ? 'true' : null"
+                >
+                  Want to Read
+                </option>
+                <option
+                  value="Reading"
+                  [attr.selected]="i.shelf == 'Reading' ? 'true' : null"
+                >
+                  Reading
+                </option>
+                <option
+                  value="Read"
+                  [attr.selected]="i.shelf == 'Read' ? 'true' : null"
+                >
+                  Read
+                </option>
               </select>
             </td>
           </tr>
