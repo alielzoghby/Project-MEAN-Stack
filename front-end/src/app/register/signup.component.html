@@ -194,6 +194,15 @@
                 </div>
               </div>
 
+              <div class="form-outline mb-4">
+                <input
+                  class="form-control"
+                  type="file"
+                  formControlName="photo"
+                  (change)="onFileSelectedFormUpdate($event)"
+                />
+              </div>
+
               <button
                 [disabled]="registerForm.invalid"
                 type="submit"

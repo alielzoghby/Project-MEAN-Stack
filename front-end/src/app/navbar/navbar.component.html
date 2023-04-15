@@ -10,15 +10,7 @@
           <a> <i class="fab mx-1 fa-google"></i> </a>
         </div>
 
-        <form class="d-flex input-group w-auto">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Search for Book"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-primary" type="button">Search</button>
-        </form>
+        <app-search></app-search>
 
         <div class="my-2">
           <a *ngIf="!isLoged" routerLink="/login" class="user-account mx-2"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
+import { DataService } from '../data.service';
 
 // declare let AOS: any;
 
@@ -46,242 +47,63 @@ export class HomePageComponent implements OnInit {
     },
   ];
   quote: any;
-  imageBase = '../../../../back-end';
 
-  constructor() {}
+  constructor(private _data: DataService) {}
 
   getPopularBooks() {
-    this.popularBooks = [
-      {
-        id: 1,
-        name: 'Portrait photography',
-        author: 'ali',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
+    this._data.getData('/book/popular/books').subscribe(
+      (res) => {
+        this.popularBooks = res;
       },
-      {
-        id: 2,
-        name: 'Portrait photography',
-        author: 'samy',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 3,
-        name: 'Portrait photography',
-        author: 'nada',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 4,
-        name: 'Portrait photography',
-        author: 'alaa',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 5,
-        name: 'Portrait photography',
-        author: 'hager',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 6,
-        name: 'Portrait photography',
-        author: 'mn',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 7,
-        name: 'Portrait photography',
-        author: 'mona',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 8,
-        name: 'Portrait photography',
-        author: 'samar',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-      {
-        id: 9,
-        name: 'Portrait photography',
-        author: 'hosam',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.',
-      },
-    ];
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getAllCategores() {
-    this.categoerys = [
-      {
-        _id: '64249f3f58ff0f1ee44e28da',
-        name: 'science fiction',
-        __v: 0,
-        numberOfBooks: 6,
-        id: 13,
+    this._data.getData('/category/').subscribe(
+      (res) => {
+        this.categoerys = res;
       },
-      {
-        numberOfBooks: 0,
-        _id: '64249f4758ff0f1ee44e28dc',
-        name: 'Paranormal',
-        __v: 0,
-      },
-      {
-        _id: '6425e41c1239e0e71ad9dfbd',
-        name: 'Crime',
-        __v: 0,
-        numberOfBooks: 3,
-        id: 11,
-      },
-      {
-        _id: '6425f9b05d26ee6953c545ef',
-        name: 'Horror',
-        __v: 0,
-        numberOfBooks: 3,
-        id: 11,
-      },
-    ];
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getCategoryBooks(id: any) {
-    console.log(id);
-    this.categoryBooks = [
-      {
-        _id: '643187f26321613814c9e716',
-        name: 'Fiction 15',
-        categoryId: '643187aa6321613814c9e713',
-        authorId: '642c75ea1374a6b0080bc18e',
-        averageRating: 0,
-        numberOfRatings: 0,
-        reviews: [],
-        __v: 0,
+    this._data.getData(`/book/category/${id}`).subscribe(
+      (res: any) => {
+        this.categoryBooks = res.data;
+        console.log(res);
       },
-      {
-        _id: '643187ff6321613814c9e71a',
-        name: 'kids 1',
-        categoryId: '643187aa6321613814c9e713',
-        authorId: '642c75ea1374a6b0080bc18e',
-        averageRating: 0,
-        numberOfRatings: 0,
-        reviews: [],
-        __v: 0,
-      },
-      {
-        _id: '643188036321613814c9e71e',
-        name: 'kids 2',
-        categoryId: '643187aa6321613814c9e713',
-        authorId: '642c75ea1374a6b0080bc18e',
-        averageRating: 0,
-        numberOfRatings: 0,
-        reviews: [],
-        __v: 0,
-      },
-      {
-        _id: '643188076321613814c9e722',
-        name: 'kids 3',
-        categoryId: '643187aa6321613814c9e713',
-        authorId: '642c75ea1374a6b0080bc18e',
-        averageRating: 0,
-        numberOfRatings: 0,
-        reviews: [],
-        __v: 0,
-      },
-    ];
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getAllBooks() {
-    this.categoryBooks = [
-      {
-        averageRating: 0,
-        numberOfRatings: 0,
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        name: 'The Adventures of Sherlock Holmes',
-        category: 'history',
-        cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-        reviews: [],
-        author: 'Asdasdas',
-        description: 'sadasdasdasdasdasdasdsadasd',
-        __v: 0,
+    this._data.getData('/book/').subscribe(
+      (res: any) => {
+        this.categoryBooks = res.data;
       },
-      {
-        averageRating: 0,
-        numberOfRatings: 0,
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        name: 'The Adventures of Sherlock Holmes',
-        category: 'history',
-        cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-        reviews: [],
-        author: 'Asdasdas',
-        description: 'sadasdasdasdasdasdasdsadasd',
-        __v: 0,
-      },
-      {
-        averageRating: 0,
-        numberOfRatings: 0,
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        name: 'The Adventures of Sherlock Holmes',
-        category: 'history',
-        cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-        reviews: [],
-        author: 'Asdasdas',
-        description: 'sadasdasdasdasdasdasdsadasd',
-        __v: 0,
-      },
-      {
-        averageRating: 0,
-        numberOfRatings: 0,
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        name: 'The Adventures of Sherlock Holmes',
-        category: 'history',
-        cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-        reviews: [],
-        author: 'Asdasdas',
-        description: 'sadasdasdasdasdasdasdsadasd',
-        __v: 0,
-      },
-      {
-        averageRating: 0,
-        numberOfRatings: 0,
-        _id: '6433f6ebcd5a5629b6cffeaf',
-        name: 'The Adventures of Sherlock Holmes',
-        category: 'history',
-        cover: 'sherlock.png-87226405-9d9a-4a32-8f4a-cc43ec17c031',
-        reviews: [],
-        author: 'Asdasdas',
-        description: 'sadasdasdasdasdasdasdsadasd',
-        __v: 0,
-      },
-    ];
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getPopularAuthor() {
-    this.authors = [
-      {
-        _id: 1,
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
+    this._data.getData('/author/').subscribe(
+      (res: any) => {
+        this.authors = res;
       },
-      {
-        _id: 2,
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-      {
-        _id: 3,
-        firstName: 'Ahmed',
-        lastName: 'Ali',
-        dateOfBirth: '1-1-1980',
-      },
-    ];
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -289,8 +111,8 @@ export class HomePageComponent implements OnInit {
     AOS.refresh();
     this.getAllCategores();
     this.getPopularBooks();
+    this.getPopularAuthor();
     this.getAllBooks();
     this.quote = this.allQuote[Math.floor(Math.random() * 6)];
-    this.getPopularAuthor();
   }
 }

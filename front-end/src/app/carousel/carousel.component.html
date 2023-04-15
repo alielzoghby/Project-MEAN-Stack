@@ -1,7 +1,7 @@
 <section id="billboard">
   <div class="main-slider">
     <mdb-carousel [controls]="true" [indicators]="true" [dark]="true">
-      <mdb-carousel-item [interval]="10000" *ngFor="let book of sliderBooks">
+      <mdb-carousel-item [interval]="10000" *ngFor="let book of books">
         <div class="slider-item">
           <div class="banner-content">
             <h2 class="banner-title">{{ book.name }}</h2>
@@ -10,7 +10,7 @@
             </p>
             <div class="btn-wrap">
               <a
-                [routerLink]="['/bookpage', book.id]"
+                [routerLink]="['/bookpage', book._id]"
                 class="btn btn-outline-accent"
                 >Read it now</a
               >
