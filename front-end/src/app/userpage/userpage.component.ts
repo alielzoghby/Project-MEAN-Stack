@@ -57,6 +57,8 @@ export class UserpageComponent {
       "shelf":shelf}).subscribe((res)=>{
         console.log(res)
       })
+
+      this.changeShelf(this.shelf)
     
     }
 

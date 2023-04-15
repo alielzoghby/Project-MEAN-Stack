@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-bookpage',
@@ -18,6 +19,7 @@ export class BookpageComponent {
   rating:any;
   userData: any;
   islogged:boolean=false
+  reviews :any;
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
@@ -33,6 +35,8 @@ export class BookpageComponent {
     this.id = this._ActivatedRoute.snapshot.params['id'];
     this.sub = this._data.getData(`/book/${this.id}`).subscribe((res) => {
       this.bookDetail = res;
+      this.reviews     = this.bookDetail.reviews
+      
      
     });
 
@@ -75,7 +79,7 @@ export class BookpageComponent {
       .subscribe((res) => {
         if (res) {
         }
-        console.log(res);
+        
       });
   }
 
@@ -87,7 +91,7 @@ export class BookpageComponent {
         rating: value,
       })
       .subscribe((res) => {
-        console.log(res);
+        
       });
 
      
@@ -95,15 +99,22 @@ export class BookpageComponent {
       
   }
   addReview() {
-    console.log(this.commentInput);
+    
     this._data
       .patchData('/userBooks/add/review', {
         bookId: this.id,
         review: this.commentInput,
       })
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe((res:any) => {
+        res.books.filter((item:any)=>{
+                 if(item.bookId==this.id){
+                  
+                  this.reviews.push(this.commentInput)
+                 }
+       })
       });
+      this.commentInput=""
+      
   }
 
   ngOnInit(): void {

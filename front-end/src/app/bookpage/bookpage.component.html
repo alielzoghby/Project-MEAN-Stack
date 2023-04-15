@@ -57,7 +57,7 @@
     <h1>reviews</h1>
     <div class="row">
       <div class="col-1 userimg">
-        <img src="../../assets/images/banner.jpg" />
+        
       </div>
       <div class="col-5 usercomment">
         <form action="">
@@ -71,18 +71,18 @@
              (click)="addReview()"
           /> 
           <button class="bookDetailmit" title="send your comment" (click)="addReview()">
-            <i class="fa-regular fa-paper-plane"></i>
+            <i class="fa-regular fa-paper-plane" ></i>
           </button>
         </form>
       </div>
     </div>
-    <div class="comments" *ngFor = "let review of bookDetail.reviews">
+    <div class="comments" *ngFor = "let review of reviews">
       <div class="row">
         <div class="col-1 userimg">
-          <img src={{review.userId.photo}} />
+          
         </div>
         <div class="col-5 otherReviews">
-          <h3 class="pname">{{review.userId.firstName}} {{review.userId.lastName}}</h3>
+          
           <p>
           {{review.review}}
           </p>
