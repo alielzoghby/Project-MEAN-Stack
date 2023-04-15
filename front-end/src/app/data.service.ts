@@ -82,7 +82,7 @@ export class DataService {
         }
       }
     }
-    return this._http.post(`${this.ROOT_URL + endPoint}`, formData, {
+    return this._http.patch(`${this.ROOT_URL + endPoint}`, formData, {
       headers,
     });
   }

@@ -63,6 +63,7 @@ export class UserpageComponent {
   }
 
   UpdateRating(item: any, value: number) {
+    console.log(item.bookId._id);
     item.rating = value;
     this._userBooks
       .patchData('/userBooks/rating', {
