@@ -19,7 +19,7 @@
     </div>
     <div class="row">
       <div class="col-md-3 col-sm-6 ">
-       <select class="shelve form-select" #shelf (change)="onSelected(bookDetail._id,shelf.value)">
+       <select class="shelve form-select" #shelf (change)="onSelected(bookDetail._id,shelf.value)" *ngIf="islogged">
            <option>choose shelf</option>
           <option value='want to read' [attr.selected]="getshelf()=='want to read' ? 'true' : null" >Want to Read</option>
           <option value='Reading' [attr.selected]="getshelf()=='Reading' ? 'true' : null">Reading</option>
@@ -38,21 +38,21 @@
 
 
       <div class="col-md-3 col-sm-6 ps-md-5">
-        <div class="rating">
+        <div class="rating" *ngIf="islogged">
           <h3 class="userrate">your rate</h3>
           
-          <i  [ngClass]="getRating(bookDetail._id) >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
-          <i  [ngClass]="getRating(bookDetail._id) >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
-          <i  [ngClass]="getRating(bookDetail._id) >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
-          <i  [ngClass]="getRating(bookDetail._id) >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
-          <i  [ngClass]="getRating(bookDetail._id) >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
+          <i  [ngClass]="rating >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
+          <i  [ngClass]="rating >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
+          <i  [ngClass]="rating >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
+          <i  [ngClass]="rating >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
+          <i  [ngClass]="rating >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<div class="reviews">
+<div class="reviews" *ngIf="islogged" >
   <div class="container">
     <h1>reviews</h1>
     <div class="row">

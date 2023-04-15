@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-bookpage',
@@ -16,22 +17,34 @@ export class BookpageComponent {
   bookDetail: any;
   rating:any;
   userData: any;
+  islogged:boolean=false
 
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _data: DataService
+    private _data: DataService,
+    private _auth:AuthService
   ) {
+
+    _auth.currentUser.subscribe((res) => {
+      if (_auth.currentUser.getValue()) this.islogged = true;
+      else this.islogged = false;
+    });
 
     this.id = this._ActivatedRoute.snapshot.params['id'];
     this.sub = this._data.getData(`/book/${this.id}`).subscribe((res) => {
       this.bookDetail = res;
-     console.log(this.bookDetail)
+     
     });
 
     this.sub2 = this._data.getData(`/userBooks/book/${this.id}`).subscribe((res: any) => {
      
     this.userData = res
-    console.log(this.userData )
+    if(!this.userData){
+      this.rating = 0
+    }
+    else{
+       this.rating = this.userData.rating
+    }
     
     });
 
@@ -39,18 +52,7 @@ export class BookpageComponent {
 
   }
 
-  getRating(id:string):number{
 
-    if(!this.userData){
-    return  0
-    }
-    else{
-   return this.userData.rating
-    }
-
-   
-
-  }
 
   getshelf():string{
 
@@ -78,7 +80,7 @@ export class BookpageComponent {
   }
 
   UpdateRating(value: number) {
-    this.sub.rating = value;
+    this.rating=value
     this._data
       .patchData('/userBooks/rating', {
         bookId: this.id,
@@ -88,7 +90,7 @@ export class BookpageComponent {
         console.log(res);
       });
 
-      this.getRating(this.id)
+     
 
       
   }
@@ -106,7 +108,7 @@ export class BookpageComponent {
 
   ngOnInit(): void {
 
-    this.getRating(this.id)
+    
    
   }
 
