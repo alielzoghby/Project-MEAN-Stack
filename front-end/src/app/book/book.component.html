@@ -1,5 +1,5 @@
 <figure class="book-style">
-  <img src="../../assets/images/tab-item1.jpg" alt="Books" class="book-item" />
+  <img [src]="data.cover" alt="Books" class="book-item" />
   <button type="button" class="read-more">
     <a [routerLink]="['/bookpage', data.id]">Read it now</a>
   </button>
@@ -9,3 +9,5 @@
     <p>{{ data.author }}</p>
   </figcaption>
 </figure>
+
+<!-- src="../../assets/images/tab-item1.jpg" -->

@@ -83,7 +83,7 @@ export class AddbooksComponent implements OnInit {
         this.books.unshift(res);
       },
       (err) => {
-        this.error = 'added Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -93,7 +93,7 @@ export class AddbooksComponent implements OnInit {
       this.message = false;
       console.log(this.error);
       console.log(this.message);
-    }, 3000);
+    }, 5000);
     this.bookForm.reset();
   }
 
@@ -112,7 +112,7 @@ export class AddbooksComponent implements OnInit {
         this.books.splice(this.i, 1);
       },
       (err) => {
-        this.error = 'delete Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -120,7 +120,7 @@ export class AddbooksComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-    }, 3000);
+    }, 5000);
   }
 
   /////////////////////////////////BOT METHOD
@@ -138,7 +138,7 @@ export class AddbooksComponent implements OnInit {
         this.error = false;
       },
       (err) => {
-        this.error = 'Update Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -146,16 +146,14 @@ export class AddbooksComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-      console.log(this.error);
-      console.log(this.message);
-    }, 3000);
+    }, 5000);
   }
 
   ngOnInit(): void {
     this.booksApi.subscribe((res) => {
       let data = this.booksApi.getValue();
       this.totalItem = data.totalPages;
-      this.books = data.data;
+      this.books = data.data.reverse();
     });
 
     this.catagorysApi.subscribe((res) => {

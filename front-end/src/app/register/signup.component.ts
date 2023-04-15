@@ -48,6 +48,7 @@ export class SignupComponent {
         Validators.minLength(8),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
+      photo: new FormControl(null),
     });
 
     this.registerForm.addValidators(
@@ -58,7 +59,18 @@ export class SignupComponent {
     );
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.registerForm.get('photo')?.setValue(file);
+  }
+
+  onFileSelectedFormUpdate(event: any) {
+    const file = event.target.files[0];
+    this.registerForm.value.photo = file;
+  }
+
   submitForm(registerForm: FormGroup) {
+    console.log(registerForm.value);
     delete registerForm.value.confirmPassword;
     this.lodaing = true;
     this._auth.register(registerForm.value, '/auth/sing-up').subscribe(
@@ -67,8 +79,9 @@ export class SignupComponent {
         this.open();
       },
       (err) => {
-        this.lodaing = false;
+        console.log(err);
 
+        this.lodaing = false;
         this.error = err.error.message;
       }
     );

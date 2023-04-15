@@ -62,7 +62,7 @@ export class AddcategoriesComponent implements OnInit {
         this.categories.unshift(res);
       },
       (err) => {
-        this.error = 'added Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -70,9 +70,7 @@ export class AddcategoriesComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-      console.log(this.error);
-      console.log(this.message);
-    }, 3000);
+    }, 5000);
 
     this.categorieForm.reset();
   }
@@ -92,7 +90,7 @@ export class AddcategoriesComponent implements OnInit {
         this.categories.splice(this.i, 1);
       },
       (err) => {
-        this.error = 'delete Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -100,9 +98,7 @@ export class AddcategoriesComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-      console.log(this.error);
-      console.log(this.message);
-    }, 3000);
+    }, 5000);
   }
 
   /////////////////////////////////BOT METHOD
@@ -120,7 +116,7 @@ export class AddcategoriesComponent implements OnInit {
         this.error = false;
       },
       (err) => {
-        this.error = 'Update Failed';
+        this.error = err.error.message;
         this.message = false;
       }
     );
@@ -128,7 +124,7 @@ export class AddcategoriesComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-    }, 3000);
+    }, 5);
   }
 
   ///////////////////////////////////////////

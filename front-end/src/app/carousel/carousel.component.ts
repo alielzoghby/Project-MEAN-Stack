@@ -12,6 +12,6 @@ export class CarouselComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.sliderBooks = this.books.filter((el: any, i: any) => i < 5);
+    this.sliderBooks = this.books;
   }
 }

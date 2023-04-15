@@ -48,6 +48,7 @@ import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
+import { SearchComponent } from './search/search.component';
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
@@ -72,6 +73,7 @@ import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
     AddcategoriesComponent,
     AddbooksComponent,
     AddauthorsComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
