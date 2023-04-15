@@ -21,7 +21,6 @@ export class AdminGuard implements CanActivate {
       else this.adminLoged = false;
     });
   }
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

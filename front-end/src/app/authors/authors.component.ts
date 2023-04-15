@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data.service';
-
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',

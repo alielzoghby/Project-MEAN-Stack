@@ -59,7 +59,6 @@ export class AddbooksComponent implements OnInit {
     const file = event.target.files[0];
     console.log(file);
     this.formUpdate.value.cover = file;
-    console.log(this.formUpdate.value.cover);
   }
 
   open(content: any) {

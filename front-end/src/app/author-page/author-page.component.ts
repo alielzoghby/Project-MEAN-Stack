@@ -5,7 +5,6 @@ import { DataService } from '../data.service';
 import { AuthGardGuard } from '../auth-gard.guard';
 import { OnDestroy, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-author-page',
   templateUrl: './author-page.component.html',
@@ -28,8 +27,7 @@ export class AuthorPageComponent {
     private router: ActivatedRoute,
     private _Author: DataService,
     private _Auth: AuthGardGuard,
-    
-    
+    private _authorService: DataService
   ) {
     this.isLogged = _Auth.islogged;
     this.id = this.router.snapshot.params['id'];
@@ -44,19 +42,14 @@ export class AuthorPageComponent {
       .subscribe((res: any) => {
         this.authorBooks = res.data;
       });
-
-   
-
   }
- 
-
 
   onSelected(item: any, shelf: string) {
-    
-      this._Author.postData('/userBooks/', { bookId: item, shelf: shelf }).subscribe((res)=>{
-        console.log(res)
+    this._Author
+      .postData('/userBooks/', { bookId: item, shelf: shelf })
+      .subscribe((res) => {
+        console.log(res);
       });
-
   }
 
   ngOnDestroy(): void {}
