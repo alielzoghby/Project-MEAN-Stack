@@ -48,6 +48,7 @@ import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
+import { DatePipe } from '@angular/common';
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
@@ -109,6 +110,7 @@ import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptorInterceptor,
       multi: true,
+    
     },
   ],
   bootstrap: [AppComponent],

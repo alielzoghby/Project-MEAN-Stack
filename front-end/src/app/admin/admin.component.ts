@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -7,39 +8,38 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  books: any;
-  catagorys: any;
-  authors: any;
+  books = new BehaviorSubject(null);
+  catagorys = new BehaviorSubject(null);
+  authors = new BehaviorSubject(null);
 
   constructor(private _data: AuthService) {}
 
   getBooks() {
     this._data.getData('/backOffice/book/').subscribe(
       (res: any) => {
-        this.books = res.data;
-        console.log(this.books);
+        this.books.next(res);
       },
       (err) => {
         console.log(err);
       }
     );
   }
+
   getAuthors() {
     this._data.getData('/backOffice/author/').subscribe(
       (res: any) => {
-        this.authors = res;
-        console.log(this.authors);
+        this.authors.next(res);
       },
       (err) => {
         console.log(err);
       }
     );
   }
+
   getCatagorys() {
-    this._data.getData('/backOffice/book/').subscribe(
+    this._data.getData('/backOffice/category').subscribe(
       (res: any) => {
-        this.catagorys = res;
-        console.log(this.catagorys);
+        this.catagorys.next(res);
       },
       (err) => {
         console.log(err);

@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
+import { BehaviorSubject } from 'rxjs';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-addcategories',
@@ -10,25 +11,28 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./addcategories.component.css'],
 })
 export class AddcategoriesComponent implements OnInit {
-  @Input() data: any;
+  @Input() apiData!: BehaviorSubject<any>;
+
   @ViewChild('deleteC') delete!: HTMLElement;
   @ViewChild('updateC') update!: HTMLElement;
+  @ViewChild('alert') alert!: HTMLElement;
 
   i: any;
   deleteId: string = '';
   updateId: any = '';
   editingIndex = -1;
+  message: any;
+  error: any;
 
   categories: any;
-  totalItem = 0;
+  totalItem = 1;
   curentPage = 1;
 
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    private _data: AuthService
+    private _data: DataService
   ) {
-    // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -51,19 +55,54 @@ export class AddcategoriesComponent implements OnInit {
 
   /////////////////////////////////POST METHOD
   postCategorie(form: FormGroup) {
-    console.log(form.value);
+    this._data.postData('/backOffice/category/', form.value).subscribe(
+      (res) => {
+        this.message = 'added Success';
+        this.error = false;
+        this.categories.unshift(res);
+      },
+      (err) => {
+        this.error = 'added Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
+
     this.categorieForm.reset();
   }
-
+  //
   /////////////////////////////////DELETE METHOD
-  getAlertDelete(event: any) {
+  getAlertDelete(event: any, i: any) {
+    this.i = i;
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
-    console.log();
   }
 
   deleteCategorie() {
-    console.log(this.deleteId);
+    this._data.deleteData(`/backOffice/category/${this.deleteId}`).subscribe(
+      (res) => {
+        this.message = 'delete Success';
+        this.error = false;
+        this.categories.splice(this.i, 1);
+      },
+      (err) => {
+        this.error = 'delete Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
   /////////////////////////////////BOT METHOD
@@ -73,10 +112,31 @@ export class AddcategoriesComponent implements OnInit {
     this.modalService.open(this.update);
   }
 
-  botCategorie() {
-    console.log(this.updateId, this.categories[this.i]._id);
+  putCategorie() {
+    let id = this.categories[this.i]._id;
+    this._data.putData(`/backOffice/category/${id}`, this.updateId).subscribe(
+      (res) => {
+        this.message = 'Update Success';
+        this.error = false;
+      },
+      (err) => {
+        this.error = 'Update Failed';
+        this.message = false;
+      }
+    );
+
+    setTimeout(() => {
+      this.error = false;
+      this.message = false;
+      console.log(this.error);
+      console.log(this.message);
+    }, 3000);
   }
 
   ///////////////////////////////////////////
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.apiData.subscribe((res) => {
+      this.categories = this.apiData.getValue().reverse();
+    });
+  }
 }

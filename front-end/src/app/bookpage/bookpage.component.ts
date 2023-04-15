@@ -9,123 +9,104 @@ import { DataService } from '../data.service';
 })
 export class BookpageComponent {
   id: string = '';
-  Math = Math 
-  commentInput:any  ;
-  sub :any;
-  sub2:any;
-  bookDetail:any = {
-    name: "test Book",
-    categoryId: {    
-      name:"Test Category",
-      numberOfBooks:10        // authorId. firstName  authorId. lastNamecategoryId.name   
-    },
-    authorId: {
-      firstName:"nada",
-      lastName:"hisham"
-    
-    },
-  
-    cover: "../../assets/image/team-member3.jpg"
-    ,
-    numberOfRatings:3,
-  
-    sumOfRatings:6,
-    description: "tdtykfkhbjnkjnjhvgcuc",
-    reviews: [
-      {
-        review : "dfgfuvgWDVLJBKJSDVwefbkjbKHEWVgwevnlkmw;bvjHWEIF",
-       userId:{
-       firstName: "yasin",
-       lastName: "hisham",
-       photo:"../../assets/images/team-member5.jpg"
-       }
-      },
-      {
-        review : "dfgfuvgWDVLJBKJSDVwefbkjbKHEWVgwevnlkmw;bvjHWEIF",
-       userId:{
-       firstName: "yasmin",
-       lastName: "hisham",
-       photo:"../../assets/images/team-member7.jpg"
-       }
-      }
-   ]
+  Math = Math;
+  commentInput: any;
+  sub: any;
+  sub2: any;
+  bookDetail: any;
+
+  userData: any;
+
+  constructor(
+    private _ActivatedRoute: ActivatedRoute,
+    private _data: DataService
+  ) {
+
+    this.id = this._ActivatedRoute.snapshot.params['id'];
+    this.sub = this._data.getData(`/book/${this.id}`).subscribe((res) => {
+      this.bookDetail = res;
+      console.log(this.bookDetail)
+    });
+
+    this.sub2 = this._data.getData(`/userBooks/book/${this.id}`).subscribe((res: any) => {
+    this.userData = res
+
+    if(this.userData ){
+          console.log(this.userData.books[0])
+    }else{
+      this.userData.books[0].shelf="none"
+      this.userData.rating = 0
+    }
+
+    });
+
   }
 
-  userData = {
-    bookId:{
-         id: 123445,
-         name:"hell",
-         categoryId:"lhkjbkb",
-         authorId:"lhkjbhvjhvjv",
-         averageRating: 5,
-         cover:"../../assets/images/",
-         numberOfRatings: 4,
-         sumOfRatings: 11,
-         description:"jkfkjgnjknggergkjekbgbkgjgnkntkntgntgbk ",
-         reviews: [
-           {
-             userId:"lhkgjgj",
-             review: "ohiugiugigigig",
-           },
-         ],
-       },
-     
-   shelf: "Reading",
-   rating:5,
-   review:"",
-   authorName:"hany"
+  getRating():number{
+
+    if(!this.userData){
+      return 0
+    }
+    else{
+      return this.userData.rating
+    }
+
   }
-  
-     constructor(
-      private _ActivatedRoute: ActivatedRoute,
-      private _data: DataService
-    ){
-      
-   
-  
+
+  getshelf():string{
+
+    if(!this.userData){
+      return "none"
+    }
+    else{
+      return this.userData.books[0].shelf
     }
 
-  
+  }
 
+  onSelected(i: any, selectedShelf: string) {
+    this._data
+      .postData('/userBooks/', {
+        bookId: i,
+        shelf: selectedShelf,
+      })
+      .subscribe((res) => {
+        if (res) {
+        }
+        console.log(res);
+      });
+  }
 
-
-    onSelected(i:any,selectedShelf:string){
-    console.log(selectedShelf,i)
-    }
-
-    UpdateRating(value:number){
-
-    this.sub.rating=value
-   this._data.patchData('/userBooks/rating',value).subscribe((res)=>{
-    console.log(res)
-  })
-    }
- addReview(){
-
-  console.log(this.commentInput)
-  this._data.patchData('/userBooks/add/review',this.commentInput).subscribe((res)=>{
-    console.log(res)
-  })
-
- }
-
+  UpdateRating(value: number) {
+    this.sub.rating = value;
+    this._data
+      .patchData('/userBooks/rating', {
+        bookId: this.id,
+        rating: value,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+  addReview() {
+    console.log(this.commentInput);
+    this._data
+      .patchData('/userBooks/add/review', {
+        bookId: this.id,
+        review: this.commentInput,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 
   ngOnInit(): void {
-    // this.id = this._ActivatedRoute.snapshot.params['id'];
-    // this.sub = this._data.getData(`/books/${this.id}`).subscribe((res) => {
-    //   this.bookDetail = res;
-    // });
 
-    // this.sub2 = this._data.getData('/userBooks/all').subscribe((res)=>{
-    //   this.userData=res.filter((item)=>{
-    //     if(item.bookId._id==this.bookDetail._id){
-    //       return item
-    //     }
-    //   })
-    // })
+  
+   
   }
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

@@ -4,13 +4,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-6 img">
-        <div><img class= "authorImg"src="../../assets/images/product-item1.jpg" /></div>
+        <div><img class= "authorImg"src={{bookDetail.cover}} /></div>
       </div>
       <div class="col-md-6 ps-md-5">
         <div class="bookname">
           <h1>{{bookDetail.name}}</h1>
-          <h4><a [routerLink]="['/author/:id']">{{bookDetail.authorId.firstName}} {{bookDetail.authorId.laststName}}</a></h4>
-          <h4><a [routerLink]="['/categories']">{{bookDetail.categoryId.name}}</a></h4>
+          <h4><a [routerLink]="['/author/',bookDetail.authorId._id]">{{bookDetail.authorId.firstName}} {{bookDetail.authorId.laststName}}</a></h4>
+          <h4><a [routerLink]="['/categories/',bookDetail.categoryId._id]"></a></h4>
         </div>
         <p class="brife">
               {{bookDetail.description}}
@@ -19,18 +19,19 @@
     </div>
     <div class="row">
       <div class="col-md-3 col-sm-6 ">
-        <select class="shelve form-select" #shelf (change)="onSelected(bookDetail,shelf.value)">
-          <option value='want to read' [attr.selected]="bookDetail.shelf=='want to read' ? 'true' : null" >Want to Read</option>
-          <option value='Reading'      [attr.selected]="bookDetail.shelf=='Reading' ? 'true' : null">Reading</option>
-          <option value='Read'         [attr.selected]="bookDetail.shelf=='Read' ? 'true' : null">Read</option>
+       <select class="shelve form-select" #shelf (change)="onSelected(bookDetail._id,shelf.value)">
+           <option>choose shelf</option>
+          <option value='want to read' [attr.selected]="getshelf()=='want to read' ? 'true' : null" >Want to Read</option>
+          <option value='Reading' [attr.selected]="getshelf()=='Reading' ? 'true' : null">Reading</option>
+          <option value='Read' [attr.selected]="getshelf()=='Read' ? 'true' : null">Read</option> 
         </select>
        <div class="AVGrate">
           <div class="rate">
-              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
-              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="Math.floor(bookDetail.sumOfRatings/bookDetail.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
+              <i  [ngClass]="bookDetail.averageRating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
+              <i  [ngClass]="bookDetail.averageRating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="bookDetail.averageRating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="bookDetail.averageRating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+              <i  [ngClass]="bookDetail.averageRating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
           </div>
         </div>
       </div>
@@ -39,11 +40,11 @@
       <div class="col-md-3 col-sm-6 ps-md-5">
         <div class="rating">
           <h3 class="userrate">your rate</h3>
-          <i  [ngClass]="bookDetail.rating >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
-          <i  [ngClass]="bookDetail.rating >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
-          <i  [ngClass]="bookDetail.rating >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
-          <i  [ngClass]="bookDetail.rating >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
-          <i  [ngClass]="bookDetail.rating >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
+          <i  [ngClass]="getRating() >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
+          <i  [ngClass]="getRating() >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
+          <i  [ngClass]="getRating() >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
+          <i  [ngClass]="getRating() >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
+          <i  [ngClass]="getRating() >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
         </div>
       </div>
     </div>

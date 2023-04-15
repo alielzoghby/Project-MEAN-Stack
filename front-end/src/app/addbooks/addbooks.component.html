@@ -1,3 +1,13 @@
+<div
+  #alert
+  class="alert"
+  *ngIf="message || error"
+  [class]="message ? 'alert-success' : error ? 'alert-danger' : ''"
+>
+  <p *ngIf="error">{{ error }}</p>
+  <p *ngIf="message">{{ message }}</p>
+</div>
+
 <button (click)="open(content)" class="btn btn-link float-end">
   <i class="fa-solid fa-circle-plus fa-xl my-3"></i>
 </button>
@@ -8,8 +18,8 @@
       <th>ID</th>
       <th>Photo</th>
       <th>Name</th>
-      <th>CategoryId</th>
-      <th>AuthorId</th>
+      <th>Category</th>
+      <th>Author</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -17,10 +27,10 @@
     <tr *ngFor="let book of books; let i = index">
       <ng-container *ngIf="!isItemEditing(i); else editingRow">
         <td>{{ book._id }}</td>
-        <td>{{ book }}</td>
+        <td><img src="{{ book.cover }}" alt="" /></td>
         <td>{{ book.name }}</td>
-        <td>{{ book.category }}</td>
-        <td>{{ book.author }}</td>
+        <td>{{ book.categoryId.name }}</td>
+        <td>{{ book.authorId.firstName + " " + book.authorId.lastName }}</td>
         <td>
           <button
             type="button"
@@ -32,7 +42,7 @@
           <button
             type="button"
             class="btn btn-link btn-sm btn-rounded"
-            (click)="getAlertDelete($event)"
+            (click)="getAlertDelete($event, i)"
           >
             <i [id]="book._id" class="fa-solid fa-trash-can"></i>
           </button>
@@ -41,11 +51,11 @@
 
       <ng-template #editingRow>
         <td colspan="6">
-          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm)">
+          <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm, i)">
             <table class="table align-middle mb-0 bg-white">
               <tr>
                 <td>
-                  <div>{{ book._id }}</div>
+                  <div>{{ books[i]._id }}</div>
                 </td>
                 <td class="fix-width1">
                   <div>
@@ -78,12 +88,13 @@
                       id="Input2"
                       name="categoryId"
                       ngModel
+                      [(ngModel)]="books[i].categoryId._id"
                     >
                       <option
-                        *ngFor="let category of catagorys"
+                        *ngFor="let category of categories"
                         value="{{ category._id }}"
                       >
-                        {{ category.category }}
+                        {{ category.name }}
                       </option>
                     </select>
                   </div>
@@ -95,6 +106,7 @@
                       id="Input3"
                       name="authorId"
                       ngModel
+                      [(ngModel)]="books[i].authorId._id"
                     >
                       <option
                         *ngFor="let author of authors"
@@ -181,7 +193,10 @@
         <label for="Input2">Category</label>
 
         <select class="form-control" id="Input2" formControlName="categoryId">
-          <option *ngFor="let category of catagorys" value="{{ category._id }}">
+          <option
+            *ngFor="let category of categories"
+            value="{{ category._id }}"
+          >
             {{ category.category }}
           </option>
         </select>
@@ -291,7 +306,7 @@
     <button
       type="button"
       class="btn btn-danger"
-      (click)="c(); botBook(); editingIndex = -1"
+      (click)="c(); putBook(); editingIndex = -1"
     >
       ok
     </button>

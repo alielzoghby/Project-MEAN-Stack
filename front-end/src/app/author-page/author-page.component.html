@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="img col-md-6 col-sm-12">
-        <img src={{authorData.photo}} />
+        <!-- <img src={{authorData.photo}} /> -->
       </div>
 
       <div class="col-md-6 col-sm-12 brief">
@@ -12,7 +12,7 @@
         <p>
           {{authorData.bio}}
         </p>
-        <div class="date">{{authorData.dateOfBirth}}</div>
+        <div class="date">{{authorData.dob}}</div>
       </div>
     </div>
   </div>
@@ -30,12 +30,13 @@
 <div class="AuthorsBooks">
   <div class="container">
     <h1>{{authorData.firstName}}{{authorData.lastName}}'s Books</h1>
-    <div class="row" *ngFor="let book of authorBooks">
+    <div class="row" *ngFor="let book of authorBooks ">
+                          
       <div class="col-md-6 col-sm-12 book">
         <img src= {{book.cover}} />
         <div class="bookinfo">
-          <div class="bookname">{{book.name}}</div>
-          <div class="AVGRating">
+          <div class="bookname"><a [routerLink]="['/bookpage/',book._id]">{{book.name}}</a></div>
+          <div class="AVGRating">                 
             <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
             <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
             <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
@@ -46,20 +47,15 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged">
-        <div class="pt-3 shelve">
-          <select class="form-select">
-            <option selected>Want to Read</option>
-            <option value="1">Currently Read</option>
-            <option value="2">Read</option>
+      <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged" >
+        <div class="pt-3 shelve" >
+          <select class="form-select" #shelf (change)="onSelected(book._id,shelf.value)">
+           
+            <option> chooose shelf </option>
+            <option value='want to read'>Want to Read</option>
+            <option value='Reading'>Reading</option>
+            <option value='Read' >Read</option>
           </select>
-        </div>
-        <div class="userRate">
-          <!-- <i  [ngClass]="i.rating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,1)"></i>
-          <i  [ngClass]="i.rating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,2)"></i>
-          <i  [ngClass]="i.rating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,3)"></i>
-          <i  [ngClass]="i.rating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(i,4)"></i>
-          <i  [ngClass]="i.rating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(i,5)"></i> -->
         </div>
       </div>
     </div>

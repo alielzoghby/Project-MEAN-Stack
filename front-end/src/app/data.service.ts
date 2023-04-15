@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DataService {
-  readonly ROOT_URL = 'http://localhost:3000';
+  readonly ROOT_URL = 'https://good-reads-a4s1.onrender.com';
 
   constructor(private _http: HttpClient) {}
 
@@ -26,6 +26,6 @@ export class DataService {
   }
 
   patchData(endPoint: string, data: any) {
-    return this._http.put(`${this.ROOT_URL + endPoint}`, data);
+    return this._http.patch(`${this.ROOT_URL + endPoint}`, data);
   }
 }

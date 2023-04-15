@@ -124,4 +124,8 @@ deleteAuthor(){
 
 }
 
+getuserBooksByAuthor(data:any){
+  return this.httpclient.get(data)
+}
+
 }
