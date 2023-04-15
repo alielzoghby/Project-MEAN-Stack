@@ -4,11 +4,11 @@
   <div class="container">
     <div class="row">
       <div class="img col-md-6 col-sm-12">
-        <!-- <img src={{authorData.photo}} /> -->
+        <img src={{authorData.photo}} />
       </div>
 
       <div class="col-md-6 col-sm-12 brief">
-        <h1>{{authorData.firstName}}{{authorData.lastName}}</h1>
+        <h1>{{authorData.firstName}} {{authorData.lastName}}</h1>
         <p>
           {{authorData.bio}}
         </p>
@@ -49,12 +49,12 @@
 
       <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged" >
         <div class="pt-3 shelve" >
-          <select class="form-select" #shelf (change)="onSelected(book._id,shelf.value)">
-           
-            <option> chooose shelf </option>
-            <option value='want to read'>Want to Read</option>
-            <option value='Reading'>Reading</option>
-            <option value='Read' >Read</option>
+          <select class="form-select" #shelf (change)="onSelected(book._id,shelf.value) "  >
+          
+            <option> chooose shelf  </option>
+            <option [attr.selected]="getshelf(book._id)=='want to read' ? 'true' : null" value='want to read'>Want to Read</option>
+            <option [attr.selected]="getshelf(book._id)=='Reading' ? 'true' : null" value='Reading'>Reading</option>
+            <option [attr.selected]="getshelf(book._id)=='Read' ? 'true' : null" value='Read' >Read</option>
           </select>
         </div>
       </div>

@@ -8,10 +8,6 @@
 
       <img src={{author.photo}} />
 
-      <div class="date" *ngIf="author.dob">was born in : <br>
-       <span  *ngIf="author.dob" >{{author.dob | date: 'dd/MM/YYYY'}}</span> 
-
-     </div>
      
   <div class="name"> <a [routerLink]="['/author/',author._id]" *ngIf="author.firstName && author.lastName"> writer : {{author.firstName}} {{author.lastName}} </a>
   </div>
