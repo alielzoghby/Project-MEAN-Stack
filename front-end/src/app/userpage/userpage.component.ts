@@ -73,6 +73,7 @@ export class UserpageComponent {
 
 
   UpdateRating(item: any, value: number) {
+    console.log(item.bookId._id)
     item.rating = value;
     this._userBooks.patchData('/userBooks/rating',{"bookId":item.bookId._id,
     "rating":value}).subscribe((res)=>{
@@ -81,6 +82,6 @@ export class UserpageComponent {
   }
 
   ngOnDestroy(): void {
-    this.temp2.unsubscribe();
+   
   }
 }
