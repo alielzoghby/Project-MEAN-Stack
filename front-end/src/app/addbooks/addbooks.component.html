@@ -151,6 +151,10 @@
     [collectionSize]="totalItem"
     [(page)]="curentPage"
     [boundaryLinks]="true"
+    [maxSize]="5"
+    [rotate]="true"
+    [ellipses]="false"
+    (pageChange)="getPaginatian()"
   ></ngb-pagination>
 </div>
 
@@ -197,7 +201,7 @@
             *ngFor="let category of categories"
             value="{{ category._id }}"
           >
-            {{ category.category }}
+            {{ category.name }}
           </option>
         </select>
 

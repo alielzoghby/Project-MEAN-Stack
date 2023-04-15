@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,7 @@ export class AdminComponent implements OnInit {
   catagorys = new BehaviorSubject(null);
   authors = new BehaviorSubject(null);
 
-  constructor(private _data: AuthService) {}
+  constructor(private _data: DataService) {}
 
   getBooks() {
     this._data.getData('/backOffice/book/').subscribe(

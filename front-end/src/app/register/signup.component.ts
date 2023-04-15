@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -48,7 +49,7 @@ export class SignupComponent {
         Validators.minLength(8),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
-      photo: new FormControl(null),
+      image: new FormControl(null),
     });
 
     this.registerForm.addValidators(
@@ -61,18 +62,18 @@ export class SignupComponent {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.registerForm.get('photo')?.setValue(file);
+    this.registerForm.get('image')?.setValue(file);
   }
 
   onFileSelectedFormUpdate(event: any) {
     const file = event.target.files[0];
-    this.registerForm.value.photo = file;
+    this.registerForm.value.image = file;
   }
 
   submitForm(registerForm: FormGroup) {
-    console.log(registerForm.value);
     delete registerForm.value.confirmPassword;
     this.lodaing = true;
+    console.log(registerForm.value);
     this._auth.register(registerForm.value, '/auth/sing-up').subscribe(
       (res) => {
         this.lodaing = false;
@@ -80,7 +81,6 @@ export class SignupComponent {
       },
       (err) => {
         console.log(err);
-
         this.lodaing = false;
         this.error = err.error.message;
       }

@@ -9,6 +9,11 @@
   width: 100%;
   justify-content: center;
 }
+
+.banner-image {
+  height: 530px;
+  width: 400px;
+}
 .main-slider .banner-content {
   width: 35%;
   margin-top: 90px;

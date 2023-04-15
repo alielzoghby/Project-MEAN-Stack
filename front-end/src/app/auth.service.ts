@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
@@ -28,7 +32,23 @@ export class AuthService {
   }
 
   register(data: any, endPoint: string): Observable<any> {
-    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
+    const headers = new HttpHeaders();
+    headers.set('enctype', 'multipart/form-data');
+    const formData = new FormData();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        if (data[key] instanceof FileList) {
+          for (let i = 0; i < data[key].length; i++) {
+            formData.append(key, data[key][i]);
+          }
+        } else {
+          formData.append(key, data[key]);
+        }
+      }
+    }
+    return this._http.post(`${this.ROOT_URL + endPoint}`, formData, {
+      headers,
+    });
   }
 
   login(data: any, endPoint: string): Observable<any> {
@@ -39,26 +59,6 @@ export class AuthService {
     this.currentUser.next(null);
     localStorage.removeItem('userTaken');
     this._router.navigate(['/home']);
-  }
-
-  getData(endPoint: string) {
-    return this._http.get(`${this.ROOT_URL + endPoint}`);
-  }
-
-  postData(endPoint: string, data: any) {
-    return this._http.post(`${this.ROOT_URL + endPoint}`, data);
-  }
-
-  deleteData(endPoint: string) {
-    return this._http.delete(`${this.ROOT_URL + endPoint}`);
-  }
-
-  putData(endPoint: string, data: any) {
-    return this._http.put(`${this.ROOT_URL + endPoint}`, data);
-  }
-
-  patchData(endPoint: string, data: any) {
-    return this._http.patch(`${this.ROOT_URL + endPoint}`, data);
   }
 
   saveCurrentUser() {
