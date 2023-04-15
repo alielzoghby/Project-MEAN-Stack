@@ -1,58 +1,66 @@
 <app-navbar></app-navbar>
-<section id="popular-books">
+<section id="categories" class="bookshelf">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="section-header align-center">
+          <div class="title">
+            <span>Some quality items</span>
+          </div>
           <h2 class="section-title">Categories</h2>
         </div>
 
-        <ul class="tabs">
-          <li class="active tab" data-aos="fade-down">All Genre</li>
-          <li class="tab" data-aos="fade-down" data-aos-duration="2000">
-            Business
+        <ul
+          class="tabs w-75 d-flex justify-content-center mx-auto flex-md-wrap"
+        >
+          <li
+            [class.active]="selectedIndex === -1"
+            data-tab-target="#all-genre"
+            class="active tab"
+            data-aos="fade-down"
+            (click)="selectedIndex = -1"
+          >
+            <span (click)="getAllBooks(); idCategory = false"> All Genre </span>
           </li>
-          <li class="tab" data-aos="fade-down" data-aos-duration="2200">
-            Technology
-          </li>
-          <li class="tab" data-aos="fade-down" data-aos-duration="2400">
-            Romantic
-          </li>
-          <li class="tab" data-aos="fade-down" data-aos-duration="2600">
-            Adventure
-          </li>
-          <li class="tab" data-aos="fade-down" data-aos-duration="2800">
-            Fictional
+          <li
+            *ngFor="let category of categoerys; let i = index"
+            [class.active]="selectedIndex === i"
+            data-tab-target="#business"
+            class="tab"
+            data-aos="fade-down"
+            data-aos-duration="2000"
+            (click)="selectedIndex = i; idCategory = category._id"
+          >
+            <span (click)="getCategoryBooks(category._id)">{{
+              category.name
+            }}</span>
           </li>
         </ul>
 
         <div class="tab-content" data-aos="fade-right" data-aos-duration="2200">
           <div id="all-genre">
             <div class="row">
-              <div class="col-md-3">
-                <figure class="product-style">
-                  <img
-                    src="../../assets/images/tab-item1.jpg"
-                    alt="Books"
-                    class="product-item"
-                  />
-                  <button
-                    type="button"
-                    class="add-to-cart"
-                    data-product-tile="add-to-cart"
-                  >
-                    Read it now
-                  </button>
-                  <figcaption>
-                    <h3>Portrait photography</h3>
-                    <p>Adam Silber</p>
-                  </figcaption>
-                </figure>
-              </div>
+              <app-book
+                class="col-md-2"
+                *ngFor="let book of categoryBooks"
+                [data]="book"
+              ></app-book>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="my-4">
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [collectionSize]="totalItem"
+        [(page)]="curentPage"
+        [boundaryLinks]="true"
+        [maxSize]="5"
+        [rotate]="true"
+        [ellipses]="false"
+        (pageChange)="getPaginatian()"
+      ></ngb-pagination>
     </div>
   </div>
 </section>
