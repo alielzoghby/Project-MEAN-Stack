@@ -28,41 +28,28 @@ export class UserpageComponent {
       this.data = res;
       this.shownData = this.data[0].books;
       
+      console.log(this.data[0].books)
+      
     });
   }
 
   changeShelf(choosenShelf: string) {
     this.shelf=choosenShelf
-    console.log(this.shelf)
+   
     if(this.shelf!="ALL"){
-      this.temp    = this._userBooks.getData(`/userBooks/${choosenShelf}`).subscribe((res)=>{
-        if(res){
-         this.data = res
-         if( this.shownData= this.data[0].books){
-          this.shownData= this.data[0].books
-          console.log( this.shownData) 
+      
+      this.shownData = this.data[0].books.filter((item:any)=>{
+     return item.shelf==this.shelf  
+      })
          }else{
-          this.shownData= []
-        console.log( this.shownData) 
+          this.shownData = this.data[0].books
          }
+
+       
         
         }
-        else{
-          this.data = []
-          this.shownData= []
-          console.log( this.shownData)
-        }
         
-     })}
-    
-    else{
-      this.temp    = this._userBooks.getData(`/userBooks/all`).subscribe((res)=>{
-        this.data = res
-        this.shownData= this.data[0].books
-         
-     })
-    }
-  }
+  
 
   onSelected(item:any,shelf:string){
    
@@ -83,9 +70,7 @@ export class UserpageComponent {
       
     }
 
-    getAvgRating(){
 
-    }
 
   UpdateRating(item: any, value: number) {
     item.rating = value;

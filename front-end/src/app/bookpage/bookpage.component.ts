@@ -14,7 +14,7 @@ export class BookpageComponent {
   sub: any;
   sub2: any;
   bookDetail: any;
-
+  rating:any;
   userData: any;
 
   constructor(
@@ -25,29 +25,30 @@ export class BookpageComponent {
     this.id = this._ActivatedRoute.snapshot.params['id'];
     this.sub = this._data.getData(`/book/${this.id}`).subscribe((res) => {
       this.bookDetail = res;
-      console.log(this.bookDetail)
+     console.log(this.bookDetail)
     });
 
     this.sub2 = this._data.getData(`/userBooks/book/${this.id}`).subscribe((res: any) => {
-      console.log(res)
+     
     this.userData = res
+    console.log(this.userData )
+    
     });
 
-    console.log(this.sub2)
+    
 
   }
 
   getRating(id:string):number{
 
     if(!this.userData){
-      return 0
+    return  0
     }
     else{
-     console.log(this.userData) 
-    return 5
-      
-
+   return this.userData.rating
     }
+
+   
 
   }
 
@@ -57,8 +58,9 @@ export class BookpageComponent {
       return "none"
     }
     else{
-      return this.userData.books[0].shelf
+       return this.userData.shelf
     }
+    
 
   }
 
@@ -86,6 +88,8 @@ export class BookpageComponent {
         console.log(res);
       });
 
+      this.getRating(this.id)
+
       
   }
   addReview() {
@@ -102,7 +106,7 @@ export class BookpageComponent {
 
   ngOnInit(): void {
 
-  
+    this.getRating(this.id)
    
   }
 

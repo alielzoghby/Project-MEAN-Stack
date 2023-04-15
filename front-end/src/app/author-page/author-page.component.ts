@@ -34,7 +34,7 @@ export class AuthorPageComponent {
 
     this.temp = _Author.getData(`/author/${this.id}`).subscribe((res) => {
       this.authorData = res;
-      console.log(this.authorData);
+      
     });
 
     this.temp2 = _Author
@@ -42,13 +42,15 @@ export class AuthorPageComponent {
       .subscribe((res: any) => {
         this.authorBooks = res.data;
       });
+console.log(this.authorBooks)
+
   }
 
   onSelected(item: any, shelf: string) {
     this._Author
       .postData('/userBooks/', { bookId: item, shelf: shelf })
       .subscribe((res) => {
-        console.log(res);
+     console.log(res)
       });
   }
 

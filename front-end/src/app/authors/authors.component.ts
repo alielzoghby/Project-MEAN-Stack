@@ -13,7 +13,8 @@ paginationItem:Array<number>= []
 constructor(private _authorServices :DataService){
   this.data=this._authorServices.getData('/author/getAuthors/').subscribe((res)=>{
     this.Datashown.push(res)
-    console.log( this.Datashown[0].authors)
+    
+    
   })
   
 }}
