@@ -12,61 +12,66 @@
             </div>
 
             <form
+              class="form-group"
               [formGroup]="registerForm"
               (ngSubmit)="submitForm(registerForm)"
             >
               <div class="row">
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <mdb-form-control>
                     <input
+                      mdbInput
                       type="text"
-                      id="form3Example1"
+                      id="form1"
                       class="form-control"
                       formControlName="firstName"
                     />
-                    <label class="form-label" for="form3Example1"
+                    <label mdbLabel class="form-label" for="form1"
                       >First name</label
                     >
-                    <div
-                      *ngIf="
-                        registerForm.get('firstName')?.errors != null &&
-                        registerForm.get('firstName')?.touched
-                      "
-                      class="alert alert-danger my-2"
+                  </mdb-form-control>
+
+                  <div
+                    *ngIf="
+                      registerForm.get('firstName')?.errors != null &&
+                      registerForm.get('firstName')?.touched
+                    "
+                    class="alert alert-danger my-2"
+                  >
+                    <p
+                      *ngIf="registerForm.get('firstName')?.errors?.['required']"
                     >
-                      <p
-                        *ngIf="registerForm.get('firstName')?.errors?.['required']"
-                      >
-                        First Name is required
-                      </p>
-                      <p
-                        *ngIf="
+                      First Name is required
+                    </p>
+                    <p
+                      *ngIf="
                       registerForm.get('firstName')?.errors?.['minlength']
                     "
-                      >
-                        First Name is min length 2
-                      </p>
-                      <p
-                        *ngIf="registerForm.get('firstName')?.errors?.['maxlength']"
-                      >
-                        First Name is max length 10
-                      </p>
-                    </div>
+                    >
+                      First Name is min length 2
+                    </p>
+                    <p
+                      *ngIf="registerForm.get('firstName')?.errors?.['maxlength']"
+                    >
+                      First Name is max length 10
+                    </p>
                   </div>
                 </div>
 
                 <div class="col-md-6 mb-4">
-                  <div class="form-outline">
+                  <mdb-form-control>
                     <input
+                      mdbInput
                       type="text"
-                      id="form3Example2"
+                      id="form2"
                       class="form-control"
                       formControlName="lastName"
                     />
-                    <label class="form-label" for="form3Example2"
+                    <label mdbLabel class="form-label" for="form2"
                       >Last name</label
                     >
-                  </div>
+                  </mdb-form-control>
+
                   <div
                     *ngIf="
                       registerForm.get('lastName')?.errors != null &&
@@ -95,15 +100,16 @@
               </div>
 
               <div class="form-outline mb-4">
-                <input
-                  type="email"
-                  id="form3Example3"
-                  class="form-control"
-                  formControlName="email"
-                />
-                <label class="form-label" for="form3Example3"
-                  >Email address</label
-                >
+                <mdb-form-control>
+                  <input
+                    mdbInput
+                    type="email"
+                    id="form3"
+                    class="form-control"
+                    formControlName="email"
+                  />
+                  <label mdbLabel class="form-label" for="form3">Email</label>
+                </mdb-form-control>
                 <div
                   *ngIf="
                     registerForm.get('email')?.errors != null &&
@@ -121,13 +127,18 @@
               </div>
 
               <div class="form-outline mb-4">
-                <input
-                  type="password"
-                  id="form3Example4"
-                  class="form-control"
-                  formControlName="password"
-                />
-                <label class="form-label" for="form3Example4">Password</label>
+                <mdb-form-control>
+                  <input
+                    mdbInput
+                    type="password"
+                    id="form4"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                  <label mdbLabel class="form-label" for="form4"
+                    >Password</label
+                  >
+                </mdb-form-control>
                 <div
                   *ngIf="
                     registerForm.get('password')?.errors != null &&
@@ -144,21 +155,24 @@
                   <p
                     *ngIf="registerForm.get('password')?.errors?.['minlength']"
                   >
-                    password is min length is 6 character
+                    password is min length is 8 character
                   </p>
                 </div>
               </div>
 
               <div class="form-outline mb-4">
-                <input
-                  type="password"
-                  id="form3Example5"
-                  class="form-control"
-                  formControlName="confirmPassword"
-                />
-                <label class="form-label" for="form3Example5"
-                  >Confirm Password</label
-                >
+                <mdb-form-control>
+                  <input
+                    mdbInput
+                    type="password"
+                    id="form5"
+                    class="form-control"
+                    formControlName="confirmPassword"
+                  />
+                  <label mdbLabel class="form-label" for="form5"
+                    >Confirm Password</label
+                  >
+                </mdb-form-control>
                 <div
                   *ngIf="registerForm.get('confirmPassword')?.errors != null &&
                   registerForm.get('confirmPassword')?.touched
@@ -174,7 +188,7 @@
                   >
                     Confirm Password is required
                   </p>
-                  <p *ngIf="registerForm.errors?.['match_error']">
+                  <p *ngIf="registerForm.errors?.['match_error'] ">
                     Confirm Password isn't match
                   </p>
                 </div>
@@ -183,9 +197,26 @@
               <button
                 [disabled]="registerForm.invalid"
                 type="submit"
-                class="btn btn-primary btn-block mb-4"
+                class="btn btn-primary btn-block mb-4 d-flex align-center justify-content-center gap-2"
               >
                 Sign up
+                <div *ngIf="lodaing">
+                  <span
+                    class="spinner-grow spinner-grow-sm mx-1"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="spinner-grow spinner-grow-sm mx-1"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="spinner-grow spinner-grow-sm mx-1"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                </div>
               </button>
 
               <div class="text-center">

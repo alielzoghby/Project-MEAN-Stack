@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-signin',
@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminSigninComponent {
   error: any;
+  lodaing = false;
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -20,16 +21,22 @@ export class AdminSigninComponent {
   constructor(private _router: Router, private _auth: AuthService) {}
 
   submitForm(loginForm: FormGroup) {
+    this.lodaing = true;
     this._auth.login(loginForm.value, '/backoffice/auth/login').subscribe(
       (res) => {
+        this.lodaing = false;
         localStorage.setItem('userTaken', res.Token);
         this._auth.saveCurrentUser();
         this._router.navigate(['/admin']);
+        this._auth.loggedAdmin.next(true);
       },
       (err) => {
-        console.log(err);
+        this.lodaing = false;
         this.error = err.error.message;
       }
     );
+    setTimeout(() => {
+      this.error = false;
+    }, 3000);
   }
 }

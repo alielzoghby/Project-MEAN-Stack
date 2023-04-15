@@ -48,12 +48,30 @@
           </div>
 
           <div class="input-container my-4">
-            <input
-              class="b-sign"
+            <button
+              class="b-sign d-flex align-center justify-content-center gap-2"
               type="submit"
-              value="Sign in"
               [disabled]="loginForm.invalid"
-            />
+            >
+              Sign in
+              <div *ngIf="lodaing">
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="spinner-grow spinner-grow-sm mx-1"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </div>
+            </button>
           </div>
         </form>
       </div>

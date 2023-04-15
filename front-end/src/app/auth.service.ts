@@ -19,6 +19,7 @@ import { DataService } from './data.service';
 export class AuthService {
   currentUser = new BehaviorSubject(null);
   ROOT_URL: string = 'https://good-reads-a4s1.onrender.com';
+  loggedAdmin = new BehaviorSubject(false);
 
   constructor(private _http: HttpClient, private _router: Router) {
     if (localStorage.getItem('userTaken') != null) {

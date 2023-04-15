@@ -120,8 +120,6 @@ export class AddbooksComponent implements OnInit {
     setTimeout(() => {
       this.error = false;
       this.message = false;
-      console.log(this.error);
-      console.log(this.message);
     }, 3000);
   }
 

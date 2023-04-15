@@ -55,7 +55,7 @@
             <table class="table align-middle mb-0 bg-white">
               <tr>
                 <td>
-                  <div>{{ books[i]._id }}</div>
+                  <div>{{ book._id }}</div>
                 </td>
                 <td class="fix-width1">
                   <div>
@@ -75,7 +75,7 @@
                     <input
                       class="form-control"
                       type="text"
-                      [(ngModel)]="books[i].name"
+                      [(ngModel)]="book.name"
                       name="name"
                       ngModel
                     />
@@ -88,7 +88,7 @@
                       id="Input2"
                       name="categoryId"
                       ngModel
-                      [(ngModel)]="books[i].categoryId._id"
+                      [(ngModel)]="book.categoryId._id"
                     >
                       <option
                         *ngFor="let category of categories"
@@ -106,7 +106,7 @@
                       id="Input3"
                       name="authorId"
                       ngModel
-                      [(ngModel)]="books[i].authorId._id"
+                      [(ngModel)]="book.authorId._id"
                     >
                       <option
                         *ngFor="let author of authors"

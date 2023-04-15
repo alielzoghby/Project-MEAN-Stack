@@ -48,13 +48,13 @@
           <form #updateForm="ngForm" (ngSubmit)="getAlertUpdate(updateForm, i)">
             <table class="table align-middle bg-white">
               <tr>
-                <td name="_id">{{ categories[i]._id }}</td>
+                <td name="_id">{{ categorie._id }}</td>
                 <td>
                   <div>
                     <input
                       class="form-control w-50 m-auto align-center"
                       type="text"
-                      [(ngModel)]="categories[i].name"
+                      [(ngModel)]="categorie.name"
                       name="name"
                       ngModel
                     />

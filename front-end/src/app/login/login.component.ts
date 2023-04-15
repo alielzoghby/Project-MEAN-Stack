@@ -10,8 +10,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  error: string = '';
+  error: any = '';
   loginForm!: FormGroup;
+  lodaing = false;
 
   constructor(
     private _router: Router,
@@ -25,16 +26,22 @@ export class LoginComponent {
   }
 
   submitForm(loginForm: FormGroup) {
+    this.lodaing = true;
+
     this._auth.login(loginForm.value, '/auth/login').subscribe(
       (res) => {
+        this.lodaing = false;
         localStorage.setItem('userTaken', res.Token);
         this._auth.saveCurrentUser();
         this._router.navigate(['/profile']);
       },
       (err) => {
-        console.log(err);
+        this.lodaing = false;
         this.error = err.error.message;
       }
     );
+    setTimeout(() => {
+      this.error = false;
+    }, 3000);
   }
 }

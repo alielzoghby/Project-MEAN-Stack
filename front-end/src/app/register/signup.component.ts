@@ -5,11 +5,9 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -19,8 +17,9 @@ import { BehaviorSubject } from 'rxjs';
 export class SignupComponent {
   @ViewChild('content') content!: HTMLElement;
 
-  error: string = '';
+  error: any = '';
   registerForm!: FormGroup;
+  lodaing = false;
 
   constructor(
     private _router: Router,
@@ -45,8 +44,8 @@ export class SignupComponent {
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.pattern('[A-Za-z1-9]+'),
-        Validators.minLength(6),
+        Validators.pattern('[A-Za-z1-9*&%$#@!^_.=+]+'),
+        Validators.minLength(8),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
     });
@@ -61,14 +60,21 @@ export class SignupComponent {
 
   submitForm(registerForm: FormGroup) {
     delete registerForm.value.confirmPassword;
+    this.lodaing = true;
     this._auth.register(registerForm.value, '/auth/sing-up').subscribe(
       (res) => {
-        open();
+        this.lodaing = false;
+        this.open();
       },
       (err) => {
+        this.lodaing = false;
+
         this.error = err.error.message;
       }
     );
+    setTimeout(() => {
+      this.error = false;
+    }, 3000);
   }
 
   open() {
@@ -82,8 +88,10 @@ export class SignupComponent {
 
 function matchValidator(control: any, controlTwo: any): ValidatorFn {
   return () => {
-    if (control.value !== controlTwo.value && controlTwo.value != '')
-      return { match_error: 'Value does not match' };
+    if (controlTwo.value != ('' || null || undefined || ' ')) {
+      if (control.value !== controlTwo.value)
+        return { match_error: 'Value does not match' };
+    }
     return null;
   };
 }

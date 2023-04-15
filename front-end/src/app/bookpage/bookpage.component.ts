@@ -29,26 +29,24 @@ export class BookpageComponent {
     });
 
     this.sub2 = this._data.getData(`/userBooks/book/${this.id}`).subscribe((res: any) => {
+      console.log(res)
     this.userData = res
-
-    if(this.userData ){
-          console.log(this.userData.books[0])
-    }else{
-      this.userData.books[0].shelf="none"
-      this.userData.rating = 0
-    }
-
     });
+
+    console.log(this.sub2)
 
   }
 
-  getRating():number{
+  getRating(id:string):number{
 
     if(!this.userData){
       return 0
     }
     else{
-      return this.userData.rating
+     console.log(this.userData) 
+    return 5
+      
+
     }
 
   }
@@ -87,6 +85,8 @@ export class BookpageComponent {
       .subscribe((res) => {
         console.log(res);
       });
+
+      
   }
   addReview() {
     console.log(this.commentInput);
