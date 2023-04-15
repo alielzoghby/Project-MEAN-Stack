@@ -16,7 +16,7 @@ export class UserpageComponent {
   AvgUnRated: number = 0;
   userRated: number = 0;
   userUnrated: number = 0;
-  shownData: any;
+  shownData: any = [];
   rating: number = 0;
   Math = Math;
   temp: any;

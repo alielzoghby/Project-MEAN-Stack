@@ -4,15 +4,12 @@
 <div class="container" >
   <div class="row">
 
-    <div class="col-md-4 pt-5 pb-5 parent" *ngFor="let author of Datashown">
- 
-      <img src={{author.photo}} />
-      <div class="date">was born in : <br>
-       <span>{{author.dateOfBirth}}</span> 
+    <div class="col-md-4 pt-5 pb-5 parent" *ngFor="let author of Datashown[0].authors">
 
-     </div>
+      <img src={{author.photo}} />
      
-  <div class="name"> <a [routerLink]="['/author/',author._id]" > writer : {{author.firstName}} {{author.lastName}} </a>
+     
+  <div class="name"> <a [routerLink]="['/author/',author._id]" *ngIf="author.firstName && author.lastName"> writer : {{author.firstName}} {{author.lastName}} </a>
   </div>
   </div>
 </div>

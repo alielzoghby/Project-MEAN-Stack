@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorService } from '../services/author.service';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { AuthGardGuard } from '../auth-gard.guard';
@@ -29,7 +28,7 @@ export class AuthorPageComponent {
     private router: ActivatedRoute,
     private _Author: DataService,
     private _Auth: AuthGardGuard,
-    private _authorService: AuthorService,
+    
     
   ) {
     this.isLogged = _Auth.islogged;

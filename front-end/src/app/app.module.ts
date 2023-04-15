@@ -48,11 +48,7 @@ import { AddbooksComponent } from './addbooks/addbooks.component';
 import { AddauthorsComponent } from './addauthors/addauthors.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyInterceptorInterceptor } from './my-interceptor.interceptor';
-<<<<<<< HEAD
-import { DatePipe } from '@angular/common';
-=======
 import { SearchComponent } from './search/search.component';
->>>>>>> d5d02b852f66e7ea193a389f5206d2c8d5e87ecd
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
