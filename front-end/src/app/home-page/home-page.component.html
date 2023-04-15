@@ -38,7 +38,7 @@
           <div class="col-md-6">
             <figure class="book-thumb">
               <img
-                src="../../assets/images/single-image.jpg"
+                [src]="popularBooks[0].cover"
                 alt="book"
                 class="single-image"
               />
@@ -173,16 +173,12 @@
                   [routerLink]="['/author', author._id]"
                   class="image-hvr-effect"
                 >
-                  <img
-                    src="../../assets/images/post-img1.jpg"
-                    alt="post"
-                    class="post-image"
-                  />
+                  <img [src]="author.photo" alt="post" class="post-image" />
                 </a>
               </figure>
 
               <div class="post-item">
-                <div class="meta-date">{{ author.dateOfBirth | date }}</div>
+                <div class="meta-date">{{ author.dob | date }}</div>
                 <h3>
                   <a [routerLink]="['/author', author._id]"
                     >{{ author.firstName + " " + author.lastName }}

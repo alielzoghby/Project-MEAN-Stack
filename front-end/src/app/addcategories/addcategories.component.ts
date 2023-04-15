@@ -53,6 +53,19 @@ export class AddcategoriesComponent implements OnInit {
     return index === this.editingIndex;
   }
 
+  getPaginatian() {
+    this._data
+      .getData(`/backOffice/category/?page=${this.curentPage}`)
+      .subscribe(
+        (res: any) => {
+          this.categories = res.categories.reverse();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
   /////////////////////////////////POST METHOD
   postCategorie(form: FormGroup) {
     this._data.postData('/backOffice/category/', form.value).subscribe(
@@ -130,7 +143,9 @@ export class AddcategoriesComponent implements OnInit {
   ///////////////////////////////////////////
   ngOnInit(): void {
     this.apiData.subscribe((res) => {
-      this.categories = this.apiData.getValue().reverse();
+      let data = this.apiData.getValue();
+      this.totalItem = data.totalBooks;
+      this.categories = data.categories.reverse();
     });
   }
 }

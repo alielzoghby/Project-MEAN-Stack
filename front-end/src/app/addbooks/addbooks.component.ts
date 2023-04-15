@@ -73,6 +73,17 @@ export class AddbooksComponent implements OnInit {
     return index === this.editingIndex;
   }
 
+  getPaginatian() {
+    this._data.getData(`/backOffice/book/?page=${this.curentPage}`).subscribe(
+      (res: any) => {
+        this.books = res.data.reverse();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
   /////////////////////////////////POST METHOD
   postBook(form: FormGroup) {
     this._data.postData('/backOffice/book/', form.value).subscribe(
@@ -151,17 +162,16 @@ export class AddbooksComponent implements OnInit {
   ngOnInit(): void {
     this.booksApi.subscribe((res) => {
       let data = this.booksApi.getValue();
-      this.totalItem = data.totalPages;
+      this.totalItem = data.totalBooks;
       this.books = data.data.reverse();
     });
 
-    this.catagorysApi.subscribe((res) => {
-      this.categories = this.catagorysApi.getValue().reverse();
+    this._data.getِAllData('/category/').subscribe((res: any) => {
+      this.categories = res.reverse();
     });
 
-    this.authorsApi.subscribe((res) => {
-      let data = this.authorsApi.getValue().reverse();
-      this.authors = data;
+    this._data.getِAllData('/author/getAuthors/').subscribe((res: any) => {
+      this.authors = res.reverse();
     });
   }
 }

@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getAllCategores() {
-    this._data.getData('/category/').subscribe(
+    this._data.getِAllData('/category/').subscribe(
       (res) => {
         this.categoerys = res;
       },

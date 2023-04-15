@@ -27,7 +27,7 @@
     <tr *ngFor="let author of authors; let i = index">
       <ng-container *ngIf="!isItemEditing(i); else editingRow">
         <td>{{ author._id }}</td>
-        <td><img src="{{ author.cover }}" alt="" /></td>
+        <td><img src="{{ author.photo }}" alt="" /></td>
         <td>{{ author.firstName }}</td>
         <td>{{ author.lastName }}</td>
         <td>{{ author.dob | date : "yyyy-MM-dd" }}</td>
@@ -137,6 +137,10 @@
     [collectionSize]="totalItem"
     [(page)]="curentPage"
     [boundaryLinks]="true"
+    [maxSize]="5"
+    [rotate]="true"
+    [ellipses]="false"
+    (pageChange)="getPaginatian()"
   ></ngb-pagination>
 </div>
 
@@ -219,7 +223,7 @@
           type="date"
           class="form-control"
           id="Input3"
-          formControlName="dateOfBirth"
+          formControlName="dob"
         />
         <p
           class="alert alert-danger"
@@ -237,9 +241,17 @@
         id="Input4"
         placeholder="Book Name"
         accept="image/png, image/jpg, image/jpeg"
-        required
+        formControlName="image"
         (change)="onFileSelected($event)"
       />
+
+      <label for="Input5">bio</label>
+      <textarea
+        class="form-control"
+        id="Input5"
+        placeholder="BIO"
+        formControlName="bio"
+      ></textarea>
 
       <div class="modal-footer">
         <button

@@ -39,3 +39,8 @@ h4 {
 .fix-width {
   width: 31% !important;
 }
+
+img {
+  height: 50px;
+  width: 40px;
+}

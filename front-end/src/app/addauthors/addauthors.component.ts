@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '../auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from '../data.service';
 
@@ -49,18 +48,19 @@ export class AddauthorsComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(10),
     ]),
-    dateOfBirth: new FormControl(null, Validators.required),
-    photo: new FormControl(null, Validators.required),
+    dob: new FormControl(null, Validators.required),
+    image: new FormControl(null, Validators.required),
+    bio: new FormControl(null),
   });
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.authorForm.get('photo')?.setValue(file);
+    this.authorForm.get('image')?.setValue(file);
   }
 
   onFileSelectedFormUpdate(event: any) {
     const file = event.target.files[0];
-    this.formUpdate.value.cover = file;
+    this.formUpdate.value.image = file;
   }
 
   open(content: any) {
@@ -73,6 +73,17 @@ export class AddauthorsComponent implements OnInit {
 
   isItemEditing(index: number) {
     return index === this.editingIndex;
+  }
+
+  getPaginatian() {
+    this._data.getData(`/backOffice/author/?page=${this.curentPage}`).subscribe(
+      (res: any) => {
+        this.authors = res.authors.reverse();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   /////////////////////////////////POST METHOD
@@ -152,7 +163,7 @@ export class AddauthorsComponent implements OnInit {
   ngOnInit(): void {
     this.apiData.subscribe((res) => {
       let data = this.apiData.getValue();
-      this.totalItem = data.totalPages;
+      this.totalItem = data.totalAuthors;
       this.authors = data.authors.reverse();
     });
   }
