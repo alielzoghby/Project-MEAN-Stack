@@ -46,57 +46,118 @@
       </div>
     </div>
   </div>
-
-  <header
-    id="header"
-    class="fixed"
+  <nav
+    class="navbar fixed navbar-expand-lg navbar-light bg-light"
     (scroll)="onscroll()"
     [ngClass]="navbarfixed ? 'fixed' : 'nofixed'"
   >
     <div class="container">
-      <div class="row">
-        <div class="main-logo col-md-2 d-flex align-items-center">
-          <a href="home#header-wrap"
-            ><img src="../../assets/images/main-logo.png" alt="logo"
-          /></a>
-        </div>
+      <div class="main-logo col-md-2 d-flex align-items-center">
+        <a href="home#header-wrap"
+          ><img src="../../assets/images/main-logo.png" alt="logo"
+        /></a>
+      </div>
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="basicNavbar.toggle()"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
 
-        <div class="col-md-10">
-          <nav id="navbar d-flex align-items-center">
-            <div class="main-menu stellarnav">
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <a routerLink="/home" routerLinkActive="active">Home</a>
-                </li>
-                <li class="menu-item">
-                  <a href="home#popular-books" class="nav-link"
-                    >Popular Books</a
-                  >
-                </li>
-                <li class="menu-item">
-                  <a
-                    routerLink="/categories"
-                    routerLinkActive="active"
-                    class="nav-link"
-                    >Categories</a
-                  >
-                </li>
-                <li class="menu-item">
-                  <a
-                    routerLink="/authors"
-                    routerLinkActive="active"
-                    class="nav-link"
-                    >Authors</a
-                  >
-                </li>
-                <li class="menu-item">
-                  <a class="nav-link">About Us</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+      <!-- Collapsible wrapper -->
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarSupportedContent"
+        mdbCollapse
+        #basicNavbar="mdbCollapse"
+      >
+        <nav id="navbar">
+          <div class="main-menu stellarnav">
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a routerLink="/home" routerLinkActive="active">Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="home#popular-books" class="nav-link">Popular Books</a>
+              </li>
+              <li class="menu-item">
+                <a
+                  routerLink="/categories"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Categories</a
+                >
+              </li>
+              <li class="menu-item">
+                <a
+                  routerLink="/authors"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Authors</a
+                >
+              </li>
+              <li class="menu-item">
+                <a class="nav-link">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
     </div>
-  </header>
+  </nav>
 </div>
+<!--
+<header
+  id="header"
+  class="fixed"
+  (scroll)="onscroll()"
+  [ngClass]="navbarfixed ? 'fixed' : 'nofixed'"
+>
+  <div class="container">
+    <div class="row">
+      <div class="main-logo col-md-2 d-flex align-items-center">
+        <a href="home#header-wrap"
+          ><img src="../../assets/images/main-logo.png" alt="logo"
+        /></a>
+      </div>
+
+      <div class="col-md-10">
+        <nav id="navbar d-flex align-items-center">
+          <div class="main-menu stellarnav">
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a routerLink="/home" routerLinkActive="active">Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="home#popular-books" class="nav-link">Popular Books</a>
+              </li>
+              <li class="menu-item">
+                <a
+                  routerLink="/categories"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Categories</a
+                >
+              </li>
+              <li class="menu-item">
+                <a
+                  routerLink="/authors"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Authors</a
+                >
+              </li>
+              <li class="menu-item">
+                <a class="nav-link">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header> -->

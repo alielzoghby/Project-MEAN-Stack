@@ -45,15 +45,16 @@
   transition: 0.2s linear;
 }
 #header .menu-list a {
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  font-family: sans-serif !important;
 }
 .active {
   color: #daa556;
 }
 ul li a {
-  padding: 10px 20px;
+  padding: 10px 20px !important;
 }
 
 @media screen and (max-width: 720px) {
@@ -61,5 +62,8 @@ ul li a {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+  }
+  .fixed {
+    top: 20px;
   }
 }

@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 
-<div class="section-header align-center">
-  <h2 class="section-title">Categories</h2>
+<div class="section-header align-center container">
+  <h2 class="section-title">Authors</h2>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4 pt-5 pb-5 parent" *ngFor="let author of Datashown">
+    <div class="col-md-3 pt-5 pb-5 parent" *ngFor="let author of Datashown">
       <img src="{{ author.photo }}" />
 
       <div class="name">
@@ -14,9 +14,13 @@
           [routerLink]="['/author/', author._id]"
           *ngIf="author.firstName && author.lastName"
         >
-          writer : {{ author.firstName }} {{ author.lastName }}
+          {{ author.firstName + " " + author.lastName }}
         </a>
       </div>
+
+      <button type="button" class="read-more">
+        <a class="link" [routerLink]="['/author', author._id]">Show Details</a>
+      </button>
     </div>
   </div>
 

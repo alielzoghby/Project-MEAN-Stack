@@ -65,7 +65,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading-font);
+  font-family: var(--heading-font) !important;
   line-height: 1.2;
   color: var(--dark-color);
 }
@@ -164,13 +164,6 @@ ul li,
 ol li {
   margin-bottom: 5px;
   outline: 0;
-}
-
-ul {
-  list-style: circle inside;
-}
-ol {
-  list-style: decimal inside;
 }
 ol,
 ul {
