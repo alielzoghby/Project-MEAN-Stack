@@ -21,11 +21,13 @@
             ><span routerLinkActive="active">Register</span></a
           >
           <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
-            ><i class="fa-solid fa-user"></i><span> Profile</span></a
+            ><i class="fa-solid fa-user"></i
+            ><span routerLinkActive="active"> Profile</span></a
           >
 
           <a routerLink="/admin" class="user-account mx-2" *ngIf="adminLooged"
-            ><i class="fa-solid fa-user"></i><span> Admin Panal</span></a
+            ><i class="fa-solid fa-user"></i
+            ><span routerLinkActive="active"> Admin Panal</span></a
           >
           <a
             (click)="logout()"

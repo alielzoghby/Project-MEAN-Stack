@@ -202,6 +202,15 @@
                   (change)="onFileSelectedFormUpdate($event)"
                 />
               </div>
+              <div
+                *ngIf="
+                  registerForm.get('image')?.errors != null &&
+                  registerForm.get('image')?.touched
+                "
+                class="alert alert-danger my-2"
+              >
+                <p>image is required</p>
+              </div>
 
               <button
                 [disabled]="registerForm.invalid"

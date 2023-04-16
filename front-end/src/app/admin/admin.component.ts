@@ -29,8 +29,6 @@ export class AdminComponent implements OnInit {
   getAuthors() {
     this._data.getData('/backOffice/author/').subscribe(
       (res: any) => {
-        console.log(res);
-
         this.authors.next(res);
       },
       (err) => {
@@ -38,7 +36,6 @@ export class AdminComponent implements OnInit {
       }
     );
   }
-
   getCatagorys() {
     this._data.getData('/backOffice/category').subscribe(
       (res: any) => {

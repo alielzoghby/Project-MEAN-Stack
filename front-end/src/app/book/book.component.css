@@ -77,3 +77,7 @@ a:hover {
   background-color: #74642f !important;
   transition: 0.4s all linear;
 }
+img {
+  height: 330px;
+  width: 180px;
+}

@@ -62,7 +62,7 @@ export class DataService {
         }
       }
     }
-    return this._http.post(`${this.ROOT_URL + endPoint}`, formData, {
+    return this._http.put(`${this.ROOT_URL + endPoint}`, formData, {
       headers,
     });
   }

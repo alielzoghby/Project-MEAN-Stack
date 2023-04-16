@@ -1,9 +1,34 @@
-<form class="d-flex input-group w-auto">
-  <input
-    type="search"
-    class="form-control"
-    placeholder="Search for Book"
-    aria-label="Search"
-  />
-  <button class="btn btn-outline-primary" type="button">Search</button>
-</form>
+<div class="search">
+  <form class="input-group">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search for Book"
+      aria-label="Search"
+      (keyup)="onKeySearch($event)"
+      (focus)="showTable()"
+      (blur)="hideTable()"
+    />
+  </form>
+
+  <div class="table">
+    <table class="table" *ngIf="tableVisible">
+      <div *ngFor="let book of data">
+        <a [routerLink]="['/bookpage', book._id]"
+          ><div class="d-flex align-items-center gap-3 p-0">
+            <img src="{{ book.cover }}" alt="" />
+
+            <span>{{ book.name }}</span>
+          </div>
+        </a>
+      </div>
+      <div class="text-center font-weight-bold" *ngIf="massage">
+        {{ massage }}
+      </div>
+
+      <tfoot>
+        <td class="text-center" colspan="2">See More</td>
+      </tfoot>
+    </table>
+  </div>
+</div>

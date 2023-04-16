@@ -45,7 +45,7 @@
             class="btn btn-link btn-sm btn-rounded"
             (click)="getAlertDelete($event, i)"
           >
-            <i class="fa-solid fa-trash-can"></i>
+            <i id="{{ author._id }}" class="fa-solid fa-trash-can"></i>
           </button>
         </td>
       </ng-container>
@@ -63,9 +63,8 @@
                       class="form-control"
                       type="file"
                       ngModel
-                      name="cover"
+                      name="image"
                       accept="image/png, image/jpg, image/jpeg"
-                      required
                       (change)="onFileSelectedFormUpdate($event)"
                     />
                   </div>
@@ -97,7 +96,7 @@
                     <input
                       type="date"
                       class="form-control"
-                      name="dateOfBirth"
+                      name="dob"
                       [ngModel]="author.dob | date : 'yyyy-MM-dd'"
                       ngModel
                     />
@@ -227,31 +226,57 @@
         />
         <p
           class="alert alert-danger"
-          *ngIf="authorForm.get('dateOfBirth')?.errors?.['required'] &&
-          authorForm.get('dateOfBirth')?.touched"
+          *ngIf="authorForm.get('dob')?.errors?.['required'] &&
+          authorForm.get('dob')?.touched"
         >
           date of birth is required
         </p>
       </div>
 
-      <label for="Input4">Picture</label>
-      <input
-        type="file"
-        class="form-control"
-        id="Input4"
-        placeholder="Book Name"
-        accept="image/png, image/jpg, image/jpeg"
-        formControlName="image"
-        (change)="onFileSelected($event)"
-      />
+      <div id="image">
+        <label for="Input4">Picture</label>
+        <input
+          type="file"
+          class="form-control"
+          id="Input4"
+          placeholder="Book Name"
+          accept="image/png, image/jpg, image/jpeg"
+          formControlName="image"
+          (change)="onFileSelected($event)"
+        />
+        <div
+          *ngIf="
+            authorForm.get('image')?.errors != null &&
+            authorForm.get('image')?.touched
+          "
+          class="alert alert-danger my-2"
+        >
+          <p *ngIf="authorForm.get('image')?.errors?.['required']">
+            image is required
+          </p>
+        </div>
+      </div>
 
-      <label for="Input5">bio</label>
-      <textarea
-        class="form-control"
-        id="Input5"
-        placeholder="BIO"
-        formControlName="bio"
-      ></textarea>
+      <div id="bio">
+        <label for="Input5">bio</label>
+        <textarea
+          class="form-control"
+          id="Input5"
+          placeholder="BIO"
+          formControlName="bio"
+        ></textarea>
+        <div
+          *ngIf="
+            authorForm.get('bio')?.errors != null &&
+            authorForm.get('bio')?.touched
+          "
+          class="alert alert-danger my-2"
+        >
+          <p *ngIf="authorForm.get('bio')?.errors?.['required']">
+            bio is required
+          </p>
+        </div>
+      </div>
 
       <div class="modal-footer">
         <button
@@ -278,7 +303,7 @@
     ></button>
   </div>
   <div class="modal-body">
-    <p>Are you sure delete this Categorie</p>
+    <p>Are you sure delete this Author</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c()">
@@ -302,7 +327,7 @@
     ></button>
   </div>
   <div class="modal-body">
-    <p>Are you sure update this author</p>
+    <p>Are you sure update this Author</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c()">

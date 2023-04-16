@@ -49,7 +49,7 @@ export class SignupComponent {
         Validators.minLength(8),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
-      image: new FormControl(null),
+      image: new FormControl(null, [Validators.required]),
     });
 
     this.registerForm.addValidators(
@@ -87,7 +87,7 @@ export class SignupComponent {
     );
     setTimeout(() => {
       this.error = false;
-    }, 3000);
+    }, 5000);
   }
 
   open() {

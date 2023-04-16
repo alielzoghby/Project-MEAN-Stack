@@ -19,7 +19,7 @@ export class AddauthorsComponent implements OnInit {
 
   i: any;
   deleteId: string = '';
-  updateId: string = '';
+  updateId: any = '';
   editingIndex = -1;
   message: any;
   error: any;
@@ -50,7 +50,7 @@ export class AddauthorsComponent implements OnInit {
     ]),
     dob: new FormControl(null, Validators.required),
     image: new FormControl(null, Validators.required),
-    bio: new FormControl(null),
+    bio: new FormControl(null, Validators.required),
   });
 
   onFileSelected(event: any) {
@@ -78,7 +78,21 @@ export class AddauthorsComponent implements OnInit {
   getPaginatian() {
     this._data.getData(`/backOffice/author/?page=${this.curentPage}`).subscribe(
       (res: any) => {
-        this.authors = res.authors.reverse();
+        this.authors = res.authors;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  /////////////////////////////////POST METHOD
+  getAuthor() {
+    this._data.getData('/backOffice/author/').subscribe(
+      (res: any) => {
+        let data = this.apiData.getValue();
+        this.totalItem = data.totalAuthors;
+        this.authors = data.authors;
       },
       (err) => {
         console.log(err);
@@ -93,6 +107,7 @@ export class AddauthorsComponent implements OnInit {
         this.message = 'added Success';
         this.error = false;
         this.authors.unshift(res);
+        // this.getAuthor();
       },
       (err) => {
         this.error = err.error.message;
@@ -113,9 +128,13 @@ export class AddauthorsComponent implements OnInit {
     this.i = i;
     this.deleteId = event.target.id;
     this.modalService.open(this.delete);
+
+    console.log(this.deleteId);
   }
 
   deleteAuthor() {
+    console.log(this.deleteId);
+
     this._data.deleteData(`/backOffice/author/${this.deleteId}`).subscribe(
       (res) => {
         this.message = 'delete Success';
@@ -135,6 +154,7 @@ export class AddauthorsComponent implements OnInit {
   }
 
   /////////////////////////////////BOT METHOD
+
   getAlertUpdate(form: any, i: any) {
     this.i = i;
     this.updateId = form.value;
@@ -143,10 +163,17 @@ export class AddauthorsComponent implements OnInit {
 
   potAuthor() {
     let id = this.authors[this.i]._id;
+    for (const key in this.updateId) {
+      if (this.updateId[key] === '') {
+        delete this.updateId[key];
+      }
+    }
+
     this._data.patchData(`/backOffice/author/${id}`, this.updateId).subscribe(
       (res) => {
         this.message = 'Update Success';
         this.error = false;
+        // this.getAuthor();
       },
       (err) => {
         this.error = err.error.message;
@@ -164,7 +191,7 @@ export class AddauthorsComponent implements OnInit {
     this.apiData.subscribe((res) => {
       let data = this.apiData.getValue();
       this.totalItem = data.totalAuthors;
-      this.authors = data.authors.reverse();
+      this.authors = data.authors;
     });
   }
 }

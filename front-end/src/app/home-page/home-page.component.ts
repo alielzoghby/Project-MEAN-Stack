@@ -76,7 +76,6 @@ export class HomePageComponent implements OnInit {
     this._data.getData(`/book/category/${id}`).subscribe(
       (res: any) => {
         this.categoryBooks = res.data;
-        console.log(res);
       },
       (err) => {
         console.log(err);

@@ -58,12 +58,27 @@ export class AddcategoriesComponent implements OnInit {
       .getData(`/backOffice/category/?page=${this.curentPage}`)
       .subscribe(
         (res: any) => {
-          this.categories = res.categories.reverse();
+          this.categories = res.categories;
         },
         (err) => {
           console.log(err);
         }
       );
+  }
+
+  /////////////////////////////////Get METHOD
+
+  getCatagorys() {
+    this._data.getData('/backOffice/category').subscribe(
+      (res: any) => {
+        let data = this.apiData.getValue();
+        this.totalItem = data.totalBooks;
+        this.categories = data.categories;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   /////////////////////////////////POST METHOD
@@ -73,6 +88,7 @@ export class AddcategoriesComponent implements OnInit {
         this.message = 'added Success';
         this.error = false;
         this.categories.unshift(res);
+        // this.getCatagorys();
       },
       (err) => {
         this.error = err.error.message;
@@ -101,6 +117,7 @@ export class AddcategoriesComponent implements OnInit {
         this.message = 'delete Success';
         this.error = false;
         this.categories.splice(this.i, 1);
+        // this.getCatagorys();
       },
       (err) => {
         this.error = err.error.message;
@@ -123,10 +140,15 @@ export class AddcategoriesComponent implements OnInit {
 
   putCategorie() {
     let id = this.categories[this.i]._id;
+
+    console.log(id);
+    console.log(this.updateId);
+
     this._data.putData(`/backOffice/category/${id}`, this.updateId).subscribe(
       (res) => {
         this.message = 'Update Success';
         this.error = false;
+        // this.getCatagorys();
       },
       (err) => {
         this.error = err.error.message;
@@ -145,7 +167,7 @@ export class AddcategoriesComponent implements OnInit {
     this.apiData.subscribe((res) => {
       let data = this.apiData.getValue();
       this.totalItem = data.totalBooks;
-      this.categories = data.categories.reverse();
+      this.categories = data.categories;
     });
   }
 }

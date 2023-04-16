@@ -63,7 +63,7 @@
                       class="form-control"
                       type="file"
                       ngModel
-                      name="cover"
+                      name="image"
                       accept="image/png, image/jpg, image/jpeg"
                       required
                       (change)="onFileSelectedFormUpdate($event)"
@@ -237,12 +237,18 @@
         type="file"
         class="form-control"
         id="Input4"
-        placeholder="Book
-      Name"
         accept="image/png, image/jpg, image/jpeg"
         required
         (change)="onFileSelected($event)"
+        formControlName="image"
       />
+      <p
+        class="alert alert-danger"
+        *ngIf="bookForm.get('image')?.errors?.['required'] &&
+    bookForm.get('image')?.touched"
+      >
+        Image is required
+      </p>
 
       <label for="Input5">Discription</label>
       <textarea
@@ -252,6 +258,14 @@
         placeholder="Discription"
         formControlName="discription"
       ></textarea>
+      <p
+        class="alert alert-danger"
+        *ngIf="bookForm.get('discription')?.errors?.['required'] &&
+  bookForm.get('discription')?.touched"
+      >
+        Discription is required
+      </p>
+
       <div class="modal-footer">
         <button
           [disabled]="bookForm.invalid"
@@ -277,7 +291,7 @@
     ></button>
   </div>
   <div class="modal-body">
-    <p>Are you sure delete this Categorie</p>
+    <p>Are you sure delete this Book</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c()">
@@ -301,7 +315,7 @@
     ></button>
   </div>
   <div class="modal-body">
-    <p>Are you sure update this Categorie</p>
+    <p>Are you sure update this Book</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c()">

@@ -21,7 +21,7 @@ export class AddbooksComponent implements OnInit {
 
   i: any;
   deleteId: string = '';
-  updateId: string = '';
+  updateId: any = '';
   editingIndex = -1;
   message: any;
   error: any;
@@ -57,8 +57,7 @@ export class AddbooksComponent implements OnInit {
 
   onFileSelectedFormUpdate(event: any) {
     const file = event.target.files[0];
-    console.log(file);
-    this.formUpdate.value.cover = file;
+    this.formUpdate.value.image = file;
   }
 
   open(content: any) {
@@ -90,6 +89,8 @@ export class AddbooksComponent implements OnInit {
       (res) => {
         this.message = 'added Success';
         this.error = false;
+        console.log(res);
+
         this.books.unshift(res);
       },
       (err) => {
@@ -142,6 +143,15 @@ export class AddbooksComponent implements OnInit {
 
   putBook() {
     let id = this.books[this.i]._id;
+
+    for (const key in this.updateId) {
+      if (this.updateId[key] === '') {
+        delete this.updateId[key];
+      }
+    }
+
+    console.log(this.updateId);
+
     this._data.patchData(`/backOffice/book/${id}`, this.updateId).subscribe(
       (res) => {
         this.message = 'Update Success';
@@ -163,15 +173,15 @@ export class AddbooksComponent implements OnInit {
     this.booksApi.subscribe((res) => {
       let data = this.booksApi.getValue();
       this.totalItem = data.totalBooks;
-      this.books = data.data.reverse();
+      this.books = data.data;
     });
 
     this._data.getِAllData('/category/').subscribe((res: any) => {
-      this.categories = res.reverse();
+      this.categories = res;
     });
 
     this._data.getِAllData('/author/getAuthors/').subscribe((res: any) => {
-      this.authors = res.reverse();
+      this.authors = res;
     });
   }
 }

@@ -8,23 +8,34 @@ import { DataService } from '../data.service';
 })
 export class SearchComponent {
   data!: any;
-
   timeout: any = null;
+  tableVisible = false;
+  massage = '';
+
   constructor(private _data: DataService) {}
   onKeySearch(event: any) {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       if (event.keyCode != 13) {
         this._data.getData(`/book/search/${event.target.value}`).subscribe(
-          (res) => {
+          (res: any) => {
+            this.massage = '';
             this.data = res;
-            console.log(res);
+            if (res.length == 0) this.massage = 'Not Found';
           },
           (err) => {
+            this.massage = 'Not Found';
             console.log(err);
           }
         );
       }
-    }, 500);
+    }, 200);
+  }
+  showTable() {
+    this.tableVisible = true;
+  }
+
+  hideTable() {
+    setTimeout(() => (this.tableVisible = false), 100);
   }
 }
