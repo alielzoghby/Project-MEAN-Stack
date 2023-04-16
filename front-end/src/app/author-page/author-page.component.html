@@ -1,67 +1,124 @@
 <app-navbar></app-navbar>
+<ngb-alert
+  #selfClosingAlert
+  *ngIf="successMessage"
+  type="success"
+  (closed)="successMessage = ''"
+  >{{ successMessage }}
+</ngb-alert>
 <body>
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="img col-md-6 col-sm-12">
-        <img src={{authorData.photo}} />
-      </div>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="img col-md-6 col-sm-12">
+          <img src="{{ authorData.photo }}" />
+        </div>
 
-      <div class="col-md-6 col-sm-12 brief">
-        <h1>{{authorData.firstName}} {{authorData.lastName}}</h1>
-        <p>
-          {{authorData.bio}}
-        </p>
-        <div class="date">{{authorData.dob| date: 'dd/MM/YYYY' }}</div>
+        <div class="col-md-6 col-sm-12 brief">
+          <h1>{{ authorData.firstName }} {{ authorData.lastName }}</h1>
+          <p>
+            {{ authorData.bio }}
+          </p>
+          <div class="date">{{ authorData.dob | date : "dd/MM/YYYY" }}</div>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 319">
-  <path
-    fill="#f3f2ec"
-    fill-opacity="1"
-    d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 319">
+    <path
+      fill="#f3f2ec"
+      fill-opacity="1"
+      d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,53.3C1120,53,1280,75
     ,1360,85.3L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-  ></path>
-</svg>
+    ></path>
+  </svg>
 
-<div class="AuthorsBooks">
-  <div class="container">
-    <h1>{{authorData.firstName}}{{authorData.lastName}}'s Books</h1>
-    <div class="row" *ngFor="let book of authorBooks ">
-                          
-      <div class="col-md-6 col-sm-12 book">
-        <img src= {{book.cover}} />
-        <div class="bookinfo">
-          <div class="bookname"><a [routerLink]="['/bookpage/',book._id]">{{book.name}}</a></div>
-          <div class="AVGRating">                 
-            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
-            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-            <i  [ngClass]="Math.floor(book.sumOfRatings/book.numberOfRatings)>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
-            <div>{{book.numberOfRatings}}-{{book.sumOfRatings}}</div>
+  <div class="AuthorsBooks">
+    <div class="container">
+      <h1>{{ authorData.firstName + " " + authorData.lastName }}'s Books</h1>
+      <div class="row" *ngFor="let book of authorBooks">
+        <div class="col-md-6 col-sm-12 book">
+          <img src="{{ book.cover }}" />
+          <div class="bookinfo">
+            <div class="bookname">
+              <a [routerLink]="['/bookpage/', book._id]">{{ book.name }}</a>
+            </div>
+            <div class="AVGRating">
+              <i
+                [ngClass]="
+                  Math.floor(book.sumOfRatings / book.numberOfRatings) >= 1
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(book.sumOfRatings / book.numberOfRatings) >= 2
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(book.sumOfRatings / book.numberOfRatings) >= 3
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(book.sumOfRatings / book.numberOfRatings) >= 4
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  Math.floor(book.sumOfRatings / book.numberOfRatings) >= 5
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <div>{{ book.numberOfRatings }}-{{ book.sumOfRatings }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged">
+          <div class="pt-3 shelve">
+            <select
+              class="form-select"
+              #shelf
+              (change)="onSelected(book._id, shelf.value)"
+            >
+              <option>chooose shelf</option>
+              <option
+                [attr.selected]="
+                  getshelf(book._id) == 'want to read' ? 'true' : null
+                "
+                value="Want to read"
+              >
+                Want to Read
+              </option>
+              <option
+                [attr.selected]="
+                  getshelf(book._id) == 'Reading' ? 'true' : null
+                "
+                value="Reading"
+              >
+                Reading
+              </option>
+              <option
+                [attr.selected]="getshelf(book._id) == 'Read' ? 'true' : null"
+                value="Read"
+              >
+                Read
+              </option>
+            </select>
           </div>
         </div>
       </div>
-
-      <div class="col-md-6 col-sm-12 rating-shelve" *ngIf="isLogged" >
-        <div class="pt-3 shelve" >
-          <select class="form-select" #shelf (change)="onSelected(book._id,shelf.value) "  >
-          
-            <option> chooose shelf  </option>
-            <option [attr.selected]="getshelf(book._id)=='want to read' ? 'true' : null" value='want to read'>Want to Read</option>
-            <option [attr.selected]="getshelf(book._id)=='Reading' ? 'true' : null" value='Reading'>Reading</option>
-            <option [attr.selected]="getshelf(book._id)=='Read' ? 'true' : null" value='Read' >Read</option>
-          </select>
-        </div>
-      </div>
     </div>
-   
-
-      </div>
-    </div>
-
+  </div>
 </body>

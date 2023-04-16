@@ -47,7 +47,7 @@ export class AddbooksComponent implements OnInit {
     categoryId: new FormControl(null, Validators.required),
     authorId: new FormControl(null, Validators.required),
     image: new FormControl(null, Validators.required),
-    discription: new FormControl(null, Validators.required),
+    description: new FormControl(null, Validators.required),
   });
 
   onFileSelected(event: any) {

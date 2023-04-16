@@ -61,10 +61,10 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  getAllCategores() {
-    this._data.getData('/category/').subscribe(
+  getPopularCategores() {
+    this._data.getData('/category/categories/popularCategories').subscribe(
       (res: any) => {
-        this.categoerys = res.categories;
+        this.categoerys = res;
       },
       (err) => {
         console.log(err);
@@ -108,7 +108,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     AOS.init({ disable: 'mobile' });
     AOS.refresh();
-    this.getAllCategores();
+    this.getPopularCategores();
     this.getPopularBooks();
     this.getPopularAuthor();
     this.getAllBooks();

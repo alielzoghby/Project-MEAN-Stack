@@ -25,10 +25,9 @@ export class AdminSigninComponent {
     this._auth.login(loginForm.value, '/backoffice/auth/login').subscribe(
       (res) => {
         this.lodaing = false;
-        localStorage.setItem('userTaken', res.Token);
-        this._auth.saveCurrentUser();
+        localStorage.setItem('adminTaken', res.Token);
+        this._auth.saveloggedAdmin();
         this._router.navigate(['/admin']);
-        this._auth.loggedAdmin.next(true);
       },
       (err) => {
         this.lodaing = false;

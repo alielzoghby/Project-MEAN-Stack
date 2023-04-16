@@ -1,11 +1,25 @@
 <app-navbar></app-navbar>
+
+<div class="container my-2 d-flex align-items-center gap-3">
+  <img class="cover" src="{{ user.photo }}" alt="" />
+  <h2>{{ user.firstName + " " + user.lastName }}</h2>
+</div>
+
+<ngb-alert
+  #selfClosingAlert
+  *ngIf="successMessage"
+  type="success"
+  (closed)="successMessage = ''"
+  >{{ successMessage }}
+</ngb-alert>
+
 <div class="container">
   <div class="row">
     <div class="col-md-2">
       <ul class="shelveNav">
         <li (click)="changeShelf('ALL')">All</li>
         <li (click)="changeShelf('Read')">read</li>
-        <li (click)="changeShelf('want to read')">want to read</li>
+        <li (click)="changeShelf('Want to read')">want to read</li>
         <li (click)="changeShelf('Reading')">reading</li>
       </ul>
     </div>
@@ -26,21 +40,22 @@
         </thead>
         <tbody>
           <tr class="tablerow" *ngFor="let i of shownData">
-            <td>
-              <img src={{i.bookId.cover}} />
+            <td align="center">
+              <img src="{{ i.bookId.cover }}" />
             </td>
-            <td>
+            <td align="center">
               <a [routerLink]="['/bookpage/', i.bookId.id]">
                 {{ i.bookId.name }}</a
               >
             </td>
-            <td>
+            <td align="center">
               <a [routerLink]="['/author/', i.bookId.authorId._id]">
-               
-                {{i.bookId.authorId.firstName}}  {{i.bookId.authorId.firstName}}
-               </a>
+                {{
+                  i.bookId.authorId.firstName + " " + i.bookId.authorId.lastName
+                }}
+              </a>
             </td>
-            <td class="rate">
+            <td class="rate" align="center">
               <i
                 [ngClass]="
                   i.rating >= 1 ? 'fa-solid fa-star' : 'fa-regular fa-star'
@@ -72,7 +87,7 @@
                 (click)="UpdateRating(i, 5)"
               ></i>
             </td>
-            <td class="rate">
+            <td class="rate" align="center">
               <i
                 [ngClass]="
                   Math.floor(
@@ -119,15 +134,15 @@
                 "
               ></i>
             </td>
-            <td class="">
+            <td align="center">
               <select
                 class="form-select"
                 #shelf
                 (change)="onSelected(i, shelf.value)"
               >
                 <option
-                  value="want to read"
-                  [attr.selected]="i.shelf == 'want to read' ? 'true' : null"
+                  value="Want to read"
+                  [attr.selected]="i.shelf == 'Want to read' ? 'true' : null"
                 >
                   Want to Read
                 </option>
@@ -148,5 +163,6 @@
           </tr>
         </tbody>
       </table>
-
-      </div>
+    </div>
+  </div>
+</div>

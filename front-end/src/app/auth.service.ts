@@ -1,21 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  finalize,
-  of,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
-import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +10,14 @@ import { DataService } from './data.service';
 export class AuthService {
   currentUser = new BehaviorSubject(null);
   ROOT_URL: string = 'https://good-reads-a4s1.onrender.com';
-  loggedAdmin = new BehaviorSubject(false);
+  loggedAdmin = new BehaviorSubject(null);
 
   constructor(private _http: HttpClient, private _router: Router) {
     if (localStorage.getItem('userTaken') != null) {
       this.saveCurrentUser();
+    }
+    if (localStorage.getItem('adminTaken') != null) {
+      this.saveloggedAdmin();
     }
   }
 
@@ -57,7 +47,10 @@ export class AuthService {
 
   logout() {
     this.currentUser.next(null);
+    this.loggedAdmin.next(null);
+
     localStorage.removeItem('userTaken');
+    localStorage.removeItem('adminTaken');
     this._router.navigate(['/home']);
   }
 
@@ -68,5 +61,14 @@ export class AuthService {
 
   getTaken() {
     return localStorage.getItem('userTaken');
+  }
+
+  saveloggedAdmin() {
+    let token: any = localStorage.getItem('adminTaken');
+    this.loggedAdmin.next(jwtDecode(token));
+  }
+
+  getTakenAdmin() {
+    return localStorage.getItem('adminTaken');
   }
 }

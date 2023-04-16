@@ -5,17 +5,10 @@ header {
   background-color: var(--light-color);
 }
 
-img {
-  /* max-width: 200px; */
-  max-height: 250px;
- 
+.authorImg {
+  height: 347px;
+  width: 260px;
 }
-
-.authorImg{
-   padding-top: 30px;
-}
-
-
 
 .shelve {
   margin-top: 20px;
@@ -29,30 +22,29 @@ img {
 }
 
 .bookname h4 {
- margin:5px 0px;
- color:var(  --light-text-color);
+  margin: 5px 0px;
+  color: var(--light-text-color);
 }
 
-.bookname a:hover{
-  color:var( --dark-text-color)
+.bookname a:hover {
+  color: var(--dark-text-color);
 }
 
 p {
   min-height: 35%;
   line-height: 25px;
-  color:var(--body-text-color);
-  padding-top:10px;
+  color: var(--body-text-color);
+  padding-top: 10px;
 }
 
-
-form{
+form {
   display: flex;
 }
 
 form i {
   font-size: 25px;
-  color:gray;
-  cursor:pointer
+  color: gray;
+  cursor: pointer;
 }
 
 form button {
@@ -68,7 +60,7 @@ form button {
 }
 
 .comments {
-  padding: 50px 0;
+  padding: 10px 0;
 }
 .reviews {
   padding: 50px;
@@ -99,8 +91,8 @@ form button {
   background-color: transparent;
 }
 
-button:active{
-color:lightslategray
+button:active {
+  color: lightslategray;
 }
 
 .comments h4 {

@@ -16,8 +16,8 @@ export class AdminLoginGuard implements CanActivate {
   adminLoged: boolean = false;
 
   constructor(private _auth: AuthService, private router: Router) {
-    _auth.currentUser.subscribe(() => {
-      if (_auth.currentUser.getValue()) this.adminLoged = true;
+    _auth.loggedAdmin.subscribe(() => {
+      if (_auth.loggedAdmin.getValue()) this.adminLoged = true;
       else this.adminLoged = false;
     });
   }

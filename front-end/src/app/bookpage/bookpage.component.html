@@ -1,96 +1,182 @@
 <app-navbar></app-navbar>
+<ngb-alert
+  #selfClosingAlert
+  *ngIf="successMessage"
+  type="success"
+  (closed)="successMessage = ''"
+  >{{ successMessage }}
+</ngb-alert>
 <body>
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6 img">
-        <div><img class= "authorImg"src={{bookDetail.cover}} /></div>
-      </div>
-      <div class="col-md-6 ps-md-5">
-        <div class="bookname">
-          <h1>{{bookDetail.name}}</h1>
-          <h4><a [routerLink]="['/author/',bookDetail.authorId._id]">{{bookDetail.authorId.firstName}} {{bookDetail.authorId.laststName}}</a></h4>
-          <h4><a [routerLink]="['/categories/',bookDetail.categoryId._id]"></a></h4>
-        </div>
-        <p class="brife">
-              {{bookDetail.description}}
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3 col-sm-6 ">
-       <select class="shelve form-select" #shelf (change)="onSelected(bookDetail._id,shelf.value)" *ngIf="islogged">
-           <option>choose shelf</option>
-          <option value='want to read' [attr.selected]="getshelf()=='want to read' ? 'true' : null" >Want to Read</option>
-          <option value='Reading' [attr.selected]="getshelf()=='Reading' ? 'true' : null">Reading</option>
-          <option value='Read' [attr.selected]="getshelf()=='Read' ? 'true' : null">Read</option> 
-        </select>
-       <div class="AVGrate">
-          <div class="rate">
-              <i  [ngClass]="bookDetail.averageRating>=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" ></i>
-              <i  [ngClass]="bookDetail.averageRating>=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="bookDetail.averageRating>=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="bookDetail.averageRating>=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-              <i  [ngClass]="bookDetail.averageRating>=5 ?'fa-solid fa-star' : 'fa-regular fa-star'"></i> 
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-md-3 col-sm-6 ps-md-5">
-        <div class="rating" *ngIf="islogged">
-          <h3 class="userrate">your rate</h3>
-          
-          <i  [ngClass]="rating >=1 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(1)"></i>
-          <i  [ngClass]="rating >=2 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(2)"></i>
-          <i  [ngClass]="rating >=3 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(3)"></i>
-          <i  [ngClass]="rating >=4 ?'fa-solid fa-star' : 'fa-regular fa-star'"(click)="UpdateRating(4)"></i>
-          <i  [ngClass]="rating >=5 ?'fa-solid fa-star' : 'fa-regular fa-star'" (click)="UpdateRating(5)"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="reviews" *ngIf="islogged" >
-  <div class="container">
-    <h1>reviews</h1>
-    <div class="row">
-      <div class="col-1 userimg">
-        
-      </div>
-      <div class="col-5 usercomment">
-        <form action="">
-          <input
-          [(ngModel)]='commentInput'
-            class="form-control"
-            type="text"
-            name="review"
-            id="2"
-            placeholder="enter your review"
-             (click)="addReview()"
-          /> 
-          <button class="bookDetailmit" title="send your comment" (click)="addReview()">
-            <i class="fa-regular fa-paper-plane" ></i>
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="comments" *ngFor = "let review of reviews">
+  <header>
+    <div class="container">
       <div class="row">
-        <div class="col-1 userimg">
-          
+        <div class="col-md-3 col-sm-6 img">
+          <div><img class="authorImg" src="{{ bookDetail.cover }}" /></div>
         </div>
-        <div class="col-5 otherReviews">
-          
-          <p>
-          {{review.review}}
+        <div class="col-md-6 ps-md-5">
+          <div class="bookname">
+            <h1>{{ bookDetail.name }}</h1>
+            <h4>
+              <a [routerLink]="['/author/', bookDetail.authorId._id]"
+                >{{ bookDetail.authorId.firstName }}
+                {{ bookDetail.authorId.laststName }}</a
+              >
+            </h4>
+            <h4>
+              <a [routerLink]="['/categories/', bookDetail.categoryId._id]"></a>
+            </h4>
+          </div>
+          <p class="brife">
+            {{ bookDetail.description }}
           </p>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <select
+            class="shelve form-select"
+            #shelf
+            (change)="onSelected(bookDetail._id, shelf.value)"
+            *ngIf="islogged"
+          >
+            <option>chooose shelf</option>
+            <option
+              [attr.selected]="getshelf() == 'want to read' ? 'true' : null"
+              value="Want to read"
+            >
+              Want to Read
+            </option>
+            <option
+              [attr.selected]="getshelf() == 'Reading' ? 'true' : null"
+              value="Reading"
+            >
+              Reading
+            </option>
+            <option
+              [attr.selected]="getshelf() == 'Read' ? 'true' : null"
+              value="Read"
+            >
+              Read
+            </option>
+          </select>
+          <div class="AVGrate">
+            <div class="rate">
+              <i
+                [ngClass]="
+                  bookDetail.averageRating >= 1
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  bookDetail.averageRating >= 2
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  bookDetail.averageRating >= 3
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  bookDetail.averageRating >= 4
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+              <i
+                [ngClass]="
+                  bookDetail.averageRating >= 5
+                    ? 'fa-solid fa-star'
+                    : 'fa-regular fa-star'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 ps-md-5">
+          <div class="rating" *ngIf="islogged">
+            <h3 class="userrate">your rate</h3>
+
+            <i
+              [ngClass]="
+                rating >= 1 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+              "
+              (click)="UpdateRating(1)"
+            ></i>
+            <i
+              [ngClass]="
+                rating >= 2 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+              "
+              (click)="UpdateRating(2)"
+            ></i>
+            <i
+              [ngClass]="
+                rating >= 3 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+              "
+              (click)="UpdateRating(3)"
+            ></i>
+            <i
+              [ngClass]="
+                rating >= 4 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+              "
+              (click)="UpdateRating(4)"
+            ></i>
+            <i
+              [ngClass]="
+                rating >= 5 ? 'fa-solid fa-star' : 'fa-regular fa-star'
+              "
+              (click)="UpdateRating(5)"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="reviews" *ngIf="islogged">
+    <div class="container">
+      <h1>reviews</h1>
+      <div class="row">
+        <div class="col-1 userimg"></div>
+        <div class="col-5 usercomment">
+          <form action="">
+            <input
+              [(ngModel)]="commentInput"
+              class="form-control"
+              type="text"
+              name="review"
+              id="2"
+              placeholder="enter your review"
+            />
+            <button
+              class="bookDetailmit"
+              title="send your comment"
+              (click)="addReview()"
+            >
+              <i class="fa-regular fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="comments" *ngFor="let review of reviews">
+        <div class="row">
+          <div class="col-1 userimg"></div>
+          <div class="col-5 otherReviews">
+            <p>
+              {{ review.review }}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<app-fotter></app-fotter>
+  <app-fotter></app-fotter>
 </body>

@@ -13,11 +13,17 @@
         <app-search></app-search>
 
         <div class="my-2">
-          <a *ngIf="!isLoged" routerLink="/login" class="user-account mx-2"
+          <a
+            *ngIf="!isLoged && !adminLooged"
+            routerLink="/login"
+            class="user-account mx-2"
             ><i class="fa-solid fa-user"></i
             ><span routerLinkActive="active">Login</span></a
           >
-          <a *ngIf="!isLoged" routerLink="/signup" class="user-account mx-2"
+          <a
+            *ngIf="!isLoged && !adminLooged"
+            routerLink="/signup"
+            class="user-account mx-2"
             ><span routerLinkActive="active">Register</span></a
           >
           <a routerLink="/profile" class="user-account mx-2" *ngIf="isLoged"
@@ -33,7 +39,7 @@
             (click)="logout()"
             routerLink="/home"
             class="user-account mx-2"
-            *ngIf="isLoged"
+            *ngIf="isLoged || adminLooged"
             ><span>Logout</span></a
           >
         </div>
